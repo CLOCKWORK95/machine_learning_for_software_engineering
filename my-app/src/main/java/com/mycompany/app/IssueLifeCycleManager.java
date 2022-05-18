@@ -332,7 +332,7 @@ public class IssueLifeCycleManager{
             int fileCount = 1;
             for ( FileObject file : commit.getFiles() ){
                 System.out.println( "    " + fileCount + ") Filepath : " + file.getFilepath() + " | Version : "  + file.getVersion() + 
-                " | Buggy : "  + file.getBuggyness());
+                " | LOC : " + file.getLOC() + " | AGE : " + file.getAGE()  + " | Buggy : "  + file.getBuggyness());
                 fileCount ++;
             }
             count = count + 1;

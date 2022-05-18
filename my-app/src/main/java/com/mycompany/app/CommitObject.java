@@ -39,7 +39,6 @@ public class CommitObject{
         this.authorEmail =      this.commit.getAuthorIdent().getEmailAddress();
         this.commitLocalDate =  this.commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         this.fullMessage =      this.commit.getFullMessage();
-        this.files = new ArrayList<FileObject>();
         this.fileManagement();
     }
 
@@ -69,14 +68,19 @@ public class CommitObject{
     public String getFullMessage(){
         return this.fullMessage;
     }
+    public IssueObject getIssue(){
+        return this.issue;
+    }
 
     // ------------------------------ Methods ----------------------------------
     
+
     public void appendFile( FileObject file ){
         this.files.add( file );
     }
 
-    public void fileManagement() throws IOException, InvalidRemoteException, GitAPIException{
+
+    public void fileManagementFromFilepaths() throws IOException, InvalidRemoteException, GitAPIException{
         // To be continued... with metrics!!!
         ArrayList<String> filepaths = this.gitRepoManager.getCommitChangedFiles( this.commit );
         for ( String filepath : filepaths ){
@@ -87,6 +91,11 @@ public class CommitObject{
             FileObject file = new FileObject( filepath, version, buggy );
             this.files.add( file );
         }
+    }
+
+
+    public void fileManagement() throws IOException, InvalidRemoteException, GitAPIException{
+        this.files = this.gitRepoManager.getCommitChangedFilesWithMetrics( this );
     }
 
 }
