@@ -12,27 +12,26 @@ public class FileObject{
     private String                  filepath;
     private int                     version;
     private String                  buggyness;
-    private ArrayList<String>       metrics = null;
-    private String                  linesAdded;
-    private String                  linesDeleted;
-    private String                  LOC;
-    private String                  LOC_TOUCHED;
-    private String                  AGE;
+    private int                     linesAdded;
+    private int                     linesDeleted;
+    private int                     LOC;
+    private int                     LOC_TOUCHED;
+    private int                     AGE;
     private String                  AUTHOR;
-    private String                  CHURN;
+    private int                     CHURN;
+    private int                     CHANGE_SET_SIZE;
     private String                  FILETEXT;
 
     // ------------------------------ Builders ----------------------------------
     
     public FileObject( String filepath, int version, String buggyness ){
-        this.metrics = new ArrayList<String>();
         this.filepath = filepath;
         this.version = version;
         this.buggyness = buggyness;
     }
 
-    public FileObject( String filepath, int version, String FILETEXT, String AGE, String LOC, String linesAdded, String linesDeleted ){
-        this.metrics = new ArrayList<String>();
+
+    public FileObject( String filepath, int version, String FILETEXT, int AGE, int LOC, int linesAdded, int linesDeleted, int changeSetSize ){
         this.filepath = filepath;
         this.version = version;
         this.FILETEXT = FILETEXT;
@@ -40,6 +39,9 @@ public class FileObject{
         this.LOC = LOC;
         this.linesAdded = linesAdded;
         this.linesDeleted = linesDeleted;
+        this.CHURN = linesAdded + linesDeleted;
+        this.AUTHOR = "";
+        this.CHANGE_SET_SIZE = changeSetSize;
     }
 
     // ------------------------------ Setters ----------------------------------
@@ -53,9 +55,6 @@ public class FileObject{
     public void setBuggyness( String buggyness ){
         this.buggyness = buggyness;
     }
-    public void setMetrics( ArrayList<String> metrics ){
-        this.metrics = metrics;
-    }
 
     // ------------------------------ Getters ----------------------------------
 
@@ -68,14 +67,26 @@ public class FileObject{
     public String getBuggyness(){
         return this.buggyness;
     }
-    public ArrayList<String> getMetrics(){
-        return this.metrics;
-    }
-    public String getLOC(){
+    public int getLOC(){
         return this.LOC;
     }
-    public String getAGE(){
+    public int getAGE(){
         return this.AGE;
+    }
+    public int getCHURN() {
+        return this.CHURN;
+    }
+    public int getChangeSetSize() {
+        return this.CHANGE_SET_SIZE;
+    }
+    public String getAUTHOR() {
+        return this.AUTHOR;
+    }
+    public int getLinesAdded(){
+        return this.linesAdded;
+    }
+    public int getLinesDeleted(){
+        return this.linesDeleted;
     }
 
     // ------------------------------ Methods ----------------------------------
@@ -89,5 +100,8 @@ public class FileObject{
             this.buggyness = "No";
         } 
     }
+
+
+    
     
 }

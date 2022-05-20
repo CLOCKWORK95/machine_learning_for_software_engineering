@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.api.Git;
@@ -21,10 +19,6 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.eclipse.jgit.errors.MissingObjectException;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
-import org.eclipse.jgit.revwalk.filter.MessageRevFilter;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.*;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -36,7 +30,6 @@ import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.diff.Edit;
 import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.revwalk.RevSort;
-import org.eclipse.jgit.util.SystemReader;
 
 
 
@@ -111,7 +104,7 @@ public class GitRepositoryManager {
     }
 
 
-    private void listDiff( String oldCommit, String newCommit ) throws GitAPIException, IOException {
+    public void listDiff( String oldCommit, String newCommit ) throws GitAPIException, IOException {
         final List<DiffEntry> diffs = this.git.diff()
                 .setOldTree(prepareTreeParser( this.repository, oldCommit ) )
                 .setNewTree(prepareTreeParser( this.repository, newCommit ) )
@@ -192,22 +185,24 @@ public class GitRepositoryManager {
                 .setOldTree(prepareTreeParser(openJGitRepository(), commit.getParent(0).getId().getName()))
                 .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
                 .call();
+        int changeSetSize = diffs.size();
         for ( DiffEntry diff : diffs ) {
             //String file_name = diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath();
             if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
                 String  filepath = diff.getNewPath();                          
                 String  fileText = getTextfromCommittedFile( commit, filepath );
-                String  fileAge = getFileAgeInWeeks( commit, filepath );
+                int     fileAge = getFileAgeInWeeks( commit, filepath );
                 for ( Edit edit : df.toFileHeader( diff ).toEditList() ) {
                     linesDeleted += edit.getEndA() - edit.getBeginA();
                     linesAdded += edit.getEndB() - edit.getBeginB();
                 }
                 int     version = commitObject.getVersion();
-                String  loc = Integer.toString( countLineBufferedReader( fileText ) );
-                files.add( new FileObject( filepath, version, fileText, fileAge, loc, Integer.toString(linesAdded), Integer.toString(linesDeleted) ) );
+                int     loc = getLoc( fileText );
+                files.add( new FileObject( filepath, version, fileText, fileAge, loc, linesAdded, linesDeleted, changeSetSize ) );
             }
             
         }
+        df.close();
         return files;
     }
 
@@ -236,8 +231,8 @@ public class GitRepositoryManager {
 
 
 
-    public String getFileAgeInWeeks( RevCommit startCommit, String filename ) throws IOException, InvalidRemoteException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    public int getFileAgeInWeeks( RevCommit startCommit, String filename ) throws IOException, InvalidRemoteException {
+        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date_first_commit, date_current_commit;
         int age;
         RevWalk revWalk = new RevWalk( this.repository );
@@ -252,16 +247,18 @@ public class GitRepositoryManager {
             long diffInMillies = Math.abs(date_current_commit.getTime() - date_first_commit.getTime());
             long diff_in_days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
             age = (int) (diff_in_days/7);
-            return Integer.toString(age);
+            revWalk.close();
+            return age;
         } else{
-            return "None";
+            revWalk.close();
+            return -1;
         }
         
     }
 
 
 
-    public int countLineBufferedReader( String fileText ) {
+    public int getLoc( String fileText ) {
         int lines = 0;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
             while ( reader.readLine() != null ) lines++;

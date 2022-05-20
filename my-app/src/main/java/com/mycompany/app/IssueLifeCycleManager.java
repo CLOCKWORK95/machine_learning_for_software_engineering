@@ -4,9 +4,7 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.errors.MissingObjectException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import java.util.stream.*;
 import java.util.Collection;
@@ -14,15 +12,7 @@ import java.util.Collections;
 import org.json.JSONException;
 import java.util.ArrayList;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.api.Git;
 import java.io.IOException;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.ObjectReader;
-import org.eclipse.jgit.revwalk.RevTree;
-import org.eclipse.jgit.treewalk.AbstractTreeIterator;
-import org.eclipse.jgit.treewalk.CanonicalTreeParser;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.revwalk.filter.MessageRevFilter;
 import com.google.common.collect.Iterables;
 
@@ -45,6 +35,7 @@ public class IssueLifeCycleManager{
     private JiraTicketManager               jiraTicketManager;
     private Multimap<LocalDate, String>     versionMap;
     private double                          p;
+    private DatasetBuilder                  datasetBuilder;
 
 
     // ------------------------------ Builders --------------------------------
@@ -59,6 +50,7 @@ public class IssueLifeCycleManager{
         this.gitRepoManager = new GitRepositoryManager( projectName, projectPath );
         this.jiraTicketManager = new JiraTicketManager( projectName.toUpperCase() );
         this.versionMap = MultimapBuilder.treeKeys().linkedListValues().build();
+        this.datasetBuilder = new DatasetBuilder( this.versionMap );
     }
 
     // ------------------------------ Getters ---------------------------------
@@ -309,7 +301,6 @@ public class IssueLifeCycleManager{
             issue.classify();
         }
     }
-
 
 
     public void printIssuesInfo( ArrayList<IssueObject> issues ) throws IOException, GitAPIException{
