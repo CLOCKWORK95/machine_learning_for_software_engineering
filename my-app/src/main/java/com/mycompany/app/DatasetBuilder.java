@@ -19,9 +19,9 @@ public class DatasetBuilder {
     //------------------------------------ Attributes --------------------------------------------
 
     // Dataset as a MultiKeyMap with key :<version,filepath> and value <metrics>
-	private MultiKeyMap                     fileDataset = new MultiKeyMap( new LinkedMap() );
+	private MultiKeyMap                     fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap() );
 
-    private MultiMap<LocalDate,String>      versionMap;
+    private Multimap<LocalDate,String>      versionMap;
 
     private int                             lastVersion;
 

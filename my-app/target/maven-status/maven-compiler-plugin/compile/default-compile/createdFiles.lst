@@ -1,0 +1,9 @@
+com/mycompany/app/IssueLifeCycleManager.class
+com/mycompany/app/CommitObject.class
+com/mycompany/app/DatasetBuilder.class
+com/mycompany/app/GitRepositoryManager.class
+com/mycompany/app/App.class
+com/mycompany/app/JiraTicketManager.class
+com/mycompany/app/IssueObject.class
+com/mycompany/app/Metrics.class
+com/mycompany/app/FileObject.class
