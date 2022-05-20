@@ -79,7 +79,6 @@ public class CommitObject{
         this.files.add( file );
     }
 
-
     public void fileManagementFromFilepaths() throws IOException, InvalidRemoteException, GitAPIException{
         // To be continued... with metrics!!!
         ArrayList<String> filepaths = this.gitRepoManager.getCommitChangedFiles( this.commit );
@@ -96,6 +95,13 @@ public class CommitObject{
 
     public void fileManagement() throws IOException, InvalidRemoteException, GitAPIException{
         this.files = this.gitRepoManager.getCommitChangedFilesWithMetrics( this );
+    }
+
+
+    public void classify(){
+        for ( FileObject file : this.files ){
+            file.classify( this );
+        }
     }
 
 }

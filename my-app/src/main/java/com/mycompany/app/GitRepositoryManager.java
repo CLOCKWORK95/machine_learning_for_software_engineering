@@ -177,6 +177,7 @@ public class GitRepositoryManager {
     }
 
 
+    
     public ArrayList<FileObject> getCommitChangedFilesWithMetrics( CommitObject commitObject ) throws IOException, GitAPIException {
         Git git = this.git;
         RevCommit commit = commitObject.getCommit();
@@ -194,7 +195,7 @@ public class GitRepositoryManager {
         for ( DiffEntry diff : diffs ) {
             //String file_name = diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath();
             if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
-                String  filepath = diff.getNewPath();           
+                String  filepath = diff.getNewPath();                          
                 String  fileText = getTextfromCommittedFile( commit, filepath );
                 String  fileAge = getFileAgeInWeeks( commit, filepath );
                 for ( Edit edit : df.toFileHeader( diff ).toEditList() ) {
@@ -203,15 +204,7 @@ public class GitRepositoryManager {
                 }
                 int     version = commitObject.getVersion();
                 String  loc = Integer.toString( countLineBufferedReader( fileText ) );
-                String  buggy = "Yes";
-                if ( ( commitObject.getVersion() >= commitObject.getIssue().getFv() ) ){
-                    buggy = "No";
-                }
-                if ( ( commitObject.getVersion() < commitObject.getIssue().getIv() ) ){
-                    buggy = "No";
-                }
-            
-                files.add( new FileObject( filepath, version, buggy, fileText, fileAge, loc, Integer.toString(linesAdded), Integer.toString(linesDeleted) ) );
+                files.add( new FileObject( filepath, version, fileText, fileAge, loc, Integer.toString(linesAdded), Integer.toString(linesDeleted) ) );
             }
             
         }

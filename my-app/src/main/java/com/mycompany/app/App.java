@@ -58,7 +58,11 @@ public class App {
 
         controller.setAffectedAndInjectedVersionsP( issuesP );
 
-        //controller.printIssuesInfo( issuesAV );
+        controller.classify( issuesAV );
+
+        controller.classify( issuesP );
+
+        controller.printIssuesInfo( issuesAV );
 
         controller.printIssuesInfo( issuesP );
 

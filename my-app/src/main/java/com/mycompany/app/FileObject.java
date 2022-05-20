@@ -31,11 +31,10 @@ public class FileObject{
         this.buggyness = buggyness;
     }
 
-    public FileObject( String filepath, int version, String buggyness, String FILETEXT, String AGE, String LOC, String linesAdded, String linesDeleted ){
+    public FileObject( String filepath, int version, String FILETEXT, String AGE, String LOC, String linesAdded, String linesDeleted ){
         this.metrics = new ArrayList<String>();
         this.filepath = filepath;
         this.version = version;
-        this.buggyness = buggyness;
         this.FILETEXT = FILETEXT;
         this.AGE = AGE;
         this.LOC = LOC;
@@ -80,5 +79,15 @@ public class FileObject{
     }
 
     // ------------------------------ Methods ----------------------------------
+
+    public void classify( CommitObject commitObject ){
+        this.buggyness = "Yes";
+        if ( ( commitObject.getVersion() >= commitObject.getIssue().getFv() ) ){
+            this.buggyness = "No";
+        }
+        if ( ( commitObject.getVersion() < commitObject.getIssue().getIv() ) ){
+            this.buggyness = "No";
+        } 
+    }
     
 }

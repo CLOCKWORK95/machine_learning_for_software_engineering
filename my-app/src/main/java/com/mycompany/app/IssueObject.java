@@ -118,4 +118,10 @@ public class IssueObject{
         commits.removeIf( commit -> commit.getFiles().isEmpty() );
     }
 
+    public void classify(){
+        for( CommitObject commitObject : this.commits ){
+            commitObject.classify();
+        }
+    }
+
 }

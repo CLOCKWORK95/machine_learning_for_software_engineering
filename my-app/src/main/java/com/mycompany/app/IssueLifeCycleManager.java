@@ -304,6 +304,14 @@ public class IssueLifeCycleManager{
     }
 
 
+    public void classify( ArrayList<IssueObject> issues ){
+        for ( IssueObject issue : issues ){
+            issue.classify();
+        }
+    }
+
+
+
     public void printIssuesInfo( ArrayList<IssueObject> issues ) throws IOException, GitAPIException{
         int count = 0;
         for ( IssueObject issue : issues ){
