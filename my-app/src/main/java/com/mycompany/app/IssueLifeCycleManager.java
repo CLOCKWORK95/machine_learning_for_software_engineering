@@ -50,7 +50,7 @@ public class IssueLifeCycleManager{
         this.gitRepoManager = new GitRepositoryManager( projectName, projectPath );
         this.jiraTicketManager = new JiraTicketManager( projectName.toUpperCase() );
         this.versionMap = MultimapBuilder.treeKeys().linkedListValues().build();
-        this.datasetBuilder = new DatasetBuilder( this.versionMap );
+        this.datasetBuilder = new DatasetBuilder( this.versionMap , this.projectName );
     }
 
     // ------------------------------ Getters ---------------------------------
@@ -69,6 +69,9 @@ public class IssueLifeCycleManager{
     }
     public Multimap<LocalDate, String> getVersionMap(){
         return this.versionMap;
+    }
+    public DatasetBuilder getDasetBuilder(){
+        return this.datasetBuilder;
     }
 
     // ------------------------------ Setters ---------------------------------
@@ -158,7 +161,7 @@ public class IssueLifeCycleManager{
             } 
 
             stop = stop +1;
-            if (stop == 100){ break;}
+            if (stop == 50){ break;}
         } 
     }
 
@@ -300,6 +303,13 @@ public class IssueLifeCycleManager{
         for ( IssueObject issue : issues ){
             issue.classify();
         }
+    }
+
+
+    public void populateDatasetMapAndWriteToCSV() throws IOException{
+        this.datasetBuilder.populateFileDataset(issuesWithAffectedVersions);
+        //this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
+        this.datasetBuilder.writeToCSV(this.projectName);
     }
 
 

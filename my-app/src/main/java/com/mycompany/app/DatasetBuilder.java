@@ -25,11 +25,14 @@ public class DatasetBuilder {
 
     private int                             lastVersion;
 
+	private String							projectName;
+
     //------------------------------------- Builders ---------------------------------------------
 
-    public DatasetBuilder( Multimap<LocalDate,String> versionMap ){
+    public DatasetBuilder( Multimap<LocalDate,String> versionMap, String projectName ){
         this.versionMap = versionMap;
         this.lastVersion =  (versionMap.size() / 2) / 2;
+		this.projectName = projectName;
     }
 
     //------------------------------------- Methods ----------------------------------------------
@@ -57,6 +60,7 @@ public class DatasetBuilder {
                     newMetrics.setMAX_CHANGE_SET(file.getChangeSetSize());
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
+						System.out.println("");
                         fileDataset.put( version, filepath, newMetrics );
                     } else{
                         Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
@@ -72,7 +76,7 @@ public class DatasetBuilder {
 	public void writeToCSV(String projectName) throws IOException {
 
 		// Set the name of the file
-		try (FileWriter csvWriter = new FileWriter("output/" + projectName + "_dataset.csv")) {
+		try (FileWriter csvWriter = new FileWriter("/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/" + projectName + "_dataset.csv")) {
 
 			/*	
 			 * Metrics Data Structure
@@ -136,7 +140,8 @@ public class DatasetBuilder {
 
 				Metrics metrics = (Metrics) entry.getValue();
 				// Check that the version index is contained in the first half of the releases
-				if (Integer.valueOf(entry.getKey().split(",")[0]) <= (lastVersion) + 1) {
+				//if (Integer.valueOf(entry.getKey().split(",")[0]) <= (lastVersion) + 1) {
+				if ( true ) {
                     int nr =                metrics.getNR();
                     String NR =             Integer.toString((metrics.getNR()));
                     String NAUTH =          Integer.toString(metrics.getAUTHORS().size());

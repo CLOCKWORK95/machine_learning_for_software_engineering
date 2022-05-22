@@ -7,7 +7,7 @@ public class Metrics {
     private int                 version;
     private String              filepath;
     private int                 NR;
-    private ArrayList<String>   AUTHORS;
+    private ArrayList<String>   AUTHORS = new ArrayList<>();
     private int                 LOC;
     private int                 AGE;
     private int                 CHURN;
