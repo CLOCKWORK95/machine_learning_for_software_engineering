@@ -27,13 +27,19 @@ public class DatasetBuilder {
 
 	private String							projectName;
 
+	private String 							path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
+
     //------------------------------------- Builders ---------------------------------------------
 
-    public DatasetBuilder( Multimap<LocalDate,String> versionMap, String projectName ){
-        this.versionMap = versionMap;
-        this.lastVersion =  (versionMap.size() / 2) / 2;
+    public DatasetBuilder( String projectName ){
 		this.projectName = projectName;
     }
+
+	public void setVersionMap( Multimap<LocalDate,String> versionMap ){
+		this.versionMap = versionMap;
+		this.lastVersion = (versionMap.size()/2)/2;
+		System.out.println( this.lastVersion );
+	}
 
     //------------------------------------- Methods ----------------------------------------------
 
@@ -74,10 +80,10 @@ public class DatasetBuilder {
     }
 
 
-	public void writeToCSV(String projectName) throws IOException {
+	public void writeToCSV( String projectName ) throws IOException {
 
 		// Set the name of the file
-		try (FileWriter csvWriter = new FileWriter("/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/" + projectName + "_dataset.csv")) {
+		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + "_dataset.csv" ) ) {
 
 			/*	
 			 * Metrics Data Structure
@@ -134,7 +140,13 @@ public class DatasetBuilder {
 				// Get the metrics list associated to the multikey
 				Metrics metrics = (Metrics) fileDataset.get(key.getKey(0), key.getKey(1));
 
-				orderedMap.put(String.valueOf(key.getKey(0)) + "," + (String)key.getKey(1), metrics);
+				int version = (int) key.getKey(0);
+
+				if ( version <= lastVersion + 1 ){
+					String revisedKey = String.valueOf( version );
+					if ( revisedKey.length() == 1 ){ revisedKey = "0" + revisedKey; }
+					orderedMap.put( revisedKey + "," + (String)key.getKey(1), metrics );
+				}
 			}
 
 			for ( Map.Entry<String, Metrics> entry : orderedMap.entrySet() ) {

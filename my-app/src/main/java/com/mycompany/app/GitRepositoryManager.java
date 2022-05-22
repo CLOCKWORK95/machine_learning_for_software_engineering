@@ -186,9 +186,11 @@ public class GitRepositoryManager {
                 .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
                 .call();
         int changeSetSize = diffs.size();
+        int javafiles = 0;
         for ( DiffEntry diff : diffs ) {
             //String file_name = diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath();
             if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
+                javafiles ++;
                 String  filepath = diff.getNewPath();                          
                 String  fileText = getTextfromCommittedFile( commit, filepath );
                 int     fileAge = getFileAgeInWeeks( commit, filepath );
@@ -199,9 +201,9 @@ public class GitRepositoryManager {
                 int     version = commitObject.getVersion();
                 int     loc = getLoc( fileText );
                 files.add( new FileObject( filepath, version, fileText, fileAge, loc, linesAdded, linesDeleted, changeSetSize ) );
-            }
-            
+            }       
         }
+        System.out.println( "Issue : " + commitObject.getIssue().getTicketID() + " |  Java Files : " + javafiles );
         df.close();
         return files;
     }

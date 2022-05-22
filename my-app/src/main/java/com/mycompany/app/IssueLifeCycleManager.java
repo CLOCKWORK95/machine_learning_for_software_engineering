@@ -14,11 +14,10 @@ import java.util.ArrayList;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import java.io.IOException;
 import org.eclipse.jgit.revwalk.filter.MessageRevFilter;
-import com.google.common.collect.Iterables;
-
+import com.google.common.collect.Iterables; 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
-
+import me.tongfei.progressbar.ProgressBar;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -50,7 +49,7 @@ public class IssueLifeCycleManager{
         this.gitRepoManager = new GitRepositoryManager( projectName, projectPath );
         this.jiraTicketManager = new JiraTicketManager( projectName.toUpperCase() );
         this.versionMap = MultimapBuilder.treeKeys().linkedListValues().build();
-        this.datasetBuilder = new DatasetBuilder( this.versionMap , this.projectName );
+        this.datasetBuilder = new DatasetBuilder( this.projectName );
     }
 
     // ------------------------------ Getters ---------------------------------
@@ -103,6 +102,7 @@ public class IssueLifeCycleManager{
         an integer index to order such releases in time.    */
     public void initializeVersionMap() throws IOException, JSONException {
         this.jiraTicketManager.getVersionsWithReleaseDate( this );
+        this.datasetBuilder.setVersionMap( this.versionMap );
     }
 
 
@@ -139,7 +139,12 @@ public class IssueLifeCycleManager{
         // a RevWalk allows to walk over commits based on some filtering that is defined
         int stop = 0;
 
+        //ProgressBar pb = new ProgressBar("SCANNING TICKET", this.issues.size()); 
+        //pb.start();
+
         for ( IssueObject issue : this.issues ){
+            
+            //pb.step();
 
             try ( RevWalk revWalk = new RevWalk( this.gitRepoManager.getRepository()) ) {
 
@@ -152,7 +157,7 @@ public class IssueLifeCycleManager{
                 for( RevCommit commit : revWalk ) {
                     LocalDate commitLocalDate = commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     int version = getVersionFromLocalDate( commitLocalDate );
-                    if ( issue.getFv() >= version ){
+                    if ( issue.getFv() >= version ){ // bypass all the commits with version greater than ticket's fixed version.
                         CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
                         issue.append( commitObject );
                     }
@@ -160,9 +165,9 @@ public class IssueLifeCycleManager{
                 }
             } 
 
-            stop = stop +1;
-            if (stop == 120){ break;}
         } 
+
+        //pb.stop();
     }
 
 
