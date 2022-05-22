@@ -52,23 +52,21 @@ public class App {
 
         ArrayList<IssueObject> issuesAV = controller.getIssuesWithAffectedVersions();
 
-        //ArrayList<IssueObject> issuesP = controller.getIssuesWithoutAffectedVersions();
+        ArrayList<IssueObject> issuesP = controller.getIssuesWithoutAffectedVersions();
 
-        //controller.computeProportionIncremental( issuesAV );
+        controller.computeProportionIncremental( issuesAV );
 
-        //controller.setAffectedAndInjectedVersionsP( issuesP );
+        controller.setAffectedAndInjectedVersionsP( issuesP );
 
         controller.classify( issuesAV );
 
-        //controller.classify( issuesP );
+        controller.classify( issuesP );
 
-        controller.printIssuesInfo( issuesAV );
+        //controller.printIssuesInfo( issuesAV );
 
         //controller.printIssuesInfo( issuesP );
 
         controller.populateDatasetMapAndWriteToCSV();
-
-        //controller.printVersionMap();
 
         System.out.println( controller.getP() );
 

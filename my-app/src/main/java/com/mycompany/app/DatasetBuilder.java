@@ -41,10 +41,10 @@ public class DatasetBuilder {
     public void populateFileDataset( ArrayList<IssueObject> issues ){
         int     version;
         String  filepath;
-        Metrics newMetrics = new Metrics();
         for ( IssueObject issue : issues ){
             for ( CommitObject commit : issue.getCommits() ){
                 for ( FileObject file : commit.getFiles() ){
+					Metrics newMetrics = new Metrics();
                     version = file.getVersion();
                     filepath = file.getFilepath();
                     newMetrics.setVersion(version);
@@ -60,10 +60,11 @@ public class DatasetBuilder {
                     newMetrics.setMAX_CHANGE_SET(file.getChangeSetSize());
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
-						System.out.println("");
+						System.out.println("NEW entry!");
                         fileDataset.put( version, filepath, newMetrics );
                     } else{
                         Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
+						System.out.println("OLD entry!");
                         newMetrics.update( oldMetrics );
                         fileDataset.put( version, filepath, newMetrics );
                     }

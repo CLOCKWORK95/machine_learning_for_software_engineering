@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.mycompany.app.AppTest" time="0.054" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.mycompany.app.AppTest" time="0.065" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="gnome"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IT"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/gianmarco/Scrivania/ML_4_SE/my-app/target/surefire/surefirebooter16256780849478398320.jar /home/gianmarco/Scrivania/ML_4_SE/my-app/target/surefire 2022-05-22T11-58-32_426-jvmRun1 surefire16800396128017289336tmp surefire_012654147026855326696tmp"/>
+    <property name="sun.java.command" value="/home/gianmarco/Scrivania/ML_4_SE/my-app/target/surefire/surefirebooter7906955484713872504.jar /home/gianmarco/Scrivania/ML_4_SE/my-app/target/surefire 2022-05-22T12-25-45_306-jvmRun1 surefire5138960332859287234tmp surefire_0127123579930591847tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/gianmarco/Scrivania/ML_4_SE/my-app/target/test-classes:/home/gianmarco/Scrivania/ML_4_SE/my-app/target/classes:/home/gianmarco/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/gianmarco/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/gianmarco/.m2/repository/org/eclipse/ecf/org.json/1.0.0.v201011060100/org.json-1.0.0.v201011060100.jar:/home/gianmarco/.m2/repository/org/eclipse/jgit/org.eclipse.jgit/5.4.2.201908231537-r/org.eclipse.jgit-5.4.2.201908231537-r.jar:/home/gianmarco/.m2/repository/com/jcraft/jsch/0.1.55/jsch-0.1.55.jar:/home/gianmarco/.m2/repository/com/jcraft/jzlib/1.1.1/jzlib-1.1.1.jar:/home/gianmarco/.m2/repository/com/googlecode/javaewah/JavaEWAH/1.1.6/JavaEWAH-1.1.6.jar:/home/gianmarco/.m2/repository/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar:/home/gianmarco/.m2/repository/org/bouncycastle/bcpg-jdk15on/1.61/bcpg-jdk15on-1.61.jar:/home/gianmarco/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.61/bcprov-jdk15on-1.61.jar:/home/gianmarco/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.61/bcpkix-jdk15on-1.61.jar:/home/gianmarco/.m2/repository/com/google/guava/guava/31.0.1-jre/guava-31.0.1-jre.jar:/home/gianmarco/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/gianmarco/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/gianmarco/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/gianmarco/.m2/repository/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0.jar:/home/gianmarco/.m2/repository/com/google/errorprone/error_prone_annotations/2.7.1/error_prone_annotations-2.7.1.jar:/home/gianmarco/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/gianmarco/.m2/repository/org/apache/commons/commons-collections4/4.0/commons-collections4-4.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/gianmarco/Scrivania/ML_4_SE/my-app/target/surefire/surefirebooter16256780849478398320.jar"/>
+    <property name="surefire.real.class.path" value="/home/gianmarco/Scrivania/ML_4_SE/my-app/target/surefire/surefirebooter7906955484713872504.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.15+10-Ubuntu-0ubuntu0.18.04.1"/>
     <property name="user.name" value="gianmarco"/>
@@ -57,5 +57,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.mycompany.app.AppTest" time="0.003"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.mycompany.app.AppTest" time="0.007"/>
 </testsuite>

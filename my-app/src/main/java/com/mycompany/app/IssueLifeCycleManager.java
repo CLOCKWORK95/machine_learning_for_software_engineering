@@ -161,7 +161,7 @@ public class IssueLifeCycleManager{
             } 
 
             stop = stop +1;
-            if (stop == 50){ break;}
+            if (stop == 120){ break;}
         } 
     }
 
@@ -308,7 +308,7 @@ public class IssueLifeCycleManager{
 
     public void populateDatasetMapAndWriteToCSV() throws IOException{
         this.datasetBuilder.populateFileDataset(issuesWithAffectedVersions);
-        //this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
+        this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
         this.datasetBuilder.writeToCSV(this.projectName);
     }
 
