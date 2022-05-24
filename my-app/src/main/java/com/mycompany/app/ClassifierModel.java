@@ -35,7 +35,7 @@ public class ClassifierModel {
 			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
 
 				// Append the first line of the evaluation results file.
-				csvWriter.append("Dataset,#TrainingRelease,Classifier,Precision,Recall,AUC,Kappa\n");
+				csvWriter.append("Dataset,#TrainingRelease,Classifier,Precision,Recall,AUC,Kappa,Accuracy\n");
 
 				// Iterate over the single version for the WalkForward technique...
 				for ( int i = 1; i < this.limits[j]; i++ ) {
@@ -76,19 +76,19 @@ public class ClassifierModel {
 
 					// Evaluate each model and add the result to the output file
 					eval.evaluateModel(classifierNB, testSet); 
-					csvWriter.append(projects[j] + "," + i + ",NaiveBayes," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "\n");
+					csvWriter.append(projects[j] + "," + i + ",NaiveBayes," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n");
 
 					eval.evaluateModel(classifierRF, testSet); 
-					csvWriter.append(projects[j] + "," + i + ",RandomForest," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "\n");
+					csvWriter.append(projects[j] + "," + i + ",RandomForest," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n");
 
 					eval.evaluateModel(classifierIBk, testSet); 
-					csvWriter.append(projects[j] + "," + i + ",IBk," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "\n");
+					csvWriter.append(projects[j] + "," + i + ",IBk," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) +"\n");
 
 				}
 
 				// Delete the temp file
-				Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
-				Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
+				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
+				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
 				csvWriter.flush();
 			}
 
