@@ -20,7 +20,8 @@ public class FileObject{
     private String                  AUTHOR;
     private int                     CHURN;
     private int                     CHANGE_SET_SIZE;
-    private String                  FILETEXT;
+    private int                     numImports;
+    private int                     numComments;
 
     // ------------------------------ Builders ----------------------------------
     
@@ -31,17 +32,20 @@ public class FileObject{
     }
 
 
-    public FileObject( String filepath, int version, String FILETEXT, int AGE, int LOC, int linesAdded, int linesDeleted, int changeSetSize ){
+    public FileObject(  String filepath, int version, int AGE, int LOC, int linesAdded, int linesDeleted, int linesReplaced, 
+                        int changeSetSize, String AUTHOR, int numImports, int numComments ){
         this.filepath = filepath;
         this.version = version;
-        this.FILETEXT = FILETEXT;
         this.AGE = AGE;
         this.LOC = LOC;
+        this.LOC_TOUCHED = linesAdded + linesDeleted + linesReplaced;
         this.linesAdded = linesAdded;
         this.linesDeleted = linesDeleted;
-        this.CHURN = linesAdded + linesDeleted;
-        this.AUTHOR = "";
+        this.CHURN = linesAdded - linesDeleted;
+        this.AUTHOR = AUTHOR;
         this.CHANGE_SET_SIZE = changeSetSize;
+        this.numImports = numImports;
+        this.numComments = numComments;
     }
 
     // ------------------------------ Setters ----------------------------------
@@ -70,6 +74,9 @@ public class FileObject{
     public int getLOC(){
         return this.LOC;
     }
+    public int getLOC_TOUCHED(){
+        return this.LOC_TOUCHED;
+    }
     public int getAGE(){
         return this.AGE;
     }
@@ -88,6 +95,13 @@ public class FileObject{
     public int getLinesDeleted(){
         return this.linesDeleted;
     }
+    public int getNumComments(){
+        return this.numComments;
+    }
+    public int getNumImports(){
+        return this.numImports;
+    }
+
 
     // ------------------------------ Methods ----------------------------------
 

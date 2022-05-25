@@ -44,7 +44,11 @@ public class ClassifierModel {
 					walkForwardTraining( this.projects[j], i );
 
 					// Create the ARFF file for testing, with the i+1 version
-					walkForwardTesting( projects[j] , i + 1 );
+					try{
+						walkForwardTesting( projects[j] , i + 1 );
+					} catch( NoTestSetAvailableException e ){
+						continue;
+					}
 
 					// Read the Datasource created before and get each dataset
 					DataSource  source1 = new DataSource( path_to_dir + "output/" + projects[j] + TRAINING);
@@ -82,7 +86,7 @@ public class ClassifierModel {
 					csvWriter.append(projects[j] + "," + i + ",RandomForest," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n");
 
 					eval.evaluateModel(classifierIBk, testSet); 
-					csvWriter.append(projects[j] + "," + i + ",IBk," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) +"\n");
+					csvWriter.append(projects[j] + "," + i + ",IBk," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) +"\n\n");
 
 				}
 
@@ -136,10 +140,13 @@ public class ClassifierModel {
 			csvWriter.append("@attribute LOC real\n");
 			csvWriter.append("@attribute AGE real\n");
 			csvWriter.append("@attribute CHURN real\n");
+			csvWriter.append("@attribute LOC_TOUCHED real\n");
+			csvWriter.append("@attribute AvgLocAdded real\n");
 			csvWriter.append("@attribute MaxLocAdded real\n");
 			csvWriter.append("@attribute AvgChgSet real\n");
 			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
+			csvWriter.append("@attribute numImports real\n");
+			csvWriter.append("@attribute numComments real\n");
 			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
 			csvWriter.append("@data\n");
 
@@ -178,7 +185,7 @@ public class ClassifierModel {
     /*  This function build the ARFF file for the specific project relative to the Test Set.
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
-	public List<Integer> walkForwardTesting( String projectName, int testing ) throws IOException {
+	public List<Integer> walkForwardTesting( String projectName, int testing ) throws IOException, NoTestSetAvailableException, Exception{
 
 		int counterElement = 0;
 		int counterBuggies = 0;
@@ -193,10 +200,13 @@ public class ClassifierModel {
 			csvWriter.append("@attribute LOC real\n");
 			csvWriter.append("@attribute AGE real\n");
 			csvWriter.append("@attribute CHURN real\n");
+			csvWriter.append("@attribute LOC_TOUCHED real\n");
+			csvWriter.append("@attribute AvgLocAdded real\n");
 			csvWriter.append("@attribute MaxLocAdded real\n");
 			csvWriter.append("@attribute AvgChgSet real\n");
 			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
+			csvWriter.append("@attribute numImports real\n");
+			csvWriter.append("@attribute numComments real\n");
 			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
 			csvWriter.append("@data\n");
 
@@ -225,6 +235,10 @@ public class ClassifierModel {
 				counterList.add(counterBuggies);
 
 			}
+		}
+		if ( counterElement == 0 ) {
+			NoTestSetAvailableException e = new NoTestSetAvailableException("There are no entries in version", testing );
+			throw(e);
 		}
 		return counterList;
 	}

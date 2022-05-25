@@ -175,8 +175,6 @@ public class GitRepositoryManager {
         Git git = this.git;
         RevCommit commit = commitObject.getCommit();
         ArrayList<FileObject> files = new ArrayList<FileObject>();
-        int linesAdded = 0;
-        int linesDeleted = 0;
         DiffFormatter df = new DiffFormatter( DisabledOutputStream.INSTANCE );
         df.setRepository( openJGitRepository() );
         df.setDiffComparator( RawTextComparator.DEFAULT );
@@ -189,21 +187,34 @@ public class GitRepositoryManager {
         int javafiles = 0;
         for ( DiffEntry diff : diffs ) {
             //String file_name = diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath();
+            int linesAdded = 0;
+            int linesDeleted = 0;
+            int linesReplaced = 0;
             if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
                 javafiles ++;
                 String  filepath = diff.getNewPath();                          
                 String  fileText = getTextfromCommittedFile( commit, filepath );
                 int     fileAge = getFileAgeInWeeks( commit, filepath );
                 for ( Edit edit : df.toFileHeader( diff ).toEditList() ) {
-                    linesDeleted += edit.getEndA() - edit.getBeginA();
-                    linesAdded += edit.getEndB() - edit.getBeginB();
+                    if ( edit.getBeginA() < edit.getEndA() && edit.getBeginB() < edit.getEndB() ){
+                        linesReplaced += edit.getEndB() - edit.getBeginB();
+                    }
+                    if ( edit.getBeginA() < edit.getEndA() && edit.getBeginB() == edit.getEndB() ){
+                        linesDeleted += edit.getEndA() - edit.getBeginA();
+                    }
+                    if ( edit.getBeginA() == edit.getEndA() && edit.getBeginB() < edit.getEndB() ){
+                        linesAdded += edit.getEndB() - edit.getBeginB();
+                    }
+                    
                 }
                 int     version = commitObject.getVersion();
                 int     loc = getLoc( fileText );
-                files.add( new FileObject( filepath, version, fileText, fileAge, loc, linesAdded, linesDeleted, changeSetSize ) );
+                int     numImports = getNumImports(fileText);
+                int     numComments = getNumComments(fileText);
+                files.add( new FileObject(  filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced, 
+                                            changeSetSize, commitObject.getAuthorName(), numImports, numComments ) );
             }       
         }
-        System.out.println( "Issue : " + commitObject.getIssue().getTicketID() + " |  Java Files : " + javafiles );
         df.close();
         return files;
     }
@@ -268,6 +279,38 @@ public class GitRepositoryManager {
             e.printStackTrace();
         }
         return lines;
+    }
+
+
+
+    public int getNumImports( String fileText ){
+        int numImports = 0;
+        try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
+            for ( String line = reader.readLine(); line != null; line = reader.readLine()) {
+                if( line.contains( "import" )){
+                    numImports ++;
+                }
+            }         
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+        return numImports;
+    }
+
+
+
+    public int getNumComments( String fileText ){
+        int numComments = 0;
+        try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
+            for ( String line = reader.readLine(); line != null; line = reader.readLine()) {
+                if( line.contains( "//" ) || line.contains( "/*" ) || line.contains( "*/" )|| line.contains( "*" )){
+                    numComments ++;
+                }
+            }         
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+        return numComments;
     }
 
 

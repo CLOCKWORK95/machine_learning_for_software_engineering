@@ -59,11 +59,14 @@ public class DatasetBuilder {
                     newMetrics.setAGE( file.getAGE());
                     newMetrics.setCHURN(file.getCHURN());
                     newMetrics.appendAuthor(file.getAUTHOR());
+					newMetrics.setLOC_TOUCHED(file.getLOC_TOUCHED());
                     newMetrics.setMAX_LOC_ADDED(file.getLinesAdded());
                     newMetrics.setLOC(file.getLOC());
                     newMetrics.setAVG_LOC_ADDED(file.getLinesAdded());
                     newMetrics.setAVG_CHANGE_SET(file.getChangeSetSize());
                     newMetrics.setMAX_CHANGE_SET(file.getChangeSetSize());
+					newMetrics.setNumImports(file.getNumImports());
+					newMetrics.setNumComments(file.getNumComments());
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
 						System.out.println("NEW entry!");
@@ -94,12 +97,14 @@ public class DatasetBuilder {
 			 *  2 - LOC
 			 *  3 - AGE
 			 *  4 - CHURN
-			 *  5 - Max_Loc_Added
-			 *  6 - Avg_Chg_set
-			 *  7 - Max_Chg_Set
-			 *  8 - Avg_LOC_Added
-			 * 	9 - Buggyness
-			 * 
+			 *  5 - LOC_TOUCHED
+			 *  6 - Max_Loc_Added
+			 *  7 - Avg_Chg_set
+			 *  8 - Max_Chg_Set
+			 *  9 - Avg_LOC_Added
+			 *  10 - numImports
+			 *  11 - numComments
+			 * 	12 - Buggyness
 			 * */
 
 			// Append the first line
@@ -117,13 +122,19 @@ public class DatasetBuilder {
 			csvWriter.append(",");
 			csvWriter.append("CHURN");
 			csvWriter.append(",");
+			csvWriter.append("LOC_TOUCHED");
+			csvWriter.append(",");
+			csvWriter.append("Avg_LOC_Added");
+			csvWriter.append(",");
 			csvWriter.append("MaxLocAdded");
 			csvWriter.append(",");
 			csvWriter.append("Avg_Chg_Set");
 			csvWriter.append(",");
 			csvWriter.append("Max_Chg_Set");
 			csvWriter.append(",");
-			csvWriter.append("Avg_LOC_Added");
+			csvWriter.append("numImports");
+			csvWriter.append(",");
+			csvWriter.append("numComments");
 			csvWriter.append(",");
 			csvWriter.append("Buggy");
 			csvWriter.append("\n");
@@ -158,19 +169,22 @@ public class DatasetBuilder {
                     int nr =                metrics.getNR();
                     String NR =             Integer.toString((metrics.getNR()));
                     String NAUTH =          Integer.toString(metrics.getAUTHORS().size());
-                    String LOC =            Integer.toString((int)metrics.getLOC()/nr);
+                    String LOC =            Integer.toString((int) ( metrics.getLOC()/nr ) );
                     String AGE =            Integer.toString(metrics.getAGE());
                     String CHURN =          Integer.toString(metrics.getCHURN());
+					String LOC_TOUCHED = 	Integer.toString(metrics.getLOC_TOUCHED());
+					String AvgLocAdded =    Integer.toString((int) ( metrics.getAVG_LOC_ADDED()/nr ) );
                     String MaxLocAdded =    Integer.toString(metrics.getMAX_LOC_ADDED());
-                    String AvgChgSet =      Integer.toString((int)metrics.getAVG_CHANGE_SET()/nr);
+                    String AvgChgSet =      Integer.toString((int) ( metrics.getAVG_CHANGE_SET()/nr ) );
                     String MaxChgSet =      Integer.toString(metrics.getMAX_CHANGE_SET());
-                    String AvgLocAdded =    Integer.toString((int)metrics.getAVG_LOC_ADDED()/nr);
+					String numImports = 	Integer.toString(metrics.getNumImports());
+					String numComments = 	Integer.toString(metrics.getNumComments());
                     String buggy =          metrics.getBUGGYNESS();
 
 					// Append the data to CSV file
 					csvWriter.append(entry.getKey().split(",")[0] + "," + entry.getKey().split(",")[1] + "," + metrics.getNR() + "," + NAUTH + ","
-							+ LOC + "," + AGE + "," + CHURN + "," + MaxLocAdded + ","
-							+ AvgChgSet + "," + MaxChgSet + "," + AvgLocAdded + "," + buggy);
+							+ LOC + "," + AGE + "," + CHURN + ","+ LOC_TOUCHED + "," + AvgLocAdded + "," +  MaxLocAdded + ","
+							+ AvgChgSet + "," + MaxChgSet + ","  + numImports + ","  + numComments + "," +  buggy);
 
 					csvWriter.append("\n");
 				}

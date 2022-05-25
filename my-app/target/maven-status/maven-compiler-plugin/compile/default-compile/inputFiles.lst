@@ -1,5 +1,6 @@
 /home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java
 /home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/FileObject.java
+/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/NoTestSetAvailableException.java
 /home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/App.java
 /home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueObject.java
 /home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/CommitObject.java

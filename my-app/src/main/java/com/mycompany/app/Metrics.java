@@ -9,12 +9,15 @@ public class Metrics {
     private int                 NR;
     private ArrayList<String>   AUTHORS = new ArrayList<>();
     private int                 LOC;
+    private int                 LOC_TOUCHED;
     private int                 AGE;
     private int                 CHURN;
     private int                 MAX_LOC_ADDED;
     private int                 AVG_LOC_ADDED;
     private int                 AVG_CHANGE_SET;
     private int                 MAX_CHANGE_SET;
+    private int                 numImports;
+    private int                 numComments;
     private String              BUGGYNESS;
 
     //--------------------------------- GETTERS & SETTERS--------------------------------------
@@ -67,6 +70,12 @@ public class Metrics {
     public void setAGE(int aGE) {
         this.AGE = aGE;
     }
+    public int getLOC_TOUCHED(){
+        return this.LOC_TOUCHED;
+    }
+    public void setLOC_TOUCHED( int LOC_TOUCHED ){
+        this.LOC_TOUCHED = LOC_TOUCHED;
+    }
     public int getLOC() {
         return LOC;
     }
@@ -91,7 +100,18 @@ public class Metrics {
     public void setFilepath(String filepath) {
         this.filepath = filepath;
     }
-    
+    public int getNumComments(){
+        return this.numComments;
+    }
+    public void setNumComments( int numComments ){
+        this.numComments = numComments;
+    }
+    public int getNumImports(){
+        return this.numImports;
+    }
+    public void setNumImports( int numImports ){
+        this.numImports = numImports;
+    }
     //-------------------------------------------- METHODS --------------------------------------------------
 
     public void appendAuthor( String author ){
@@ -108,7 +128,10 @@ public class Metrics {
             updateAuthors.add( this.AUTHORS.get(0) );
             this.AUTHORS = updateAuthors;
         } else { this.AUTHORS = oldMetrics.getAUTHORS(); }
+        // Sum up all CHURN (loc added - loc deleted) within the release.
         this.CHURN += oldMetrics.getCHURN();
+        // Sum up all LOC TOUCHED within the release.
+        this.LOC_TOUCHED += oldMetrics.getLOC_TOUCHED();
         // Sum up all LOC ADDED within the release (average will be computed in a second time by dividing by NR).
         this.AVG_LOC_ADDED += oldMetrics.getAVG_LOC_ADDED();
         // Get the oldest version of this file within the release.
@@ -127,6 +150,10 @@ public class Metrics {
         if (!( this.MAX_CHANGE_SET> oldMetrics.getMAX_CHANGE_SET())){
             this.MAX_CHANGE_SET = oldMetrics.getMAX_CHANGE_SET();
         }
+        // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
+        this.numImports += oldMetrics.getNumImports();
+        // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
+        this.numComments += oldMetrics.getNumComments();
 
     }
 

@@ -71,7 +71,7 @@ public class App {
 
             controller.populateDatasetMapAndWriteToCSV();
 
-            //System.out.println( controller.getP() );
+            System.out.println( controller.getP() );
         }
 
         /*  This block of code implements the training of classifiers models and  returns their evaluation metrics. */
