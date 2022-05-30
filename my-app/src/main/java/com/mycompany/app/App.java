@@ -77,7 +77,7 @@ public class App {
         /*  This block of code implements the training of classifiers models and  returns their evaluation metrics. */
         if ( condition == 1 ){
             ClassifierModel controller = new ClassifierModel();
-            controller.evaluate();
+            controller.evaluateSampling();
         }
 
     }

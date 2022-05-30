@@ -16,6 +16,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+import java.util.logging.Logger;
+import weka.attributeSelection.CfsSubsetEval;
+import weka.attributeSelection.GreedyStepwise;
+import weka.classifiers.AbstractClassifier;
+import weka.classifiers.Evaluation;
+import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.lazy.IBk;
+import weka.classifiers.meta.FilteredClassifier;
+import weka.classifiers.trees.RandomForest;
+import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.supervised.attribute.AttributeSelection;
+import weka.filters.supervised.instance.Resample;
+import weka.filters.supervised.instance.SMOTE;
+import weka.filters.supervised.instance.SpreadSubsample;
 
 public class ClassifierModel {
 
@@ -24,6 +41,66 @@ public class ClassifierModel {
 	private final String    TRAINING = "_training.arff";
 	private final String    TESTING = "_testing.arff";
     private String 			path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
+	private static final String 	OVER_SAMPLING = "Over sampling";
+	private static final String 	UNDER_SAMPLING = "Under sampling";
+	private static final String 	SMOTE = "Smote";
+	private static final String 	NO_SAMPLING = "No sampling";
+	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
+
+
+	public void evaluateSampling() throws Exception{
+
+		// For each project...
+		for ( int j = 0; j < this.projects.length; j++ ) {
+
+			// Open the FileWriter for the output file
+			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
+				
+				// Iterate over the single version for the WalkForward technique...
+				for ( int i = 1; i < this.limits[j]; i++ ) {
+
+					// Create the ARFF file for the training, till the i-th version
+					List<Integer> resultTraining = walkForwardTraining( this.projects[j], i );
+					List<Integer> resultTesting;
+					// Create the ARFF file for testing, with the i+1 version
+					try{
+						resultTesting = walkForwardTesting( projects[j] , i + 1 );
+					} catch( NoTestSetAvailableException e ){
+						continue;
+					}
+
+					// Append the first line of the evaluation results file.
+					csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
+
+					double percentTraining = resultTraining.get(0) / (double)(resultTraining.get(0) + resultTesting.get(0));
+					double percentDefectTraining = resultTraining.get(1) / (double)resultTraining.get(0);
+					double percentDefectTesting = resultTesting.get(1) / (double)resultTesting.get(0);
+					double percentageMajorityClass = 1 - ( (resultTraining.get(1) + resultTesting.get(1)) / (double)(resultTraining.get(0) + resultTesting.get(0)));
+
+					// Read the Datasource created before and get each dataset
+					DataSource  source1 = new DataSource( path_to_dir + "output/" + projects[j] + TRAINING);
+					Instances   trainingSet = source1.getDataSet();
+					DataSource  source2 = new DataSource( path_to_dir + "output/" + projects[j] + TESTING);
+					Instances   testSet = source2.getDataSet();
+
+					// Apply sampling to the two datasets
+					List<String> samplingResult = applySampling( trainingSet, testSet, percentageMajorityClass, "False");
+					for (String result : samplingResult) {
+						csvWriter.append(projects[j] + "," + i  + "," + resultTraining.get(0) + "," + resultTesting.get(0) + "," + percentTraining  + "," + percentDefectTraining  + "," + percentDefectTesting +"," + result);
+					}
+
+				}
+
+				// Delete the temp file
+				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
+				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
+				csvWriter.flush();
+			}
+
+			// Flush the output file to disk
+		}
+	}
+
 
 
 	public void evaluate() throws Exception{
@@ -182,6 +259,70 @@ public class ClassifierModel {
 
 
 
+    /*  This function build the ARFF file for the specified project used as Training Set.
+	    param : projectName, the name of the project.
+	    param : trainingLimit, the index of the last version to be included in the training set. */ 
+	public ModifiedWalkForwardReader modifiedWalkForwardTraining( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws IOException {
+
+		int counterElement = 0;
+		int counterBuggies = 0;
+		int stepsDone = 0;
+
+		ArrayList<Integer> counterList = new ArrayList<>();
+
+		// Create the output ARFF file (.arff)
+		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TRAINING ) ) {
+
+			// Append the static line of the ARFF file
+			csvWriter.append("@relation " + projectName + "\n\n");
+			csvWriter.append("@attribute NumberRevisions real\n");
+			csvWriter.append("@attribute NumberAuthors real\n");
+			csvWriter.append("@attribute LOC real\n");
+			csvWriter.append("@attribute AGE real\n");
+			csvWriter.append("@attribute CHURN real\n");
+			csvWriter.append("@attribute LOC_TOUCHED real\n");
+			csvWriter.append("@attribute AvgLocAdded real\n");
+			csvWriter.append("@attribute MaxLocAdded real\n");
+			csvWriter.append("@attribute AvgChgSet real\n");
+			csvWriter.append("@attribute MaxChgSet real\n");
+			csvWriter.append("@attribute numImports real\n");
+			csvWriter.append("@attribute numComments real\n");
+			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
+			csvWriter.append("@data\n");
+
+			// Read the project dataset
+			try {
+				// Skip the first line (contains just column name)
+				String line = reader.getBr().readLine();
+
+				// Read till the last row 
+				while ( ( line = reader.getBr().readLine() ) != null ){  
+
+					counterElement = counterElement + 1;
+					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
+					
+					if ( counterElement != 0 && counterElement % reader.getStep() == 0 && stepsDone == trainingSteps ) {
+						break;
+					} 
+				}
+
+				// Flush the file to the disk
+				csvWriter.flush();
+
+				counterList.add( counterElement );
+				counterList.add( counterBuggies );
+
+				reader.setCounterResults( counterList );
+
+				return reader; 
+
+			} catch( IOException e ){
+				throw e;
+			}
+		}
+	}
+
+
     /*  This function build the ARFF file for the specific project relative to the Test Set.
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
@@ -236,7 +377,7 @@ public class ClassifierModel {
 
 			}
 		}
-		if ( counterElement == 0 ) {
+		if ( counterElement <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are no entries in version", testing );
 			throw(e);
 		}
@@ -246,9 +387,169 @@ public class ClassifierModel {
 
 
 
-    public static String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) {
-		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(1)  + "," + eval.falsePositiveRate(1)  + "," + eval.trueNegativeRate(1)  + "," + eval.falseNegativeRate(1)  + "," + eval.precision(1)  + "," + eval.recall(1)  + "," + eval.areaUnderROC(1)  + "," + eval.kappa() + "\n";
+    public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) throws Exception {
+		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(1)  + "," + eval.falsePositiveRate(1)  + "," + eval.trueNegativeRate(1)  + "," + eval.falseNegativeRate(1)  + "," + eval.precision(1)  + "," + eval.recall(1)  + "," + eval.areaUnderROC(1)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
 	}
+
+
+
+	/** This apply different sampling technique and evaluate the model
+	 * 
+	 * 	param training, the Evaluation object
+	 * 	param testing, the name of the classifier
+	 * 	param percentageMajorityClass, the percentage in the training set of the majority class
+	 * 	return result, list string with the list of metrics separated with ',' of the various run
+	 */
+	public List<String> applySampling( Instances training, Instances testing, double percentageMajorityClass, String featureSelection ) throws SamplingException {
+
+		ArrayList<String> result = new ArrayList<>();
+
+		IBk classifierIBk = new IBk();
+		RandomForest classifierRF = new RandomForest();
+		NaiveBayes classifierNB = new NaiveBayes();
+
+		int numAttrNoFilter = training.numAttributes();
+		training.setClassIndex(numAttrNoFilter - 1);
+		testing.setClassIndex(numAttrNoFilter - 1);
+
+		// Build the classifier
+		try {
+			classifierNB.buildClassifier(training);
+			classifierRF.buildClassifier(training);
+			classifierIBk.buildClassifier(training);
+		} catch (Exception e) {
+			throw new SamplingException("Error building the classifier.");
+		}
+		// Get an evaluation object
+
+		// Evaluate with no sampling e no feature selection
+		Evaluation eval;
+		try {
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(null, eval, training, testing, classifierRF);
+			addResult(eval, result, "RF", NO_SAMPLING, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(null, eval, training, testing, classifierIBk);
+			addResult(eval, result, "IBk", NO_SAMPLING, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(null, eval, training, testing, classifierNB);
+			addResult(eval, result, "NB", NO_SAMPLING, featureSelection);
+
+			// Apply under sampling
+			FilteredClassifier fc = new FilteredClassifier();
+			SpreadSubsample  underSampling = new SpreadSubsample();
+			underSampling.setInputFormat(training);
+			String[] opts = new String[]{ "-M", "1.0"};
+			underSampling.setOptions(opts);
+			fc.setFilter(underSampling);
+
+			// Evaluate the three classifiers
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
+			addResult(eval, result, "RF", UNDER_SAMPLING, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
+			addResult(eval, result, "IBk", UNDER_SAMPLING, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
+			addResult(eval, result, "NB", UNDER_SAMPLING, featureSelection);
+
+			// Apply over sampling
+			fc = new FilteredClassifier();
+			Resample  overSampling = new Resample();
+			overSampling.setInputFormat(training);
+			String[] optsOverSampling = new String[]{"-B", "1.0", "-Z", String.valueOf(2*percentageMajorityClass*100)};
+			overSampling.setOptions(optsOverSampling);
+			fc.setFilter(overSampling);
+
+			// Evaluate the three classifiers
+			eval = new Evaluation(testing);	
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
+			addResult(eval, result, "RF", OVER_SAMPLING, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
+			addResult(eval, result, "IBk", OVER_SAMPLING, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
+			addResult(eval, result, "NB", OVER_SAMPLING, featureSelection);
+
+			// Apply SMOTE
+			SMOTE smote = new SMOTE();
+			fc = new FilteredClassifier();
+			smote.setInputFormat(training);
+			fc.setFilter(smote);
+
+			// Evaluate the three classifiers
+			eval = new Evaluation(testing);	
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
+			addResult(eval, result, "RF", SMOTE, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
+			addResult(eval, result, "IBk", SMOTE, featureSelection);
+
+			eval = new Evaluation(training);
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
+			addResult(eval, result, "NB", SMOTE, featureSelection);
+
+
+		} catch (Exception e) {
+			throw new SamplingException("Errore nell'applicazione del sampling.");
+		}	
+
+		return result;
+
+
+	}
+
+
+
+
+	public Evaluation applyFilterForSampling(FilteredClassifier fc, Evaluation eval, Instances training, Instances testing, AbstractClassifier classifierName) throws SamplingException {
+
+		// In filter needed, applyt it and evaluate the model 
+		try {
+			if (fc != null) {
+				fc.setClassifier(classifierName);
+				fc.buildClassifier(training);
+				eval.evaluateModel(fc, testing);
+
+				// If not... Just evaluate the model
+			} else {
+				eval.evaluateModel(classifierName, testing);
+
+			}
+		} catch (Exception e) {
+			LOGGER.info("Attenzione. Classe minoritaria insufficiente per SMOTE.");
+		}
+		return eval;
+	}
+
+
+
+	/** This function build the ARFF file for the specific project relative to the testing set
+	 * 
+	 *  param eval, the Evaluation object
+	 *  param result, the list needed to append the results
+	 *  param classifierAbb, the abbreviation of the classifier
+	 *  param sampling, the name of sampling technique
+	 *  param featureSelection, the name of feature selection technique
+	 */ 
+	public void addResult(Evaluation eval, List<String> result, String classifierAbb, String sampling, String featureSelection) throws Exception {
+
+		// Add the result to the List of instances metrics
+		result.add( getMetrics( eval,classifierAbb, sampling, featureSelection ) );
+
+	}
+
+
+
 
 
 }
