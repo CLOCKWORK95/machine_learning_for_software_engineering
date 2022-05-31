@@ -1,16 +1,23 @@
+package com.mycompany.app;
 import java.io.BufferedReader;
+import java.lang.Math;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ModifiedWalkForwardReader {
 
     private BufferedReader  br;
-    private List<Integer>   counterResults;     // Results of a single walk [ numelements, numbugs ].
+    private List<Integer>   counterResults;     // Results of a single walk [ numelementsTraining, numbugsTraining, numelementsTest, numbugsTest ].
     private int             STEP;               // Step size.
     private int             STEPS;              // Number of steps to divide the dataset into.
     private int             SIZE;               // Number of lines of the file specified in path.
     private String          path;               // filepath.
 
 
-    public ModifiedWalkForwardReader( int STEPS, String path ){
+    public ModifiedWalkForwardReader( int STEPS, String path ) throws FileNotFoundException, IOException {
         this.STEPS = STEPS;
         this.path = path;
         this.br = new BufferedReader( new FileReader( path ) );
@@ -39,7 +46,7 @@ public class ModifiedWalkForwardReader {
     }
 
     
-    public void getDatasetSize(){
+    public void getDatasetSize() throws IOException , FileNotFoundException {
         int lines = 0;
         while( this.br.readLine() != null ){
             lines ++;
@@ -47,7 +54,17 @@ public class ModifiedWalkForwardReader {
         if( lines > 2 ){
             this.SIZE = lines -1;
         }
-        this.STEP = (int) this.SIZE/this.STEPS;
+        this.STEP = (int) Math.floor( this.SIZE / this.STEPS );
         this.br = new BufferedReader( new FileReader( path ) );
     }
+
+    public void appendCounterResult( int value ){
+        this.counterResults.add( value );
+    }
+
+    public void reset() throws IOException, FileNotFoundException {
+        this.br = new BufferedReader( new FileReader( path ) );
+        this.counterResults.clear();
+    }
+
 }

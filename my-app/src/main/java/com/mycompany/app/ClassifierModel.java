@@ -103,6 +103,61 @@ public class ClassifierModel {
 
 
 
+	public void evaluateSamplingModified() throws Exception{
+
+		// For each project...
+		for ( int j = 0; j < this.projects.length; j++ ) {
+
+			// Open the FileWriter for the output file
+			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
+
+				String 						projectName = this.projects[j];
+				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( 10, path_to_dir + "output/" + projectName + "_dataset.csv" );
+				int 						STEPS = reader.getSteps();
+				
+				// Iterate over the single version for the WalkForward technique...
+				for ( int i = 1; i < STEPS; i++ ) {
+
+					reader.reset();
+					// Create the ARFF file for the training and test sets: training set stops at the i-th fold, test set is the (i+1)th fold.
+					reader = modifiedWalkForwardTrainingAndTest( projectName, reader, i );
+					List<Integer> resultTraining = reader.getCounterResults().subList( 0, 1 );
+					List<Integer> resultTesting = reader.getCounterResults().subList( 2, 3 );
+
+					// Append the first line of the evaluation results file.
+					csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
+
+					double percentTraining = resultTraining.get(0) / (double)(resultTraining.get(0) + resultTesting.get(0));
+					double percentDefectTraining = resultTraining.get(1) / (double)resultTraining.get(0);
+					double percentDefectTesting = resultTesting.get(1) / (double)resultTesting.get(0);
+					double percentageMajorityClass = 1 - ( (resultTraining.get(1) + resultTesting.get(1)) / (double)(resultTraining.get(0) + resultTesting.get(0)));
+
+					// Read the Datasource created before and get each dataset
+					DataSource  source1 = new DataSource( path_to_dir + "output/" + projects[j] + TRAINING);
+					Instances   trainingSet = source1.getDataSet();
+					DataSource  source2 = new DataSource( path_to_dir + "output/" + projects[j] + TESTING);
+					Instances   testSet = source2.getDataSet();
+
+					// Apply sampling to the two datasets
+					List<String> samplingResult = applySampling( trainingSet, testSet, percentageMajorityClass, "False");
+					for (String result : samplingResult) {
+						csvWriter.append(projects[j] + "," + i  + "," + resultTraining.get(0) + "," + resultTesting.get(0) + "," + percentTraining  + "," + percentDefectTraining  + "," + percentDefectTesting +"," + result);
+					}
+
+				}
+
+				// Delete the temp file
+				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
+				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
+				csvWriter.flush();
+			}
+
+			// Flush the output file to disk
+		}
+	}
+
+
+
 	public void evaluate() throws Exception{
 
 		// For each project...
@@ -197,7 +252,7 @@ public class ClassifierModel {
 	}
 
 
-    /*  This function build the ARFF file for the specified project used as Training Set.
+    /*  This method build the ARFF file for the specified project used as Training Set.
 	    param : projectName, the name of the project.
 	    param : trainingLimit, the index of the last version to be included in the training set. */ 
 	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) throws IOException {
@@ -259,71 +314,7 @@ public class ClassifierModel {
 
 
 
-    /*  This function build the ARFF file for the specified project used as Training Set.
-	    param : projectName, the name of the project.
-	    param : trainingLimit, the index of the last version to be included in the training set. */ 
-	public ModifiedWalkForwardReader modifiedWalkForwardTraining( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws IOException {
-
-		int counterElement = 0;
-		int counterBuggies = 0;
-		int stepsDone = 0;
-
-		ArrayList<Integer> counterList = new ArrayList<>();
-
-		// Create the output ARFF file (.arff)
-		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TRAINING ) ) {
-
-			// Append the static line of the ARFF file
-			csvWriter.append("@relation " + projectName + "\n\n");
-			csvWriter.append("@attribute NumberRevisions real\n");
-			csvWriter.append("@attribute NumberAuthors real\n");
-			csvWriter.append("@attribute LOC real\n");
-			csvWriter.append("@attribute AGE real\n");
-			csvWriter.append("@attribute CHURN real\n");
-			csvWriter.append("@attribute LOC_TOUCHED real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
-			csvWriter.append("@attribute MaxLocAdded real\n");
-			csvWriter.append("@attribute AvgChgSet real\n");
-			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute numImports real\n");
-			csvWriter.append("@attribute numComments real\n");
-			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
-			csvWriter.append("@data\n");
-
-			// Read the project dataset
-			try {
-				// Skip the first line (contains just column name)
-				String line = reader.getBr().readLine();
-
-				// Read till the last row 
-				while ( ( line = reader.getBr().readLine() ) != null ){  
-
-					counterElement = counterElement + 1;
-					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
-					
-					if ( counterElement != 0 && counterElement % reader.getStep() == 0 && stepsDone == trainingSteps ) {
-						break;
-					} 
-				}
-
-				// Flush the file to the disk
-				csvWriter.flush();
-
-				counterList.add( counterElement );
-				counterList.add( counterBuggies );
-
-				reader.setCounterResults( counterList );
-
-				return reader; 
-
-			} catch( IOException e ){
-				throw e;
-			}
-		}
-	}
-
-
-    /*  This function build the ARFF file for the specific project relative to the Test Set.
+    /*  This method build the ARFF file for the specific project relative to the Test Set.
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
 	public List<Integer> walkForwardTesting( String projectName, int testing ) throws IOException, NoTestSetAvailableException, Exception{
@@ -386,20 +377,132 @@ public class ClassifierModel {
 
 
 
+   	/*  This function build the ARFF files for the specified project used as Training and Test Sets.
+		This walk forward tecnique divides the whole dataset into 'trainingSteps' folds of the same size, 
+		in order to implement the classic walk forward procedure ( in other words, it doesn't care about version 
+		numbers, but still preserves the order of the time-series ).
+		This implementation is thought to mantain correct balancing in training and testing set sizes over 
+		the iterations of the algorithm, as the version-based implementation was quite unbalanced in sizes.
+		param : projectName		the name of the project.
+		param : reader			a structured reader object implemented to perform the walkforward task.
+		param : trainingSteps	the number of folds to divide the dataset into.	 */ 
+	public ModifiedWalkForwardReader modifiedWalkForwardTrainingAndTest( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws IOException, NoTestSetAvailableException, Exception {
 
-    public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) throws Exception {
-		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(1)  + "," + eval.falsePositiveRate(1)  + "," + eval.trueNegativeRate(1)  + "," + eval.falseNegativeRate(1)  + "," + eval.precision(1)  + "," + eval.recall(1)  + "," + eval.areaUnderROC(1)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
+		int 									entries = 0;
+		int 									bugs = 0;
+		int 									stepsDone = 0;
+
+		// Create the output ARFF file (.arff)
+		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TRAINING ) ) {
+
+			// Append the static line of the ARFF file
+			csvWriter.append("@relation " + projectName + "\n\n");
+			csvWriter.append("@attribute NumberRevisions real\n");
+			csvWriter.append("@attribute NumberAuthors real\n");
+			csvWriter.append("@attribute LOC real\n");
+			csvWriter.append("@attribute AGE real\n");
+			csvWriter.append("@attribute CHURN real\n");
+			csvWriter.append("@attribute LOC_TOUCHED real\n");
+			csvWriter.append("@attribute AvgLocAdded real\n");
+			csvWriter.append("@attribute MaxLocAdded real\n");
+			csvWriter.append("@attribute AvgChgSet real\n");
+			csvWriter.append("@attribute MaxChgSet real\n");
+			csvWriter.append("@attribute numImports real\n");
+			csvWriter.append("@attribute numComments real\n");
+			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
+			csvWriter.append("@data\n");
+
+			// Read the project dataset
+			try {
+				// Skip the first line (contains just column name)
+				String line = reader.getBr().readLine();
+
+				// Read till the last row 
+				while ( ( line = reader.getBr().readLine() ) != null ){  
+
+					if ( entries != 0 && entries % reader.getStep() == 0 && stepsDone == trainingSteps ) {
+						break;
+					} 
+					if ( entries != 0 && entries % reader.getStep() == 0 && stepsDone < trainingSteps ) {
+						stepsDone = stepsDone + 1;
+					} 
+					entries = entries + 1;
+					bugs = bugs + appendToCSV( csvWriter, line );
+
+				}
+
+				// Flush the file to the disk
+				csvWriter.flush();
+				reader.appendCounterResult( entries );
+				reader.appendCounterResult( bugs );
+
+			} catch( IOException e ){
+				throw e;
+			}
+		}
+
+		entries = 0;
+		bugs = 0;
+
+		// Create the output ARFF file (.arff) which will be used as TEST SET for the evaluation in the WalkForward iteration.
+		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TESTING ) ) {
+
+			// Append the static line of the ARFF file
+			csvWriter.append("@relation " + projectName + "\n\n");
+			csvWriter.append("@attribute NumberRevisions real\n");
+			csvWriter.append("@attribute NumberAuthors real\n");
+			csvWriter.append("@attribute LOC real\n");
+			csvWriter.append("@attribute AGE real\n");
+			csvWriter.append("@attribute CHURN real\n");
+			csvWriter.append("@attribute LOC_TOUCHED real\n");
+			csvWriter.append("@attribute AvgLocAdded real\n");
+			csvWriter.append("@attribute MaxLocAdded real\n");
+			csvWriter.append("@attribute AvgChgSet real\n");
+			csvWriter.append("@attribute MaxChgSet real\n");
+			csvWriter.append("@attribute numImports real\n");
+			csvWriter.append("@attribute numComments real\n");
+			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
+			csvWriter.append("@data\n");
+
+			// Read the project dataset
+			try {  
+				String line;
+				// Read untill the next step is complete.
+				while ( ( line = reader.getBr().readLine() ) != null ){  
+
+					if ( entries < reader.getStep() ) {
+
+						entries = entries + 1;
+						// Append the row readed from the CSV file, but without the first 2 column
+						bugs = bugs + appendToCSV( csvWriter, line );
+					}
+				}
+
+				// Flush the file to the disk
+				csvWriter.flush();
+				reader.appendCounterResult( entries );
+				reader.appendCounterResult( bugs );
+
+			} catch (Exception e){
+				throw( e );
+			}
+		}
+		if ( entries <= 5 ) {
+			NoTestSetAvailableException e = new NoTestSetAvailableException("There are not enough entries to build test set! " + 
+													"Please decrease the integer STEPS parameter of ModifiedWalkForwardReader." );
+			throw(e);
+		}
+
+		return reader;
 	}
+	
 
 
-
-	/** This apply different sampling technique and evaluate the model
-	 * 
-	 * 	param training, the Evaluation object
-	 * 	param testing, the name of the classifier
-	 * 	param percentageMajorityClass, the percentage in the training set of the majority class
-	 * 	return result, list string with the list of metrics separated with ',' of the various run
-	 */
+	/* 	This method applies different sampling techniques to training and test sets, and evaluates the model. 
+		param training, the Evaluation object
+	  	param testing, the name of the classifier
+	  	param percentageMajorityClass, the percentage in the training set of the majority class
+	  	return result, list string with the list of metrics separated with ',' of the various run	*/
 	public List<String> applySampling( Instances training, Instances testing, double percentageMajorityClass, String featureSelection ) throws SamplingException {
 
 		ArrayList<String> result = new ArrayList<>();
@@ -510,8 +613,7 @@ public class ClassifierModel {
 
 
 
-
-	public Evaluation applyFilterForSampling(FilteredClassifier fc, Evaluation eval, Instances training, Instances testing, AbstractClassifier classifierName) throws SamplingException {
+	public Evaluation applyFilterForSampling( FilteredClassifier fc, Evaluation eval, Instances training, Instances testing, AbstractClassifier classifierName ) throws SamplingException {
 
 		// In filter needed, applyt it and evaluate the model 
 		try {
@@ -533,22 +635,23 @@ public class ClassifierModel {
 
 
 
-	/** This function build the ARFF file for the specific project relative to the testing set
-	 * 
-	 *  param eval, the Evaluation object
-	 *  param result, the list needed to append the results
-	 *  param classifierAbb, the abbreviation of the classifier
-	 *  param sampling, the name of sampling technique
-	 *  param featureSelection, the name of feature selection technique
-	 */ 
+	/*	This method build the ARFF file for the specific project relative to the testing set	  
+	   	param eval, the Evaluation object
+	   	param result, the list needed to append the results
+	   	param classifierAbb, the abbreviation of the classifier
+	   	param sampling, the name of sampling technique
+	   	param featureSelection, the name of feature selection technique		*/ 
 	public void addResult(Evaluation eval, List<String> result, String classifierAbb, String sampling, String featureSelection) throws Exception {
-
 		// Add the result to the List of instances metrics
 		result.add( getMetrics( eval,classifierAbb, sampling, featureSelection ) );
 
 	}
 
 
+
+    public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) throws Exception {
+		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(1)  + "," + eval.falsePositiveRate(1)  + "," + eval.trueNegativeRate(1)  + "," + eval.falseNegativeRate(1)  + "," + eval.precision(1)  + "," + eval.recall(1)  + "," + eval.areaUnderROC(1)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
+	}
 
 
 
