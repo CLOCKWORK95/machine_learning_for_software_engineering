@@ -303,9 +303,8 @@ public class GitRepositoryManager {
         int numComments = 0;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
             for ( String line = reader.readLine(); line != null; line = reader.readLine()) {
-                if( line.contains( "//" ) || line.contains( "/*" ) || line.contains( "*/" )|| line.contains( "*" )){
-                    numComments ++;
-                }
+                if ( line.endsWith("}") || line.endsWith("{") || line.endsWith(";") ) continue;
+                else numComments ++;              
             }         
         } catch ( IOException e ) {
             e.printStackTrace();
