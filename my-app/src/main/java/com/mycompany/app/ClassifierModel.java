@@ -3,30 +3,23 @@ package com.mycompany.app;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import weka.core.Instances;
-import weka.classifiers.Evaluation;
-import weka.classifiers.trees.RandomForest;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.core.converters.ConverterUtils.DataSource;
-import weka.classifiers.lazy.IBk;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import java.util.logging.Logger;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.attributeSelection.GreedyStepwise;
+import weka.classifiers.CostMatrix;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.RandomForest;
+import weka.classifiers.meta.CostSensitiveClassifier;
 import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.AttributeSelection;
@@ -36,16 +29,17 @@ import weka.filters.supervised.instance.SpreadSubsample;
 
 public class ClassifierModel {
 
-    private String[]        projects = {"storm"};
-    private Integer[]       limits = {14};
-	private final String    TRAINING = "_training.arff";
-	private final String    TESTING = "_testing.arff";
-    private String 			path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
+    private String[]        		projects = {"storm"};
+    private Integer[]       		limits = {14};
+	private final String    		TRAINING = "_training.arff";
+	private final String    		TESTING = "_testing.arff";
+    private String 					path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
 	private static final String 	OVER_SAMPLING = "Over sampling";
 	private static final String 	UNDER_SAMPLING = "Under sampling";
 	private static final String 	SMOTE = "Smote";
 	private static final String 	NO_SAMPLING = "No sampling";
 	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
+	private String 					FEATURE_SELECTION = "False";
 
 
 	public void evaluateSampling() throws Exception{
@@ -137,9 +131,15 @@ public class ClassifierModel {
 					Instances   trainingSet = source1.getDataSet();
 					DataSource  source2 = new DataSource( path_to_dir + "output/" + projects[j] + TESTING);
 					Instances   testSet = source2.getDataSet();
+					
+					if ( FEATURE_SELECTION.equals( "True" ) ) {
+						List<Instances> datasets = WekaFeatureSelection.featureSelection( trainingSet, testSet );
+						trainingSet = datasets.get( 0 );
+						testSet = datasets.get( 1 );
+					}
 
 					// Apply sampling to the two datasets
-					List<String> samplingResult = applySampling( trainingSet, testSet, percentageMajorityClass, "False");
+					List<String> samplingResult = applySampling( trainingSet, testSet, percentageMajorityClass, FEATURE_SELECTION );
 					for (String result : samplingResult) {
 						csvWriter.append(projects[j] + "," + i  + "," + resultTraining.get(0) + "," + resultTesting.get(0) + "," + percentTraining  + "," + percentDefectTraining  + "," + percentDefectTesting +"," + result);
 					}
@@ -385,9 +385,9 @@ public class ClassifierModel {
 		param : trainingSteps	the number of folds to divide the dataset into.	 */ 
 	public ModifiedWalkForwardReader modifiedWalkForwardTrainingAndTest( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws IOException, NoTestSetAvailableException, Exception {
 
-		int 									entries = 0;
-		int 									bugs = 0;
-		int 									stepsDone = 0;
+		int 	entries = 0;
+		int 	bugs = 0;
+		int 	stepsDone = 1;
 
 		// Create the output ARFF file (.arff)
 		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TRAINING ) ) {
@@ -520,86 +520,106 @@ public class ClassifierModel {
 		} catch (Exception e) {
 			throw new SamplingException("Error building the classifier.");
 		}
-		// Get an evaluation object
 
-		// Evaluate with no sampling e no feature selection
 		Evaluation eval;
 		try {
-			eval = new Evaluation(training);
+
+			// NO SAMPLING
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(null, eval, training, testing, classifierRF);
 			addResult(eval, result, "RF", NO_SAMPLING, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(null, eval, training, testing, classifierIBk);
 			addResult(eval, result, "IBk", NO_SAMPLING, featureSelection);
 
-			eval = new Evaluation(training);
-			eval = applyFilterForSampling(null, eval, training, testing, classifierNB);
-			addResult(eval, result, "NB", NO_SAMPLING, featureSelection);
+			eval = new Evaluation( testing );
+			eval = applyFilterForSampling( null, eval, training, testing, classifierNB );
+			addResult( eval, result, "NB", NO_SAMPLING, featureSelection );
 
-			// Apply under sampling
+			// UNDER SAMPLING the Majority Class.
 			FilteredClassifier fc = new FilteredClassifier();
 			SpreadSubsample  underSampling = new SpreadSubsample();
-			underSampling.setInputFormat(training);
-			String[] opts = new String[]{ "-M", "1.0"};
-			underSampling.setOptions(opts);
-			fc.setFilter(underSampling);
+			underSampling.setInputFormat( training );
+			underSampling.setDistributionSpread( 1.0 );
+			fc.setFilter( underSampling );
 
 			// Evaluate the three classifiers
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
 			addResult(eval, result, "RF", UNDER_SAMPLING, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
 			addResult(eval, result, "IBk", UNDER_SAMPLING, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
 			addResult(eval, result, "NB", UNDER_SAMPLING, featureSelection);
 
-			// Apply over sampling
+			// OVER SAMPLING the Minority class.
 			fc = new FilteredClassifier();
 			Resample  overSampling = new Resample();
-			overSampling.setInputFormat(training);
-			String[] optsOverSampling = new String[]{"-B", "1.0", "-Z", String.valueOf(2*percentageMajorityClass*100)};
-			overSampling.setOptions(optsOverSampling);
-			fc.setFilter(overSampling);
+			overSampling.setInputFormat( training );
+			overSampling.setSampleSizePercent( 2 * percentageMajorityClass * 100 );
+			overSampling.setNoReplacement( false );
+			overSampling.setBiasToUniformClass( 1.0 );
+			fc.setFilter( overSampling );
 
 			// Evaluate the three classifiers
-			eval = new Evaluation(testing);	
+			eval = new Evaluation( testing );	
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
 			addResult(eval, result, "RF", OVER_SAMPLING, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
 			addResult(eval, result, "IBk", OVER_SAMPLING, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
 			addResult(eval, result, "NB", OVER_SAMPLING, featureSelection);
 
-			// Apply SMOTE
-			SMOTE smote = new SMOTE();
+			// SMOTE
 			fc = new FilteredClassifier();
-			smote.setInputFormat(training);
-			fc.setFilter(smote);
+			SMOTE smote = new SMOTE();
+			smote.setInputFormat( training );
+			fc.setFilter( smote );
 
 			// Evaluate the three classifiers
-			eval = new Evaluation(testing);	
+			eval = new Evaluation( testing );	
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
 			addResult(eval, result, "RF", SMOTE, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
 			addResult(eval, result, "IBk", SMOTE, featureSelection);
 
-			eval = new Evaluation(training);
+			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
 			addResult(eval, result, "NB", SMOTE, featureSelection);
 
+			/*
+			// COST SENSITIVE EVALUATION
+			fc = new FilteredClassifier();
+			CostMatrix costMatrix = new CostMatrix( 2 );
+			
+			fc.setFilter( smote );
 
-		} catch (Exception e) {
+			// Evaluate the three classifiers
+			eval = new Evaluation( testing );	
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
+			addResult(eval, result, "RF", SMOTE, featureSelection);
+
+			eval = new Evaluation( testing );
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
+			addResult(eval, result, "IBk", SMOTE, featureSelection);
+
+			eval = new Evaluation( testing );
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
+			addResult(eval, result, "NB", SMOTE, featureSelection); */
+
+
+		} catch ( Exception e ) {
 			throw new SamplingException("Errore nell'applicazione del sampling.");
 		}	
 
@@ -615,13 +635,13 @@ public class ClassifierModel {
 		// In filter needed, applyt it and evaluate the model 
 		try {
 			if (fc != null) {
-				fc.setClassifier(classifierName);
-				fc.buildClassifier(training);
-				eval.evaluateModel(fc, testing);
+				fc.setClassifier( classifierName );
+				fc.buildClassifier( training );
+				eval.evaluateModel( fc, testing );
 
 				// If not... Just evaluate the model
 			} else {
-				eval.evaluateModel(classifierName, testing);
+				eval.evaluateModel( classifierName, testing );
 
 			}
 		} catch (Exception e) {
