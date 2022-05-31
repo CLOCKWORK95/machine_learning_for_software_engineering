@@ -121,8 +121,8 @@ public class ClassifierModel {
 					reader.reset();
 					// Create the ARFF file for the training and test sets: training set stops at the i-th fold, test set is the (i+1)th fold.
 					reader = modifiedWalkForwardTrainingAndTest( projectName, reader, i );
-					List<Integer> resultTraining = reader.getCounterResults().subList( 0, 1 );
-					List<Integer> resultTesting = reader.getCounterResults().subList( 2, 3 );
+					List<Integer> resultTraining = reader.getCounterResults().subList( 0, 2 );
+					List<Integer> resultTesting = reader.getCounterResults().subList( 2, 4 );
 
 					// Append the first line of the evaluation results file.
 					csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
@@ -146,9 +146,6 @@ public class ClassifierModel {
 
 				}
 
-				// Delete the temp file
-				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
-				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
 				csvWriter.flush();
 			}
 
