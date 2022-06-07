@@ -18,6 +18,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.ArrayList;
 
 
@@ -27,51 +28,53 @@ public class App {
     public static void main( String[] args ) throws Exception, InvalidRemoteException, TransportException, GitAPIException, IOException, JSONException 
     {
 
-        String projectName = "storm";
+        String[] projectNames = {"storm","bookkeeper"};
 
-        String projectPath = "/home/gianmarco/Scrivania/ML_4_SE/storm/.git";
+        String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/storm/.git", "/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" };
 
         int condition = 1;
 
         /*  This block of code implements the csv creation by merging project informations from jira and git. */
         if ( condition == 0 ){
-            IssueLifeCycleManager controller = new IssueLifeCycleManager( projectName, projectPath );
 
-            controller.initializeVersionMap();
+            for ( int i = 0; i < projectNames.length ; i ++ ){
 
-            controller.retrieveIssueTickets();
+                IssueLifeCycleManager controller = new IssueLifeCycleManager( projectNames[i], projectPaths[i] );
 
-            controller.setOpeningAndFixedVersions();
+                controller.initializeVersionMap();
 
-            controller.logWalk();
+                controller.retrieveIssueTickets();
 
-            controller.removeCommitsWithoutJavaExtension();
+                controller.setOpeningAndFixedVersions();
 
-            controller.removeIssuesWithoutCommits();
+                controller.logWalk();
 
-            controller.setAffectedVersionsAV();
+                controller.removeCommitsWithoutJavaExtension();
 
-            controller.setInjectedVersionAV();
+                controller.removeIssuesWithoutCommits();
 
-            ArrayList<IssueObject> issuesAV = controller.getIssuesWithAffectedVersions();
+                controller.setAffectedVersionsAV();
 
-            ArrayList<IssueObject> issuesP = controller.getIssuesWithoutAffectedVersions();
+                controller.setInjectedVersionAV();
 
-            controller.computeProportionIncremental( issuesAV );
+                ArrayList<IssueObject> issuesAV = controller.getIssuesWithAffectedVersions();
 
-            controller.setAffectedAndInjectedVersionsP( issuesP );
+                ArrayList<IssueObject> issuesP = controller.getIssuesWithoutAffectedVersions();
 
-            controller.classify( issuesAV );
+                controller.computeProportionIncremental( issuesAV );
 
-            controller.classify( issuesP );
+                controller.setAffectedAndInjectedVersionsP( issuesP );
 
-            //controller.printIssuesInfo( issuesAV );
+                controller.classify( issuesAV );
 
-            //controller.printIssuesInfo( issuesP );
+                controller.classify( issuesP );
 
-            controller.populateDatasetMapAndWriteToCSV();
+                controller.populateDatasetMapAndWriteToCSV();
 
-            System.out.println( controller.getP() );
+                System.out.println( controller.getP() );
+
+            }
+            
         }
 
         /*  This block of code implements the training of classifiers models and  returns their evaluation metrics. */

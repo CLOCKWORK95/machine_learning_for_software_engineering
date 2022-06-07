@@ -158,6 +158,11 @@ public class IssueLifeCycleManager{
                     LocalDate commitLocalDate = commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     int version = getVersionFromLocalDate( commitLocalDate );
                     if ( issue.getFv() >= version ){ // bypass all the commits with version greater than ticket's fixed version.
+                        try{
+                            RevCommit checkparent = commit.getParent(0);
+                        } catch ( ArrayIndexOutOfBoundsException e ){
+                            continue;
+                        }
                         CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
                         issue.append( commitObject );
                     }

@@ -29,8 +29,8 @@ import weka.filters.supervised.instance.SpreadSubsample;
 
 public class ClassifierModel {
 
-    private String[]        		projects = {"storm"};
-    private Integer[]       		limits = {14};
+    private String[]        		projects = {"storm", "bookkeeper"};
+    private Integer[]       		limits = {14,8};
 	private final String    		TRAINING = "_training.arff";
 	private final String    		TESTING = "_testing.arff";
     private String 					path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
@@ -109,6 +109,9 @@ public class ClassifierModel {
 				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( 10, path_to_dir + "output/" + projectName + "_dataset.csv" );
 				int 						STEPS = reader.getSteps();
 				
+				// Append the first line of the evaluation results file.
+				csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
+
 				// Iterate over the single version for the WalkForward technique...
 				for ( int i = 1; i < STEPS; i++ ) {
 
@@ -117,9 +120,6 @@ public class ClassifierModel {
 					reader = modifiedWalkForwardTrainingAndTest( projectName, reader, i );
 					List<Integer> resultTraining = reader.getCounterResults().subList( 0, 2 );
 					List<Integer> resultTesting = reader.getCounterResults().subList( 2, 4 );
-
-					// Append the first line of the evaluation results file.
-					csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
 
 					double percentTraining = resultTraining.get(0) / (double)(resultTraining.get(0) + resultTesting.get(0));
 					double percentDefectTraining = resultTraining.get(1) / (double)resultTraining.get(0);
