@@ -35,6 +35,7 @@ public class IssueLifeCycleManager{
     private Multimap<LocalDate, String>     versionMap;
     private double                          p;
     private DatasetBuilder                  datasetBuilder;
+    private ArrayList<CommitObject>         allCommits;                    
 
 
     // ------------------------------ Builders --------------------------------
@@ -50,6 +51,7 @@ public class IssueLifeCycleManager{
         this.jiraTicketManager = new JiraTicketManager( projectName.toUpperCase() );
         this.versionMap = MultimapBuilder.treeKeys().linkedListValues().build();
         this.datasetBuilder = new DatasetBuilder( this.projectName );
+        this.allCommits = new ArrayList<CommitObject>();
     }
 
     // ------------------------------ Getters ---------------------------------
@@ -129,6 +131,49 @@ public class IssueLifeCycleManager{
     }
 
 
+
+
+    public void logWalkGenesi() throws MissingObjectException, IncorrectObjectTypeException, IOException, GitAPIException {
+        
+        Collection<Ref> allRefs = this.gitRepoManager.getRepository().getAllRefs().values();
+
+        // a RevWalk allows to walk over commits based on some filtering that is defined
+        int stop = 0;
+
+        try ( RevWalk revWalk = new RevWalk( this.gitRepoManager.getRepository()) ) {
+            
+            ProgressBar pb = new ProgressBar("SCANNING THE GIT LOG TO INITIALIZE THE FILE DATASET", Iterables.size( revWalk)); 
+            pb.start();
+
+            for( Ref ref : allRefs ) {
+                revWalk.markStart( revWalk.parseCommit( ref.getObjectId() ));
+            }
+
+            for( RevCommit commit : revWalk ) {
+                pb.step();
+
+                LocalDate commitLocalDate = commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                
+                int version = getVersionFromLocalDate( commitLocalDate );
+                
+                try{
+                    RevCommit checkparent = commit.getParent(0);
+                } catch ( ArrayIndexOutOfBoundsException e ){
+                    continue;
+                }
+                CommitObject commitObject = new CommitObject( commit, version, this.gitRepoManager );
+                this.allCommits.add( commitObject );
+                
+            }
+
+            pb.stop();
+        } 
+
+    }
+
+
+
+
     /*  This Method interfaces with the Git Repository Manager in order to retrieve,
         for each issue in issues array, all related commits (having Issue ID inside the
         commit message).    */ 
@@ -139,7 +184,7 @@ public class IssueLifeCycleManager{
         // a RevWalk allows to walk over commits based on some filtering that is defined
         int stop = 0;
 
-        ProgressBar pb = new ProgressBar("SCANNING TICKET", this.issues.size()); 
+        ProgressBar pb = new ProgressBar("SCANNING ISSUE TICKETS", this.issues.size()); 
         pb.start();
 
         for ( IssueObject issue : this.issues ){
@@ -163,7 +208,7 @@ public class IssueLifeCycleManager{
                         } catch ( ArrayIndexOutOfBoundsException e ){
                             continue;
                         }
-                        CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
+                        CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager, true );
                         issue.append( commitObject );
                     }
                     
@@ -204,7 +249,8 @@ public class IssueLifeCycleManager{
     public void setAffectedVersionsAV(){
         for ( IssueObject issue : this.issues ){           
             // If the current issue has not specified AVs it'll be appended to the array
-            // that will be used to perform the Proportion Method.
+            // of issues without AVs. The Proportion Method will be applied on it to retrieve an
+            // estimate of the injected ( and so the affected ) version(s).
             if ( issue.getAffectedVersions().size() == 0 ){
                 this.issuesWithoutAffectedVersions.add( issue );
             }
@@ -238,12 +284,15 @@ public class IssueLifeCycleManager{
 
 
     /*  This Method is used to set the Injected version of every issue having declared affected
-        versions. The injected version is set as the minimum between all declared affected versions. */
+        versions. The injected version is set as the minimum between all declared affected versions. 
+        Also, into this method all proportion values (the ones associated to every single issue) are computed,
+        in order to make IVs estimations for IV and AV of all tickets with not declared AVs.*/
     public void setInjectedVersionAV(){
         int iv;
         for ( IssueObject issue : this.issuesWithAffectedVersions ){
             iv = Collections.min( issue.getAvs() );
             issue.setIv( iv );
+            issue.computeProportion();
         }
     }
 
@@ -274,7 +323,10 @@ public class IssueLifeCycleManager{
     }
 
 
-    public void computeProportionIncremental( ArrayList<IssueObject> issues ){
+    /*  This method computes a value of proportion that averages the proportion values
+        computed over each single issue from the list of AVs native owners. 
+        This is NOT a canonical way to compute proportion.  */
+    public void computeProportionAverage( ArrayList<IssueObject> issues ){
         ArrayList<Double> proportions = new ArrayList<>();
         for ( IssueObject issue : issues ){
             if ( !( issue.getOv() == issue.getFv() ) ) {
@@ -293,14 +345,37 @@ public class IssueLifeCycleManager{
         for ( IssueObject issue : issues ){
             int fv = issue.getFv();
             int ov = issue.getOv();
-            int P = (int) this.p;
-            if ( fv == ov ) { 
-                // IS THIS CORRECT? MAYBE IN THIS CASE I JUST SHOULD DELETE THE ISSUE? 
-                // CAUSE I AM ACTUALLY APPLYING PROPORTION RIGHT (IN THE ELSE BLOCK)!
-                issue.setIv( ( fv - ( ( 1 ) * P ) ) );
-            } else{
-                issue.setIv( ( fv - ( ( fv - ov ) * P ) ) );
+            ArrayList<Double> proportions = new ArrayList<>();
+            double P;
+            // Compute value of Incremental Proportion for the current issue, by averaging
+            // proportion values of all those tickets contained into the array of issues 
+            // with AVs having earlier Injected Version with respect to this one.
+            for ( IssueObject previousTicket : this.issuesWithAffectedVersions ){
+                if ( previousTicket.getFv() <= fv ){
+                    proportions.add( previousTicket.getProportion() );
+                }
             }
+            // If there were not previous tickets wrt this one to compute proportion on,
+            // just set the injected version of this issue as its opening version.
+            if( proportions.size() == 0 ){
+                issue.setIv( ov );
+            }
+            else{
+                P = (int) average( proportions );
+                int iv;
+                if ( fv == ov ) { 
+                    // IS THIS CORRECT? MAYBE IN THIS CASE I JUST SHOULD DELETE THE ISSUE? 
+                    // CAUSE I AM ACTUALLY APPLYING PROPORTION RIGHT (IN THE ELSE BLOCK)!
+                    iv = (int) ( fv - ( ( 1 ) * P ) );
+                    if ( iv <= 1 )  iv = 1;
+                    issue.setIv( iv );
+                } else {
+                    iv = (int) ( fv - ( ( fv - ov ) * P ) );
+                    if ( iv <= 1 )  iv = 1;
+                    issue.setIv( iv );
+                }
+            }
+
             int minAVValue = issue.getIv();
             int maxAVValue = ( issue.getFv() - 1 );
             ArrayList<Integer> avs = new ArrayList<>( IntStream.rangeClosed(minAVValue, maxAVValue).boxed().collect(Collectors.toList()) );
@@ -316,7 +391,12 @@ public class IssueLifeCycleManager{
     }
 
 
-    public void populateDatasetMapAndWriteToCSV() throws IOException{
+    public void initializeDatasetMap(){
+        this.datasetBuilder.initializeFileDataset(allCommits);
+    }
+
+
+    public void updateDatasetMapAndWriteToCSV() throws IOException{
         this.datasetBuilder.populateFileDataset(issuesWithAffectedVersions);
         this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
         this.datasetBuilder.writeToCSV(this.projectName);

@@ -25,6 +25,11 @@ public class FileObject{
 
     // ------------------------------ Builders ----------------------------------
     
+    public FileObject( String filepath, int version ){
+        this.filepath = filepath;
+        this.version = version;
+    }
+
     public FileObject( String filepath, int version, String buggyness ){
         this.filepath = filepath;
         this.version = version;
@@ -113,6 +118,10 @@ public class FileObject{
         if ( ( commitObject.getVersion() < commitObject.getIssue().getIv() ) ){
             this.buggyness = "No";
         } 
+    }
+
+    public void classifyDummy(){
+        this.buggyness = "No";
     }
 
 

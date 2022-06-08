@@ -28,6 +28,16 @@ public class CommitObject{
 
     // ------------------------------ Builders ----------------------------------
     
+
+    public CommitObject( RevCommit commit, IssueObject issue, int version, GitRepositoryManager gitRepoManager, boolean flag ) throws IOException, InvalidRemoteException, GitAPIException{
+        this.issue =            issue;
+        this.commit =           commit;
+        this.version =          version;
+        this.gitRepoManager =   gitRepoManager;
+        this.fileEasyManagement();   
+    }
+
+
     public CommitObject( RevCommit commit, IssueObject issue, int version, GitRepositoryManager gitRepoManager ) throws IOException, InvalidRemoteException, GitAPIException{
         this.issue =            issue;
         this.commit =           commit;
@@ -42,6 +52,20 @@ public class CommitObject{
         this.fileManagement();
     }
 
+
+    public CommitObject( RevCommit commit, int version, GitRepositoryManager gitRepoManager ) throws IOException, InvalidRemoteException, GitAPIException{
+        this.commit =           commit;
+        this.version =          version;
+        this.gitRepoManager =   gitRepoManager;
+        this.parent =           this.commit.getParent(0);
+        this.revisionHash =     this.commit.getName();
+        this.authorName =       this.commit.getAuthorIdent().getName();
+        this.authorEmail =      this.commit.getAuthorIdent().getEmailAddress();
+        this.commitLocalDate =  this.commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        this.fullMessage =      this.commit.getFullMessage();
+        this.fileManagement();
+        this.classifyDummy();
+    }
     // ------------------------------ Getters ----------------------------------
 
     public RevCommit getCommit(){
@@ -79,6 +103,7 @@ public class CommitObject{
         this.files.add( file );
     }
 
+
     public void fileManagementFromFilepaths() throws IOException, InvalidRemoteException, GitAPIException{
         // To be continued... with metrics!!!
         ArrayList<String> filepaths = this.gitRepoManager.getCommitChangedFiles( this.commit );
@@ -98,9 +123,21 @@ public class CommitObject{
     }
 
 
+    public void fileEasyManagement() throws IOException, InvalidRemoteException, GitAPIException{
+        this.files = this.gitRepoManager.getCommitChangedFilesEasy( this );
+    }
+
+
     public void classify(){
         for ( FileObject file : this.files ){
             file.classify( this );
+        }
+    }
+
+
+    public void classifyDummy(){
+        for ( FileObject file : this.files ){
+            file.classifyDummy();
         }
     }
 

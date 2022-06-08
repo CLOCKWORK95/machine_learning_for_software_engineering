@@ -50,6 +50,9 @@ public class ClassifierModel {
 			// Open the FileWriter for the output file
 			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
 				
+				// Append the first line of the evaluation results file.
+				csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
+				
 				// Iterate over the single version for the WalkForward technique...
 				for ( int i = 1; i < this.limits[j]; i++ ) {
 
@@ -63,8 +66,7 @@ public class ClassifierModel {
 						continue;
 					}
 
-					// Append the first line of the evaluation results file.
-					csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
+
 
 					double percentTraining = resultTraining.get(0) / (double)(resultTraining.get(0) + resultTesting.get(0));
 					double percentDefectTraining = resultTraining.get(1) / (double)resultTraining.get(0);
@@ -667,7 +669,7 @@ public class ClassifierModel {
 
 
     public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) throws Exception {
-		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(1)  + "," + eval.falsePositiveRate(1)  + "," + eval.trueNegativeRate(1)  + "," + eval.falseNegativeRate(1)  + "," + eval.precision(1)  + "," + eval.recall(1)  + "," + eval.areaUnderROC(1)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
+		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(0)  + "," + eval.falsePositiveRate(0)  + "," + eval.trueNegativeRate(0)  + "," + eval.falseNegativeRate(0)  + "," + eval.precision(0)  + "," + eval.recall(0)  + "," + eval.areaUnderROC(0)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
 	}
 
 

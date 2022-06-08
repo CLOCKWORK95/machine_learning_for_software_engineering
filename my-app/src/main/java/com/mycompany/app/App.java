@@ -1,6 +1,7 @@
 package com.mycompany.app;
 
 import java.io.File;
+import java.lang.Throwable;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 public class App {
 
-    public static void main( String[] args ) throws Exception, InvalidRemoteException, TransportException, GitAPIException, IOException, JSONException 
+    public static void main( String[] args ) throws Throwable, Exception, InvalidRemoteException, TransportException, GitAPIException, IOException, JSONException 
     {
 
         String[] projectNames = {"storm","bookkeeper"};
@@ -47,6 +48,10 @@ public class App {
 
                 controller.setOpeningAndFixedVersions();
 
+                controller.logWalkGenesi();
+
+                controller.initializeDatasetMap();
+
                 controller.logWalk();
 
                 controller.removeCommitsWithoutJavaExtension();
@@ -61,7 +66,7 @@ public class App {
 
                 ArrayList<IssueObject> issuesP = controller.getIssuesWithoutAffectedVersions();
 
-                controller.computeProportionIncremental( issuesAV );
+                //controller.computeProportionAverage( issuesAV );
 
                 controller.setAffectedAndInjectedVersionsP( issuesP );
 
@@ -69,9 +74,9 @@ public class App {
 
                 controller.classify( issuesP );
 
-                controller.populateDatasetMapAndWriteToCSV();
+                controller.updateDatasetMapAndWriteToCSV();
 
-                System.out.println( controller.getP() );
+                //System.out.println( controller.getP() );
 
             }
             
@@ -80,7 +85,8 @@ public class App {
         /*  This block of code implements the training of classifiers models and  returns their evaluation metrics. */
         if ( condition == 1 ){
             ClassifierModel controller = new ClassifierModel();
-            controller.evaluateSamplingModified();
+            //controller.evaluateSamplingModified();
+            Deliverable2Milestone3.evaluate();
         }
 
     }

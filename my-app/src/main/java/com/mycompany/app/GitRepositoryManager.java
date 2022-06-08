@@ -221,6 +221,40 @@ public class GitRepositoryManager {
 
 
 
+
+    public ArrayList<FileObject> getCommitChangedFilesEasy( CommitObject commitObject ) throws IOException, GitAPIException {
+        Git git = this.git;
+        RevCommit commit = commitObject.getCommit();
+        ArrayList<FileObject> files = new ArrayList<FileObject>();
+        DiffFormatter df = new DiffFormatter( DisabledOutputStream.INSTANCE );
+        df.setRepository( openJGitRepository() );
+        df.setDiffComparator( RawTextComparator.DEFAULT );
+        df.setDetectRenames( true );
+        final List<DiffEntry> diffs = git.diff()
+                .setOldTree(prepareTreeParser(openJGitRepository(), commit.getParent(0).getId().getName()))
+                .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
+                .call();
+        int changeSetSize = diffs.size();
+        
+        for ( DiffEntry diff : diffs ) {
+            
+            if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
+                String  filepath = diff.getNewPath();  
+                int     version = commitObject.getVersion();
+                files.add( new FileObject(  filepath, version ) );
+            }       
+        }
+        df.close();
+        return files;
+    }
+
+
+
+
+
+
+
+
     public String getTextfromCommittedFile( RevCommit commit, String filename ) throws IOException, InvalidRemoteException {
         RevTree tree = commit.getTree();
         Repository repository = openJGitRepository();

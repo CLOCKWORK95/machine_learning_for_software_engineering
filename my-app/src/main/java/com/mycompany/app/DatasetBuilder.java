@@ -37,50 +37,118 @@ public class DatasetBuilder {
 
 	public void setVersionMap( Multimap<LocalDate,String> versionMap ){
 		this.versionMap = versionMap;
-		this.lastVersion = (versionMap.size()/2)/2;
+		this.lastVersion = ( versionMap.size()/2 )/2;
 		System.out.println( this.lastVersion );
 	}
 
     //------------------------------------- Methods ----------------------------------------------
 
-    /*  This Method is used to populate the  Multi Key Map representing the dataset to be created. */
+	/*  This Method is used to initialize the Multi Key Map representing the dataset to be created. */
+    public void initializeFileDataset( ArrayList<CommitObject> allCommits ){
+        int     version;
+        String  filepath;
+        
+		for ( CommitObject commit : allCommits ){
+			for ( FileObject file : commit.getFiles() ){
+				Metrics newMetrics = new Metrics();
+				version = file.getVersion();
+				filepath = file.getFilepath();
+				newMetrics.setVersion(version);
+				newMetrics.setFilepath(filepath);
+				newMetrics.setNR( 1 );
+				newMetrics.setAGE( file.getAGE());
+				newMetrics.setCHURN(file.getCHURN());
+				newMetrics.appendAuthor(file.getAUTHOR());
+				newMetrics.setLOC_TOUCHED(file.getLOC_TOUCHED());
+				newMetrics.setMAX_LOC_ADDED(file.getLinesAdded());
+				newMetrics.setLOC(file.getLOC());
+				newMetrics.setAVG_LOC_ADDED(file.getLinesAdded());
+				newMetrics.setAVG_CHANGE_SET(file.getChangeSetSize());
+				newMetrics.setMAX_CHANGE_SET(file.getChangeSetSize());
+				newMetrics.setNumImports(file.getNumImports());
+				newMetrics.setNumComments(file.getNumComments());
+				newMetrics.setBUGGYNESS(file.getBuggyness());
+				if( !fileDataset.containsKey(version,filepath) ){
+					System.out.println("NEW entry!");
+					fileDataset.put( version, filepath, newMetrics );
+				} else{
+					Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
+					System.out.println("OLD entry!");
+					newMetrics.update( oldMetrics );
+					fileDataset.put( version, filepath, newMetrics );
+				}
+			}
+		}
+        
+    }
+
+
+
+    /*  This Method is used to update/populate the Multi Key Map with file informations derived 
+		from the analysis of the Jira Issue Tickets. */
     public void populateFileDataset( ArrayList<IssueObject> issues ){
         int     version;
         String  filepath;
+		String  buggyness;
         for ( IssueObject issue : issues ){
             for ( CommitObject commit : issue.getCommits() ){
                 for ( FileObject file : commit.getFiles() ){
-					Metrics newMetrics = new Metrics();
+
                     version = file.getVersion();
                     filepath = file.getFilepath();
-                    newMetrics.setVersion(version);
-                    newMetrics.setFilepath(filepath);
-                    newMetrics.setNR( 1 );
-                    newMetrics.setAGE( file.getAGE());
-                    newMetrics.setCHURN(file.getCHURN());
-                    newMetrics.appendAuthor(file.getAUTHOR());
-					newMetrics.setLOC_TOUCHED(file.getLOC_TOUCHED());
-                    newMetrics.setMAX_LOC_ADDED(file.getLinesAdded());
-                    newMetrics.setLOC(file.getLOC());
-                    newMetrics.setAVG_LOC_ADDED(file.getLinesAdded());
-                    newMetrics.setAVG_CHANGE_SET(file.getChangeSetSize());
-                    newMetrics.setMAX_CHANGE_SET(file.getChangeSetSize());
-					newMetrics.setNumImports(file.getNumImports());
-					newMetrics.setNumComments(file.getNumComments());
-                    newMetrics.setBUGGYNESS(file.getBuggyness());
-                    if( !fileDataset.containsKey(version,filepath) ){
-						System.out.println("NEW entry!");
-                        fileDataset.put( version, filepath, newMetrics );
-                    } else{
-                        Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
-						System.out.println("OLD entry!");
-                        newMetrics.update( oldMetrics );
-                        fileDataset.put( version, filepath, newMetrics );
-                    }
+					buggyness = file.getBuggyness();
+
+                    Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
+					System.out.println("UPDATING entry!");
+					oldMetrics.setBUGGYNESS(buggyness);
+					fileDataset.put( version, filepath, oldMetrics );
                 }
             }
         }
     }
+
+
+    /*  This Method is used to update/populate the Multi Key Map with file informations derived 
+		from the analysis of the Jira Issue Tickets. */
+	public void populateFileDatasetHeavy( ArrayList<IssueObject> issues ){
+		int     version;
+		String  filepath;
+		String  buggyness;
+		for ( IssueObject issue : issues ){
+			for ( CommitObject commit : issue.getCommits() ){
+				for ( FileObject file : commit.getFiles() ){
+					Metrics newMetrics = new Metrics();
+					version = file.getVersion();
+					filepath = file.getFilepath();
+					buggyness = file.getBuggyness();
+					newMetrics.setVersion(version);
+					newMetrics.setFilepath(filepath);
+					newMetrics.setNR( 1 );
+					newMetrics.setAGE( file.getAGE());
+					newMetrics.setCHURN(file.getCHURN());
+					newMetrics.appendAuthor(file.getAUTHOR());
+					newMetrics.setLOC_TOUCHED(file.getLOC_TOUCHED());
+					newMetrics.setMAX_LOC_ADDED(file.getLinesAdded());
+					newMetrics.setLOC(file.getLOC());
+					newMetrics.setAVG_LOC_ADDED(file.getLinesAdded());
+					newMetrics.setAVG_CHANGE_SET(file.getChangeSetSize());
+					newMetrics.setMAX_CHANGE_SET(file.getChangeSetSize());
+					newMetrics.setNumImports(file.getNumImports());
+					newMetrics.setNumComments(file.getNumComments());
+					newMetrics.setBUGGYNESS(file.getBuggyness());
+					if( !fileDataset.containsKey(version,filepath) ){
+						System.out.println("NEW entry!");
+						fileDataset.put( version, filepath, newMetrics );
+					} else{
+						Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
+						System.out.println("OLD entry!");
+						newMetrics.update( oldMetrics );
+						fileDataset.put( version, filepath, newMetrics );
+					}
+				}
+			}
+		}
+	}
 
 
 	public void writeToCSV( String projectName ) throws IOException {

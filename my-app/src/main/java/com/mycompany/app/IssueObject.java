@@ -25,6 +25,7 @@ public class IssueObject{
     private int                         iv;     // Injected Version  index
     private int                         ov;     // Opening Versions  index
     private int                         fv;     // Fixed Versions    index
+    private double                      proportion;
 
     // ------------------------------ Builders --------------------------------
 
@@ -77,6 +78,9 @@ public class IssueObject{
     public ArrayList<Integer> getAvs(){
         return this.avs;
     }
+    public double getProportion(){
+        return this.proportion;
+    }
 
     // ------------------------------ Setters --------------------------------
 
@@ -107,6 +111,9 @@ public class IssueObject{
     public void setAvs( ArrayList<Integer> avs ){
         this.avs = avs;
     }
+    public void setProportion( double proportion ){
+        this.proportion = proportion;
+    }
 
     // ------------------------------ Methods --------------------------------
     
@@ -121,6 +128,15 @@ public class IssueObject{
     public void classify(){
         for( CommitObject commitObject : this.commits ){
             commitObject.classify();
+        }
+    }
+
+    public void computeProportion(){
+        if ( !( fv == ov ) ){
+            this.proportion = ( fv - iv ) / ( fv - ov );
+        }
+        else{
+            this.proportion = 1.0;
         }
     }
 
