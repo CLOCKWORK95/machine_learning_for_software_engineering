@@ -87,6 +87,11 @@ public class App {
             ClassifierModel controller = new ClassifierModel();
             //controller.evaluateSamplingModified();
             Deliverable2Milestone3.evaluate();
+            //Deliverable2Milestone2.deliverable2();
+        }
+
+        if ( condition == 2 ){
+            Deliverable2Milestone1.dataset();
         }
 
     }

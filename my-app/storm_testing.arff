@@ -1,0 +1,14 @@
+@relation storm
+
+@attribute LOC_Touched real
+@attribute NumberRevisions real
+@attribute NumberBugFix real
+@attribute LOC_Addedr real
+@attribute MAX_LOC_Added real
+@attribute Chg_Set_Size real
+@attribute Max_Chg_Set real
+@attribute AVG_Chg_Set real
+@attribute Avg_LOC_Added real
+@attribute Buggy {Yes, No}
+
+@data

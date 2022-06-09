@@ -33,7 +33,7 @@ public class ClassifierModel {
     private Integer[]       		limits = {14,8};
 	private final String    		TRAINING = "_training.arff";
 	private final String    		TESTING = "_testing.arff";
-    private String 					path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
+    public static final String 		path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
 	private static final String 	OVER_SAMPLING = "Over sampling";
 	private static final String 	UNDER_SAMPLING = "Under sampling";
 	private static final String 	SMOTE = "Smote";

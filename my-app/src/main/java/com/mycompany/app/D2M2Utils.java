@@ -49,7 +49,7 @@ public class D2M2Utils {
 		ArrayList<Integer> counterList = new ArrayList<>();
 
 		// Create the output ARFF file
-		try (FileWriter csvWriter = new FileWriter(projectName + TRAINING)) {
+		try (FileWriter csvWriter = new FileWriter("/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/" +projectName + TRAINING)) {
 
 			// Append the static line of the ARFF file
 			csvWriter.append("@relation " + projectName + "\n\n");
@@ -107,7 +107,7 @@ public class D2M2Utils {
 		int counterDefective = 0;
 		ArrayList<Integer> counterList = new ArrayList<>();
 		// Create the output ARFF file
-		try (FileWriter csvWriter = new FileWriter(projectName + TESTING)) {
+		try (FileWriter csvWriter = new FileWriter("/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/" +projectName + TESTING)) {
 
 			// Append the static line of the ARFF file
 			csvWriter.append("@relation " + projectName + "\n\n");
