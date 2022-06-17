@@ -1,0 +1,5 @@
+com.mycompany.app.IssueLifeCycleManager#setAffectedAndInjectedVersionsP(Ljava/util/ArrayList;)V
+java.util.stream.Collectors#toList()Ljava/util/stream/Collector;
+java.util.stream.IntStream#rangeClosed(II)Ljava/util/stream/IntStream;
+java.util.ArrayList#instance-init#
+java.util.ArrayList#<init>(Ljava/util/Collection;)V

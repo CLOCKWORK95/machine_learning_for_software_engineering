@@ -1,0 +1,160 @@
+
+ùcom.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javay! y(2"13*ÿ
+13l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java|( |(2ª∏
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java|  |('&
+%0 org.eclipse.jgit.revwalk.RevWalk" org.eclipse.jgit.revwalk.RevWalkü
+ú
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java| |(3
+%1"Korg.eclipse.jgit.revwalk.RevWalk#<init>(Lorg/eclipse/jgit/lib/Repository;)V*(
+&
+%0 org.eclipse.jgit.revwalk.RevWalk*/
+-
+
+repositoryorg.eclipse.jgit.lib.Repository*
+12*•
+1n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaá á("Ø
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaá á(=
+;
+
+treeParser-org.eclipse.jgit.treewalk.CanonicalTreeParser*ﬂ
+2n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÖ Ö(‰·
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÖ Ö(
+%12void"+org.eclipse.jgit.revwalk.RevWalk#dispose()V**
+(
+walk org.eclipse.jgit.revwalk.RevWalk2	dispose()*
+1*‹
+3n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ Ç(6·ﬁ
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ Ç(6
+%11void"{org.eclipse.jgit.treewalk.CanonicalTreeParser#reset(Lorg/eclipse/jgit/lib/ObjectReader;Lorg/eclipse/jgit/lib/AnyObjectId;)V*=
+;
+
+treeParser-org.eclipse.jgit.treewalk.CanonicalTreeParser*-
++
+reader!org.eclipse.jgit.lib.ObjectReader*&
+$
+%10org.eclipse.jgit.lib.ObjectId2Lreset(Lorg/eclipse/jgit/lib/ObjectReader;Lorg/eclipse/jgit/lib/AnyObjectId;)*
+2*Ë
+4n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÅ Å(C—
+Œ
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÅ Å(C+
+reader!org.eclipse.jgit.lib.ObjectReader"__id*)
+'
+%9!org.eclipse.jgit.lib.ObjectReaderôñ
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ) Ç(5$
+%10org.eclipse.jgit.lib.ObjectId"Iorg.eclipse.jgit.revwalk.RevObject#getId()Lorg/eclipse/jgit/lib/ObjectId;**
+(
+tree org.eclipse.jgit.revwalk.RevTree2getId()*
+3*±
+5n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÅ' Å(1∂≥
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÅ' Å(C'
+%9!org.eclipse.jgit.lib.ObjectReader"Torg.eclipse.jgit.lib.Repository#newObjectReader()Lorg/eclipse/jgit/lib/ObjectReader;*/
+-
+
+repositoryorg.eclipse.jgit.lib.Repository2newObjectReader()*
+4*Ë
+6n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÄ Ä(GÌ
+Í
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÄ Ä(G;
+
+treeParser-org.eclipse.jgit.treewalk.CanonicalTreeParser"__id*5
+3
+%7-org.eclipse.jgit.treewalk.CanonicalTreeParser*
+5*ä
+7l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~ ~(DÀ
+»
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~ ~(D(
+tree org.eclipse.jgit.revwalk.RevTree"__id*(
+&
+%6 org.eclipse.jgit.revwalk.RevTree◊‘
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÄ1 Ä(D3
+%7-org.eclipse.jgit.treewalk.CanonicalTreeParser"-org.eclipse.jgit.treewalk.CanonicalTreeParserÈ
+Ê
+n
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÄ- Ä(F
+%8"7org.eclipse.jgit.treewalk.CanonicalTreeParser#<init>()V*5
+3
+%7-org.eclipse.jgit.treewalk.CanonicalTreeParser*
+6*Ü
+8l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~ ~(Cçä
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~ ~(C&
+%6 org.eclipse.jgit.revwalk.RevTree"porg.eclipse.jgit.revwalk.RevWalk#parseTree(Lorg/eclipse/jgit/lib/AnyObjectId;)Lorg/eclipse/jgit/revwalk/RevTree;**
+(
+walk org.eclipse.jgit.revwalk.RevWalk*%
+#
+%5org.eclipse.jgit.lib.ObjectId2-parseTree(Lorg/eclipse/jgit/lib/AnyObjectId;)*
+7*ç
+9l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~* ~(Bîë
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~* ~(B#
+%5org.eclipse.jgit.lib.ObjectId"Iorg.eclipse.jgit.revwalk.RevObject#getId()Lorg/eclipse/jgit/lib/ObjectId;*(
+&
+%4 org.eclipse.jgit.revwalk.RevTree2getId()*
+8*Ú
+10l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java} }(N—
+Œ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java} }(N,
+commit"org.eclipse.jgit.revwalk.RevCommit"__id**
+(
+%3"org.eclipse.jgit.revwalk.RevCommit§°
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java~* ~(:&
+%4 org.eclipse.jgit.revwalk.RevTree"Norg.eclipse.jgit.revwalk.RevCommit#getTree()Lorg/eclipse/jgit/revwalk/RevTree;*.
+,
+commit"org.eclipse.jgit.revwalk.RevCommit2	getTree()*
+9*ê
+11l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java} }(Mïí
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java} }(M(
+%3"org.eclipse.jgit.revwalk.RevCommit"torg.eclipse.jgit.revwalk.RevWalk#parseCommit(Lorg/eclipse/jgit/lib/AnyObjectId;)Lorg/eclipse/jgit/revwalk/RevCommit;**
+(
+walk org.eclipse.jgit.revwalk.RevWalk*%
+#
+%2org.eclipse.jgit.lib.ObjectId2/parseCommit(Lorg/eclipse/jgit/lib/AnyObjectId;)*
+10*©
+12l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java| |(3À
+»
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java| |(3(
+walk org.eclipse.jgit.revwalk.RevWalk"__id*(
+&
+%0 org.eclipse.jgit.revwalk.RevWalk‡›
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java}0 }(L#
+%2org.eclipse.jgit.lib.ObjectId"Zorg.eclipse.jgit.lib.Repository#resolve(Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;*/
+-
+
+repositoryorg.eclipse.jgit.lib.Repository*
+
+objectIdjava.lang.String2resolve(Ljava/lang/String;)*
+11:-
+
+repositoryorg.eclipse.jgit.lib.Repository:
+objectIdjava.lang.StringB*(
+&com.mycompany.app.GitRepositoryManager

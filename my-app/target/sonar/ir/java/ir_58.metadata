@@ -1,0 +1,10 @@
+com.mycompany.app.WekaFeatureSelection#featureSelection(Lweka/core/Instances;Lweka/core/Instances;)Ljava/util/List;
+java.util.ArrayList#<init>()V
+weka.attributeSelection.GreedyStepwise#instance-init#
+weka.filters.supervised.attribute.AttributeSelection#instance-init#
+weka.filters.supervised.attribute.AttributeSelection#<init>()V
+weka.attributeSelection.GreedyStepwise#<init>()V
+weka.attributeSelection.CfsSubsetEval#instance-init#
+weka.filters.Filter#useFilter(Lweka/core/Instances;Lweka/filters/Filter;)Lweka/core/Instances;
+weka.attributeSelection.CfsSubsetEval#<init>()V
+java.util.ArrayList#instance-init#

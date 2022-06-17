@@ -36,7 +36,7 @@ public class App {
 
         /*  This block of code implements the csv creation by merging project informations from jira and git. */
         if ( condition == 0 ){
-
+//
             for ( int i = 0; i < projectNames.length ; i ++ ){
 
                 IssueLifeCycleManager controller = new IssueLifeCycleManager( projectNames[i], projectPaths[i] );

@@ -1,0 +1,5 @@
+com.mycompany.app.ModifiedWalkForwardReader#reset()V
+java.io.FileReader#instance-init#
+java.io.BufferedReader#instance-init#
+java.io.BufferedReader#<init>(Ljava/io/Reader;)V
+java.io.FileReader#<init>(Ljava/lang/String;)V

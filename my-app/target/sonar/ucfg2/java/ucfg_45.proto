@@ -1,0 +1,237 @@
+
+jcom.mycompany.app.JiraTicketManager#getVersionsWithReleaseDate(Lcom/mycompany/app/IssueLifeCycleManager;)Vi
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javap p('"10*Á
+2k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaä ä(÷
+”
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaä( ä(G
+%20java.lang.String"-java.lang.String#valueOf(I)Ljava/lang/String;*"
+java.lang.String*
+""ñì
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaä ä(I
+%21void"gcom.mycompany.app.IssueLifeCycleManager#appendVersionMapEntry(Ljava/time/LocalDate;Ljava/lang/String;)V*7
+5
+
+controller'com.mycompany.app.IssueLifeCycleManager*
+
+kjava.time.LocalDate*
+
+%20java.lang.String2>appendVersionMapEntry(Ljava/time/LocalDate;Ljava/lang/String;)*
+1*ú
+3k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaâ â( §°
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaâ â(6
+%19java.util.Set"Lcom.mycompany.app.IssueLifeCycleManager#getVersionMapKeySet()Ljava/util/Set;*7
+5
+
+controller'com.mycompany.app.IssueLifeCycleManager2getVersionMapKeySet()*
+1*√
+6k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÇ Ç(îë
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÇ Ç(+
+%10org.json.JSONObject"8org.json.JSONArray#getJSONObject(I)Lorg/json/JSONObject;* 
+
+versionsorg.json.JSONArray*
+
+ijava.lang.Integer2getJSONObject(I)âÜ
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÇ Ç(7
+%11java.lang.Object"=org.json.JSONObject#get(Ljava/lang/String;)Ljava/lang/Object;*
+
+%10org.json.JSONObject*
+name2get(Ljava/lang/String;)ﬂ‹
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÇ Ç(B
+%12java.lang.String"-java.lang.Object#toString()Ljava/lang/String;*
+
+%11java.lang.Object2
+toString()≤
+Ø
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÇ Ç(B
+releaseNamejava.lang.String"__id*
+
+%12java.lang.Stringîë
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÉ7 É(P
+%13org.json.JSONObject"8org.json.JSONArray#getJSONObject(I)Lorg/json/JSONObject;* 
+
+versionsorg.json.JSONArray*
+
+ijava.lang.Integer2getJSONObject(I) 
+«
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÉV É(b
+%14java.lang.String"__id*9*7%
+#com.mycompany.app.JiraTicketManager"
+RELEASE_DATEöó
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÉ7 É(d
+%15java.lang.Object"=org.json.JSONObject#get(Ljava/lang/String;)Ljava/lang/Object;*
+
+%13org.json.JSONObject*
+
+%14java.lang.String2get(Ljava/lang/String;)ﬂ‹
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÉ7 É(o
+%16java.lang.String"-java.lang.Object#toString()Ljava/lang/String;*
+
+%15java.lang.Object2
+toString()ä
+á
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÉ& É(q
+%17java.time.LocalDate"Hjava.time.LocalDate#parse(Ljava/lang/CharSequence;)Ljava/time/LocalDate;*"
+java.time.LocalDate*
+
+%16java.lang.String°û
+l
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÉ É(Ä
+%18void"gcom.mycompany.app.IssueLifeCycleManager#appendVersionMapEntry(Ljava/time/LocalDate;Ljava/lang/String;)V*7
+5
+
+controller'com.mycompany.app.IssueLifeCycleManager*
+
+%17java.time.LocalDate*!
+
+releaseNamejava.lang.String2>appendVersionMapEntry(Ljava/time/LocalDate;Ljava/lang/String;)*
+9*˛
+7k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ9 Å(Aìê
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ9 Å(R
+%8org.json.JSONObject"8org.json.JSONArray#getJSONObject(I)Lorg/json/JSONObject;* 
+
+versionsorg.json.JSONArray*
+
+ijava.lang.Integer2getJSONObject(I)ÌÍ
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ9 Å(^
+%9boolean",org.json.JSONObject#has(Ljava/lang/String;)Z*
+
+%8org.json.JSONObject*
+name2has(Ljava/lang/String;)*
+6
+9*⁄
+8k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ Å(ìê
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ Å(!
+%5org.json.JSONObject"8org.json.JSONArray#getJSONObject(I)Lorg/json/JSONObject;* 
+
+versionsorg.json.JSONArray*
+
+ijava.lang.Integer2getJSONObject(I)…
+∆
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ' Å(3
+%6java.lang.String"__id*9*7%
+#com.mycompany.app.JiraTicketManager"
+RELEASE_DATE˝˙
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaÅ Å(5
+%7boolean",org.json.JSONObject#has(Ljava/lang/String;)Z*
+
+%5org.json.JSONObject*
+
+%6java.lang.String2has(Ljava/lang/String;)*
+7
+9*º
+9i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.java (√¿
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.java ($	
+%4int"org.json.JSONArray#length()I* 
+
+versionsorg.json.JSONArray2length()*
+3
+8*Ò
+10i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javas s(ù
+ö
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javas s(
+releaseNamejava.lang.String"__id*
+""î
+ë
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javat t(
+ijava.lang.Integer"__id*
+""∆
+√
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javawF w(V
+%0java.lang.String"__id*8*6%
+#com.mycompany.app.JiraTicketManager"
+projectName‚
+ﬂ
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaw w(V
+%1java.lang.String"__concat*64
+2https://issues.apache.org/jira/rest/api/2/project/*
+
+%0java.lang.Stringß
+§
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaw w(W
+urljava.lang.String"__id*
+
+%1java.lang.String–Õ
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javay y(*
+%2org.json.JSONObject"\com.mycompany.app.JiraTicketManager#readJsonFromUrl(Ljava/lang/String;)Lorg/json/JSONObject;*'%
+#com.mycompany.app.JiraTicketManager*
+
+urljava.lang.String2#readJsonFromUrl(Ljava/lang/String;)Æ
+´
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javay y(+
+jsonorg.json.JSONObject"__id*
+
+%2org.json.JSONObject°û
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.java| |(6
+%3org.json.JSONArray"Horg.json.JSONObject#getJSONArray(Ljava/lang/String;)Lorg/json/JSONArray;*
+
+jsonorg.json.JSONObject*
+
+versions2 getJSONArray(Ljava/lang/String;)∞
+≠
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.java| |(7
+versionsorg.json.JSONArray"__id*
+
+%3org.json.JSONArrayê
+ç
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.java (
+ijava.lang.Integer"__id*2 *
+9*ä
+0 "Ç
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaé é(
+implicit return*Ã
+1k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaâ â(ò
+ï
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaâ â(
+kjava.time.LocalDate"__id*
+""∂
+≥
+k
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaâ â(
+kjava.time.LocalDate"
+__arrayGet*
+
+%19java.util.Set*
+""*
+2
+0:5
+
+controller'com.mycompany.app.IssueLifeCycleManagerB'%
+#com.mycompany.app.JiraTicketManager

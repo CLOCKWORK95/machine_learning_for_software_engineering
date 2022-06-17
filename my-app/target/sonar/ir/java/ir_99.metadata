@@ -1,0 +1,6 @@
+com.mycompany.app.ModifiedWalkForwardReader#getDatasetSize()V
+java.io.FileReader#instance-init#
+java.lang.Math#floor(D)D
+java.io.BufferedReader#instance-init#
+java.io.BufferedReader#<init>(Ljava/io/Reader;)V
+java.io.FileReader#<init>(Ljava/lang/String;)V

@@ -1,0 +1,243 @@
+
+Vcom.mycompany.app.GitRepositoryManager#listDiff(Ljava/lang/String;Ljava/lang/String;)Vl
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javak k("7*œ
+2m
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas t(ÜÀ
+»
+m
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas t(Ü
+%27java.lang.String"__concat*
+
+%17java.lang.String*
+
+%21java.lang.StringáÑ
+m
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas t(á
+%28void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%14java.io.PrintStream*
+
+%27java.lang.String2println(Ljava/lang/String;)*
+1*º	
+3l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatW t([ÉÄ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatW t(h
+%24java.lang.String">org.eclipse.jgit.diff.DiffEntry#getOldPath()Ljava/lang/String;*)
+'
+difforg.eclipse.jgit.diff.DiffEntry2getOldPath()π
+∂
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatW t(q
+%25java.lang.String"__concat*
+
+%24java.lang.String*
+ -> ÑÅ
+m
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatt t(Ö
+%26java.lang.String">org.eclipse.jgit.diff.DiffEntry#getNewPath()Ljava/lang/String;*)
+'
+difforg.eclipse.jgit.diff.DiffEntry2getNewPath()À
+»
+m
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatW t(Ö
+%23java.lang.String"__concat*
+
+%25java.lang.String*
+
+%26java.lang.String¨
+©
+m
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatW t(Ö
+%21java.lang.String"__id*
+
+%23java.lang.String*
+2*™
+4l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatC t(GÉÄ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatC t(T
+%22java.lang.String">org.eclipse.jgit.diff.DiffEntry#getNewPath()Ljava/lang/String;*)
+'
+difforg.eclipse.jgit.diff.DiffEntry2getNewPath()´
+®
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javatC t(T
+%21java.lang.String"__id*
+
+%22java.lang.String*
+2*˘
+5l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas s(õ
+ò
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas s(
+%14java.io.PrintStream"__id*
+""Ω∫
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas* s(>1
+%15*org.eclipse.jgit.diff.DiffEntry$ChangeType"[org.eclipse.jgit.diff.DiffEntry#getChangeType()Lorg/eclipse/jgit/diff/DiffEntry$ChangeType;*)
+'
+difforg.eclipse.jgit.diff.DiffEntry2getChangeType()’
+“
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas s(>
+%16java.lang.String"__concat*
+
+Diff: *3
+1
+%15*org.eclipse.jgit.diff.DiffEntry$ChangeType∑
+¥
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javas s(E
+%17java.lang.String"__concat*
+
+%16java.lang.String*
+: ÉÄ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javat t(&
+%18java.lang.String">org.eclipse.jgit.diff.DiffEntry#getOldPath()Ljava/lang/String;*)
+'
+difforg.eclipse.jgit.diff.DiffEntry2getOldPath()ÉÄ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javat. t(?
+%19java.lang.String">org.eclipse.jgit.diff.DiffEntry#getNewPath()Ljava/lang/String;*)
+'
+difforg.eclipse.jgit.diff.DiffEntry2getNewPath()Å˛
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javat t(@
+%20boolean",java.lang.String#equals(Ljava/lang/Object;)Z*
+
+%18java.lang.String*
+
+%19java.lang.String2equals(Ljava/lang/Object;)*
+3
+4*¯ 
+7l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal& l(*Ã
+…
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal& l(.
+%0org.eclipse.jgit.api.Git"__id*3*1(
+&com.mycompany.app.GitRepositoryManager"
+gitÜÉ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal& l(5&
+%1 org.eclipse.jgit.api.DiffCommand"Aorg.eclipse.jgit.api.Git#diff()Lorg/eclipse/jgit/api/DiffCommand;* 
+
+%0org.eclipse.jgit.api.Git2diff()⁄
+◊
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javam/ m(>%
+%2org.eclipse.jgit.lib.Repository"__id*:*8(
+&com.mycompany.app.GitRepositoryManager"
+
+repositoryΩ
+∫
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javam m(K4
+%3.org.eclipse.jgit.treewalk.AbstractTreeIterator"ùcom.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;**(
+&com.mycompany.app.GitRepositoryManager*'
+%
+%2org.eclipse.jgit.lib.Repository*
+
+	oldCommitjava.lang.String∫∑
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal& m(M&
+%4 org.eclipse.jgit.api.DiffCommand"org.eclipse.jgit.api.DiffCommand#setOldTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)Lorg/eclipse/jgit/api/DiffCommand;*(
+&
+%1 org.eclipse.jgit.api.DiffCommand*6
+4
+%3.org.eclipse.jgit.treewalk.AbstractTreeIterator2<setOldTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)⁄
+◊
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javan/ n(>%
+%5org.eclipse.jgit.lib.Repository"__id*:*8(
+&com.mycompany.app.GitRepositoryManager"
+
+repositoryΩ
+∫
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javan n(K4
+%6.org.eclipse.jgit.treewalk.AbstractTreeIterator"ùcom.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;**(
+&com.mycompany.app.GitRepositoryManager*'
+%
+%5org.eclipse.jgit.lib.Repository*
+
+	newCommitjava.lang.String∫∑
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal& n(M&
+%7 org.eclipse.jgit.api.DiffCommand"org.eclipse.jgit.api.DiffCommand#setNewTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)Lorg/eclipse/jgit/api/DiffCommand;*(
+&
+%4 org.eclipse.jgit.api.DiffCommand*6
+4
+%6.org.eclipse.jgit.treewalk.AbstractTreeIterator2<setNewTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)ÚÔ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal& o(
+%8java.util.List"7org.eclipse.jgit.api.DiffCommand#call()Ljava/util/List;*(
+&
+%7 org.eclipse.jgit.api.DiffCommand2call()®
+•
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javal o(
+diffsjava.util.List"__id*
+
+%8java.util.Listö
+ó
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaq q(
+%9java.io.PrintStream"__id*
+""∏µ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaq( q(4
+
+%10int"java.util.List#size()I*
+
+diffsjava.util.List2size()Ø
+¨
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaq q(4
+%11java.lang.String"__concat*	
+Found: *
+
+
+%10int¡
+æ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaq q(E
+%12java.lang.String"__concat*
+
+%11java.lang.String*
+ differencesÖÇ
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaq q(G
+%13void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%9java.io.PrintStream*
+
+%12java.lang.String2println(Ljava/lang/String;)*
+1*ã
+0 "É
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javav v(
+implicit return*
+1l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javar r(®
+•
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javar r('
+difforg.eclipse.jgit.diff.DiffEntry"__id*
+""…
+∆
+l
+b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javar r('
+difforg.eclipse.jgit.diff.DiffEntry"
+__arrayGet*
+
+diffsjava.util.List*
+""*
+5
+0:
+	oldCommitjava.lang.String:
+	newCommitjava.lang.StringB*(
+&com.mycompany.app.GitRepositoryManager

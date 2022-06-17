@@ -1,0 +1,116 @@
+
+\com.mycompany.app.JiraTicketManager#readJsonFromUrl(Ljava/lang/String;)Lorg/json/JSONObject;i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaH H(""8*¨
+2i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaM M(.Æ
+´
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaM M(.
+jsonorg.json.JSONObject"__id*
+
+%9org.json.JSONObject"ä
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaN N(
+
+jsonorg.json.JSONObject*©
+3i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaL L(!¨
+©
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaL L(!
+jsonTextjava.lang.String"__id*
+
+%8java.lang.Stringûõ
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaM M(#
+%9org.json.JSONObject"org.json.JSONObject„
+‡
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaM M(-
+%10"/org.json.JSONObject#<init>(Ljava/lang/String;)V*
+
+%9org.json.JSONObject*
+
+jsonTextjava.lang.String*
+2*Ê
+4i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK K(_≤
+Ø
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK K(_
+rdjava.io.BufferedReader"__id*
+
+%6java.io.BufferedReaderª∏
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaL L( 
+%8java.lang.String"Ocom.mycompany.app.JiraTicketManager#readAll(Ljava/io/Reader;)Ljava/lang/String;*'%
+#com.mycompany.app.JiraTicketManager*
+
+rdjava.io.BufferedReader2readAll(Ljava/io/Reader;)*
+3*Ü
+5i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK K(^§°
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK K()
+%6java.io.BufferedReader"java.io.BufferedReaderÈ
+Ê
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK K(^
+%7"0java.io.BufferedReader#<init>(Ljava/io/Reader;)V*
+
+%6java.io.BufferedReader*!
+
+%4java.io.InputStreamReader*
+4*Õ
+6i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK* K(]™ß
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK. K(?
+%4java.io.InputStreamReader"java.io.InputStreamReader™
+ß
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK* K(]
+%5"Rjava.io.InputStreamReader#<init>(Ljava/io/InputStream;Ljava/nio/charset/Charset;)V*!
+
+%4java.io.InputStreamReader*
+
+isjava.io.InputStream* 
+
+%3java.nio.charset.Charset*
+5*˝
+7i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaK@ K(Bá
+Ñ
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaKD K(\
+%3java.nio.charset.Charset"Njava.nio.charset.Charset#forName(Ljava/lang/String;)Ljava/nio/charset/Charset;*"
+java.nio.charset.Charset*	
+UTF-8*
+6*Á
+8i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaI I(êç
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaI I(
+%0java.net.URL"java.net.URLœ
+Ã
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaI I(
+%1"(java.net.URL#<init>(Ljava/lang/String;)V*
+
+%0java.net.URL*
+
+urljava.lang.String›⁄
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaI I(,
+%2java.io.InputStream".java.net.URL#openStream()Ljava/io/InputStream;*
+
+%0java.net.URL2openStream()¨
+©
+i
+_/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/JiraTicketManager.javaI I(-
+isjava.io.InputStream"__id*
+
+%2java.io.InputStream*
+7:
+urljava.lang.StringB'%
+#com.mycompany.app.JiraTicketManager

@@ -1,0 +1,16 @@
+com.mycompany.app.GitRepositoryManager#getCommitChangedFilesWithMetrics(Lcom/mycompany/app/CommitObject;)Ljava/util/ArrayList;
+java.util.ArrayList#<init>()V
+org.eclipse.jgit.revwalk.RevCommit#getParent(I)Lorg/eclipse/jgit/revwalk/RevCommit;
+com.mycompany.app.FileObject#instance-init#
+org.eclipse.jgit.revwalk.RevObject#getId()Lorg/eclipse/jgit/lib/ObjectId;
+com.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;
+java.util.ArrayList#instance-init#
+org.eclipse.jgit.diff.DiffFormatter#instance-init#
+com.mycompany.app.FileObject#<init>(Ljava/lang/String;IIIIIIILjava/lang/String;II)V
+org.eclipse.jgit.diff.DiffFormatter#<init>(Ljava/io/OutputStream;)V
+org.eclipse.jgit.diff.Edit#getBeginA()I
+org.eclipse.jgit.diff.Edit#getBeginB()I
+org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;
+java.lang.String#endsWith(Ljava/lang/String;)Z
+org.eclipse.jgit.diff.Edit#getEndA()I
+org.eclipse.jgit.diff.Edit#getEndB()I

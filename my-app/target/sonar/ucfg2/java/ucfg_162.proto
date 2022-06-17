@@ -1,0 +1,21 @@
+
+8__sonar_lambda_2$com.mycompany.app.IssueLifeCycleManagero
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaþ þ(>"1*Ò
+1o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaþ" þ('ˆ…
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaþ" þ(4
+%6java.util.ArrayList"?com.mycompany.app.IssueObject#getCommits()Ljava/util/ArrayList;*(
+&
+issuecom.mycompany.app.IssueObject2getCommits()ËÈ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaþ" þ(>
+%7boolean"java.util.ArrayList#isEmpty()Z*
+
+%6java.util.ArrayList2	isEmpty()"‚
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaþ" þ(>
+
+%7boolean:&
+issuecom.mycompany.app.IssueObjectB 
+java.util.function.Predicate

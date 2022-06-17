@@ -1,0 +1,2 @@
+com.mycompany.app.IssueLifeCycleManager#setInjectedVersionAV()V
+java.util.Collections#min(Ljava/util/Collection;)Ljava/lang/Object;

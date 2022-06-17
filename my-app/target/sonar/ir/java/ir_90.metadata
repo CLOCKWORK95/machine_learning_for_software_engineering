@@ -1,0 +1,3 @@
+com.mycompany.app.ClassifierModel#getMetrics(Lweka/classifiers/Evaluation;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+weka.classifiers.Evaluation#kappa()D
+weka.classifiers.Evaluation#errorRate()D

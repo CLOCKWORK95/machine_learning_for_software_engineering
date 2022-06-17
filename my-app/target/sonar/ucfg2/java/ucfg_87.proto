@@ -1,0 +1,22 @@
+
+.__sonar_lambda_0$com.mycompany.app.IssueObjectc
+Y/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueObject.javav v(?"1* 
+1c
+Y/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueObject.javav$ v(*ûø
+c
+Y/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueObject.javav$ v(5
+%2java.util.ArrayList">com.mycompany.app.CommitObject#getFiles()Ljava/util/ArrayList;**
+(
+commitcom.mycompany.app.CommitObject2
+getFiles()¿¼
+c
+Y/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueObject.javav$ v(?
+%3boolean"java.util.ArrayList#isEmpty()Z*
+
+%2java.util.ArrayList2	isEmpty()"v
+c
+Y/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueObject.javav$ v(?
+
+%3boolean:(
+commitcom.mycompany.app.CommitObjectB 
+java.util.function.Predicate

@@ -1,0 +1,8 @@
+com.mycompany.app.GitRepositoryManager#getCommitChangedFiles(Lorg/eclipse/jgit/revwalk/RevCommit;)Ljava/util/ArrayList;
+java.util.ArrayList#<init>()V
+org.eclipse.jgit.revwalk.RevCommit#getParent(I)Lorg/eclipse/jgit/revwalk/RevCommit;
+org.eclipse.jgit.revwalk.RevObject#getId()Lorg/eclipse/jgit/lib/ObjectId;
+com.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;
+java.util.ArrayList#instance-init#
+org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;
+java.lang.String#endsWith(Ljava/lang/String;)Z

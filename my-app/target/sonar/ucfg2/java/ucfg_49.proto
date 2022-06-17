@@ -1,0 +1,16 @@
+
+Ncom.mycompany.app.CommitObject#getCommit()Lorg/eclipse/jgit/revwalk/RevCommit;d
+Z/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/CommitObject.java/ /("1*Ê
+1d
+Z/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/CommitObject.java0 0(É
+Æ
+d
+Z/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/CommitObject.java0 0((
+%0"org.eclipse.jgit.revwalk.RevCommit"__id*.*, 
+com.mycompany.app.CommitObject"
+commit"’
+d
+Z/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/CommitObject.java0 0(*
+(
+%0"org.eclipse.jgit.revwalk.RevCommitB" 
+com.mycompany.app.CommitObject

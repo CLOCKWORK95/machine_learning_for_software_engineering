@@ -1,0 +1,502 @@
+
+Scom.mycompany.app.IssueLifeCycleManager#printInfo(Lcom/mycompany/app/IssueObject;)Vo
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java– –("8*ˆ
+3o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‡ ‡(!®
+•
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‡ ‡(!$
+filecom.mycompany.app.FileObject"__id*
+""Ã
+…
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‡ ‡(!$
+filecom.mycompany.app.FileObject"
+__arrayGet*
+
+%50java.util.ArrayList*
+""*
+4
+1*∆
+4o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java· ·(û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java· ·(
+%51java.io.PrintStream"__id*
+""©
+¶
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ·(6
+%52java.lang.String"__concat*
+    *
+""≈
+¬
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ·(H
+%53java.lang.String"__concat*
+
+%52java.lang.String*
+) Filepath : Çˇ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·K ·(]
+%54java.lang.String"<com.mycompany.app.FileObject#getFilepath()Ljava/lang/String;*&
+$
+filecom.mycompany.app.FileObject2getFilepath()Õ
+ 
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ·(]
+%55java.lang.String"__concat*
+
+%53java.lang.String*
+
+%54java.lang.String≈
+¬
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ·(o
+%56java.lang.String"__concat*
+
+%55java.lang.String*
+ | Version : „‡
+p
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·s ·(Ñ
+
+%57int"*com.mycompany.app.FileObject#getVersion()I*&
+$
+filecom.mycompany.app.FileObject2getVersion()¡
+æ
+p
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ·(Ñ
+%58java.lang.String"__concat*
+
+%56java.lang.String*
+
+
+%57int¡
+æ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ‚(
+%59java.lang.String"__concat*
+
+%58java.lang.String*
+	 | LOC : ⁄◊
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‚ ‚(+
+
+%60int"&com.mycompany.app.FileObject#getLOC()I*&
+$
+filecom.mycompany.app.FileObject2getLOC()¿
+Ω
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ‚(+
+%61java.lang.String"__concat*
+
+%59java.lang.String*
+
+
+%60int¡
+æ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ‚(9
+%62java.lang.String"__concat*
+
+%61java.lang.String*
+	 | AGE : ⁄◊
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‚< ‚(I
+
+%63int"&com.mycompany.app.FileObject#getAGE()I*&
+$
+filecom.mycompany.app.FileObject2getAGE()¿
+Ω
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ‚(I
+%64java.lang.String"__concat*
+
+%62java.lang.String*
+
+
+%63int√
+¿
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ‚(Z
+%65java.lang.String"__concat*
+
+%64java.lang.String*
+ | Buggy : ÑÅ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‚^ ‚(q
+%66java.lang.String"=com.mycompany.app.FileObject#getBuggyness()Ljava/lang/String;*&
+$
+filecom.mycompany.app.FileObject2getBuggyness()Õ
+ 
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java·$ ‚(q
+%67java.lang.String"__concat*
+
+%65java.lang.String*
+
+%66java.lang.StringâÜ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java· ‚(r
+%68void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%51java.io.PrintStream*
+
+%67java.lang.String2println(Ljava/lang/String;)*
+3*Ñ
+5o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‡$ ‡(*àÖ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‡$ ‡(5
+%50java.util.ArrayList">com.mycompany.app.CommitObject#getFiles()Ljava/util/ArrayList;**
+(
+commitcom.mycompany.app.CommitObject2
+getFiles()*
+3*Ñ
+6o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹ ‹(û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹ ‹(
+%34java.io.PrintStream"__id*
+""úô
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹, ‹(G
+%35java.time.LocalDate"Hcom.mycompany.app.CommitObject#getCommitLocalDate()Ljava/time/LocalDate;**
+(
+commitcom.mycompany.app.CommitObject2getCommitLocalDate()¬
+ø
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹  ‹(G
+%36java.lang.String"__concat*	
+Date : *
+
+%35java.time.LocalDate–
+Õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹  ‹(d
+%37java.lang.String"__concat*
+
+%36java.lang.String*
+ --> Software Version : ËÂ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹g ‹(z
+
+%38int",com.mycompany.app.CommitObject#getVersion()I**
+(
+commitcom.mycompany.app.CommitObject2getVersion()¿
+Ω
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹  ‹(z
+%39java.lang.String"__concat*
+
+%37java.lang.String*
+
+
+%38intâÜ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‹ ‹(|
+%40void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%34java.io.PrintStream*
+
+%39java.lang.String2println(Ljava/lang/String;)û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java› ›(
+%41java.io.PrintStream"__id*
+""åâ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java›0 ›(F
+%42java.lang.String"@com.mycompany.app.CommitObject#getAuthorName()Ljava/lang/String;**
+(
+commitcom.mycompany.app.CommitObject2getAuthorName()¡
+æ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java›  ›(F
+%43java.lang.String"__concat*
+	Author : *
+
+%42java.lang.String…
+∆
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java›  ›(\
+%44java.lang.String"__concat*
+
+%43java.lang.String*
+ Author e-mail : éã
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java›_ ›(v
+%45java.lang.String"Acom.mycompany.app.CommitObject#getAuthorEmail()Ljava/lang/String;**
+(
+commitcom.mycompany.app.CommitObject2getAuthorEmail()Õ
+ 
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java›  ›(v
+%46java.lang.String"__concat*
+
+%44java.lang.String*
+
+%45java.lang.StringâÜ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java› ›(x
+%47void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%41java.io.PrintStream*
+
+%46java.lang.String2println(Ljava/lang/String;)û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaﬁ ﬁ(
+%48java.io.PrintStream"__id*
+""®•
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaﬁ ﬁ(W
+%49void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%48java.io.PrintStream*86
+4Touched Files (.java extension) and classification :2println(Ljava/lang/String;)*
+5*Ö
+7o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaŸ$ Ÿ()âÜ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaŸ$ Ÿ(6
+%33java.util.ArrayList"?com.mycompany.app.IssueObject#getCommits()Ljava/util/ArrayList;*(
+&
+issuecom.mycompany.app.IssueObject2getCommits()*
+1*ò:
+8o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java“ “(ù
+ö
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java“ “(
+%0java.io.PrintStream"__id*
+""ÑÅ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java“8 “(K
+%1java.lang.String"=com.mycompany.app.IssueObject#getTicketID()Ljava/lang/String;*(
+&
+issuecom.mycompany.app.IssueObject2getTicketID()Œ
+À
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java“ “(K
+%2java.lang.String"__concat*
+\n\nTicket Identifier : *
+
+%1java.lang.StringÜÉ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java“ “(M
+
+%3void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%0java.io.PrintStream*
+
+%2java.lang.String2println(Ljava/lang/String;)ù
+ö
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java” ”(
+%4java.io.PrintStream"__id*
+""êç
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java”2 ”(K
+%5java.lang.String"Ccom.mycompany.app.IssueObject#getResolutionDate()Ljava/lang/String;*(
+&
+issuecom.mycompany.app.IssueObject2getResolutionDate()»
+≈
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java” ”(K
+%6java.lang.String"__concat*
+Resolution Date : *
+
+%5java.lang.String“
+œ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java” ”(l
+%7java.lang.String"__concat*
+
+%6java.lang.String* 
+ -> Fixed Version (index) : ⁄◊
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java”o ”(|	
+%8int"&com.mycompany.app.IssueObject#getFv()I*(
+&
+issuecom.mycompany.app.IssueObject2getFv()Ω
+∫
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java” ”(|
+%9java.lang.String"__concat*
+
+%7java.lang.String*
+	
+%8intáÑ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java” ”(~
+%10void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%4java.io.PrintStream*
+
+%9java.lang.String2println(Ljava/lang/String;)û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘ ‘(
+%11java.io.PrintStream"__id*
+""çä
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘0 ‘(G
+%12java.lang.String"Acom.mycompany.app.IssueObject#getCreationDate()Ljava/lang/String;*(
+&
+issuecom.mycompany.app.IssueObject2getCreationDate()»
+≈
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘ ‘(G
+%13java.lang.String"__concat*
+Creation Date : *
+
+%12java.lang.String÷
+”
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘ ‘(j
+%14java.lang.String"__concat*
+
+%13java.lang.String*" 
+ -> Opening Version (index) : €ÿ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘m ‘(z
+
+%15int"&com.mycompany.app.IssueObject#getOv()I*(
+&
+issuecom.mycompany.app.IssueObject2getOv()¿
+Ω
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘ ‘(z
+%16java.lang.String"__concat*
+
+%14java.lang.String*
+
+
+%15intâÜ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java‘ ‘({
+%17void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%11java.io.PrintStream*
+
+%16java.lang.String2println(Ljava/lang/String;)û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’ ’(
+%18java.io.PrintStream"__id*
+""õò
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’4 ’(O
+%19java.util.ArrayList"Hcom.mycompany.app.IssueObject#getAffectedVersions()Ljava/util/ArrayList;*(
+&
+issuecom.mycompany.app.IssueObject2getAffectedVersions()ÚÔ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’4 ’(Z
+%20java.lang.String"9java.util.AbstractCollection#toString()Ljava/lang/String;*
+
+%19java.util.ArrayList2
+toString()Ã
+…
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’ ’(Z
+%21java.lang.String"__concat*
+Affected Versions : *
+
+%20java.lang.String«
+ƒ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’ ’(n
+%22java.lang.String"__concat*
+
+%21java.lang.String*
+ AVs indexes : Å˛
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’q ’(
+%23java.util.ArrayList";com.mycompany.app.IssueObject#getAvs()Ljava/util/ArrayList;*(
+&
+issuecom.mycompany.app.IssueObject2getAvs()Û
+p
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’q ’(ä
+%24java.lang.String"9java.util.AbstractCollection#toString()Ljava/lang/String;*
+
+%23java.util.ArrayList2
+toString()Œ
+À
+p
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’ ’(ä
+%25java.lang.String"__concat*
+
+%22java.lang.String*
+
+%24java.lang.Stringäá
+p
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java’ ’(å
+%26void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%18java.io.PrintStream*
+
+%25java.lang.String2println(Ljava/lang/String;)û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java÷ ÷(
+%27java.io.PrintStream"__id*
+""€ÿ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java÷< ÷(I
+
+%28int"&com.mycompany.app.IssueObject#getIv()I*(
+&
+issuecom.mycompany.app.IssueObject2getIv()∆
+√
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java÷ ÷(I
+%29java.lang.String"__concat*
+Injected Version (index) : *
+
+
+%28intâÜ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java÷ ÷(K
+%30void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%27java.io.PrintStream*
+
+%29java.lang.String2println(Ljava/lang/String;)û
+õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java◊ ◊(
+%31java.io.PrintStream"__id*
+""ÖÇ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java◊ ◊(/
+%32void"0java.io.PrintStream#println(Ljava/lang/String;)V*
+
+%31java.io.PrintStream*
+Related Commits :2println(Ljava/lang/String;)*
+7*é
+0 "Ü
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaÁ Á(
+implicit return*˛
+1o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaŸ Ÿ(!¨
+©
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaŸ Ÿ(!(
+commitcom.mycompany.app.CommitObject"__id*
+""–
+Õ
+o
+c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaŸ Ÿ(!(
+commitcom.mycompany.app.CommitObject"
+__arrayGet*
+
+%33java.util.ArrayList*
+""*
+6
+0:&
+issuecom.mycompany.app.IssueObjectB+)
+'com.mycompany.app.IssueLifeCycleManager
