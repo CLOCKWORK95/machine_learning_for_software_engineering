@@ -1,365 +1,0 @@
-
-2com.mycompany.app.IssueLifeCycleManager#logWalk()Vo
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaá á("32*˙
-25o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaó ó(V¸˘
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaó ó(V
-%17void"[org.eclipse.jgit.revwalk.RevWalk#setRevFilter(Lorg/eclipse/jgit/revwalk/filter/RevFilter;)V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*2
-0
-%16)org.eclipse.jgit.revwalk.filter.RevFilter29setRevFilter(Lorg/eclipse/jgit/revwalk/filter/RevFilter;)*
-20*Ì
-26o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaó& ó(TÔ
-Ï
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaó& ó(T0
-%16)org.eclipse.jgit.revwalk.filter.RevFilter"vorg.eclipse.jgit.revwalk.filter.MessageRevFilter#create(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/filter/RevFilter;*4"2
-0org.eclipse.jgit.revwalk.filter.MessageRevFilter*
-
-%15java.lang.String*
-25*ÿ
-27o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï ï(U“
-œ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï ï(U+
-revWalk org.eclipse.jgit.revwalk.RevWalk"__id*)
-'
-%13 org.eclipse.jgit.revwalk.RevWalkÖÇ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaó? ó(R
-%15java.lang.String"=com.mycompany.app.IssueObject#getTicketID()Ljava/lang/String;*(
-&
-issuecom.mycompany.app.IssueObject2getTicketID()*
-26*›
-28o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï$ ï(Uøº
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï( ï(/'
-%13 org.eclipse.jgit.revwalk.RevWalk" org.eclipse.jgit.revwalk.RevWalkù
-ö
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï$ ï(U
-%14"Korg.eclipse.jgit.revwalk.RevWalk#<init>(Lorg/eclipse/jgit/lib/Repository;)V*)
-'
-%13 org.eclipse.jgit.revwalk.RevWalk*(
-&
-%12org.eclipse.jgit.lib.Repository*
-27*¢
-29o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï1 ï(5Í
-Á
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï1 ï(D-
-%11&com.mycompany.app.GitRepositoryManager"__id*?*=)
-'com.mycompany.app.IssueLifeCycleManager"
-gitRepoManager∑¥
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaï1 ï(T&
-%12org.eclipse.jgit.lib.Repository"Wcom.mycompany.app.GitRepositoryManager#getRepository()Lorg/eclipse/jgit/lib/Repository;*/
--
-%11&com.mycompany.app.GitRepositoryManager2getRepository()*
-28*ﬂ
-30o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaì ì(·ﬁ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaì ì(
-%10void"*me.tongfei.progressbar.ProgressBar#step()V**
-(
-pb"me.tongfei.progressbar.ProgressBar2step()*
-29*À
-31o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaë" ë(&Œ
-À
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaë" ë(-
-%9java.util.ArrayList"__id*7*5)
-'com.mycompany.app.IssueLifeCycleManager"
-issues*
-2*€
-32o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaâ" â(&È
-Ê
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaâ" â(5,
-%0&com.mycompany.app.GitRepositoryManager"__id*?*=)
-'com.mycompany.app.IssueLifeCycleManager"
-gitRepoManagerµ≤
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaâ" â(E%
-%1org.eclipse.jgit.lib.Repository"Wcom.mycompany.app.GitRepositoryManager#getRepository()Lorg/eclipse/jgit/lib/Repository;*.
-,
-%0&com.mycompany.app.GitRepositoryManager2getRepository()˝˙
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaâ" â(R
-%2java.util.Map";org.eclipse.jgit.lib.Repository#getAllRefs()Ljava/util/Map;*'
-%
-%1org.eclipse.jgit.lib.Repository2getAllRefs()ﬂ‹
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaâ" â([
-%3java.util.Collection",java.util.Map#values()Ljava/util/Collection;*
-
-%2java.util.Map2values()π
-∂
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaâ â(\
-allRefsjava.util.Collection"__id*
-
-%3java.util.CollectionŒ
-À
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaé< é(G
-%4java.util.ArrayList"__id*7*5)
-'com.mycompany.app.IssueLifeCycleManager"
-issues¡æ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaé< é(N	
-%5int"java.util.ArrayList#size()I*
-
-%4java.util.ArrayList2size()¬ø
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaé é(((
-%6"me.tongfei.progressbar.ProgressBar""me.tongfei.progressbar.ProgressBarâ
-Ü
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaé é(O
-%7"?me.tongfei.progressbar.ProgressBar#<init>(Ljava/lang/String;I)V**
-(
-%6"me.tongfei.progressbar.ProgressBar*
-SCANNING TICKET*
-	
-%5int–
-Õ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaé é(P(
-pb"me.tongfei.progressbar.ProgressBar"__id**
-(
-%6"me.tongfei.progressbar.ProgressBar‚ﬂ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaè è(
-
-%8void"+me.tongfei.progressbar.ProgressBar#start()V**
-(
-pb"me.tongfei.progressbar.ProgressBar2start()*
-31*€
-11o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaü ü(M€ÿ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java† †(&
-
-%28int"&com.mycompany.app.IssueObject#getFv()I*(
-&
-issuecom.mycompany.app.IssueObject2getFv()*
-3
-8*£
-12p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû û(é¡
-æ
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû û(é&
-commitLocalDatejava.time.LocalDate"__id*
-
-%26java.time.LocalDate‡›
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaü" ü(L
-
-%27int"Wcom.mycompany.app.IssueLifeCycleManager#getVersionFromLocalDate(Ljava/time/LocalDate;)I*+)
-'com.mycompany.app.IssueLifeCycleManager*(
-&
-commitLocalDatejava.time.LocalDate2.getVersionFromLocalDate(Ljava/time/LocalDate;)*
-11*˝
-13p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(ç˛˚
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(ç
-%26java.time.LocalDate":java.time.ZonedDateTime#toLocalDate()Ljava/time/LocalDate;* 
-
-%25java.time.ZonedDateTime2toLocalDate()*
-12*¨
-14o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(Æ´
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(
-%25java.time.ZonedDateTime"Ejava.time.Instant#atZone(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;*
-
-%23java.time.Instant*
-
-%24java.time.ZoneId2atZone(Ljava/time/ZoneId;)*
-13*’
-15o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaûh û(n◊
-‘
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaûh û(~
-%24java.time.ZoneId"2java.time.ZoneId#systemDefault()Ljava/time/ZoneId;*"
-java.time.ZoneId*
-14*·
-16o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(`„‡
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(`
-%23java.time.Instant"-java.util.Date#toInstant()Ljava/time/Instant;*
-
-%22java.util.Date2toInstant()*
-15*˚
-17o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(T˝˙
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(T
-%22java.util.Date":org.eclipse.jgit.lib.PersonIdent#getWhen()Ljava/util/Date;*)
-'
-%21 org.eclipse.jgit.lib.PersonIdent2	getWhen()*
-16*∫
-18o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(6ºπ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaû0 û(J'
-%21 org.eclipse.jgit.lib.PersonIdent"Xorg.eclipse.jgit.revwalk.RevCommit#getCommitterIdent()Lorg/eclipse/jgit/lib/PersonIdent;*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit2getCommitterIdent()*
-17*é
-0 "Ü
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∞ ∞(
-implicit return*›
-1o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaØ Ø(
-·ﬁ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaØ Ø(
-%34void"*me.tongfei.progressbar.ProgressBar#stop()V**
-(
-pb"me.tongfei.progressbar.ProgressBar2stop()*
-0*˙
-2o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaë ë(™
-ß
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaë ë(&
-issuecom.mycompany.app.IssueObject"__id*
-""Õ
- 
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaë ë(&
-issuecom.mycompany.app.IssueObject"
-__arrayGet*
-
-%9java.util.ArrayList*
-""*
-30
-1*ò
-3o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaù ù(%∞
-≠
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaù ù(%,
-commit"org.eclipse.jgit.revwalk.RevCommit"__id*
-""Â
-‚
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaù ù(%,
-commit"org.eclipse.jgit.revwalk.RevCommit"
-__arrayGet*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*
-""*
-2
-18*¢
-4o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¶ ¶(t”
-–
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¶ ¶(t.
-commitObjectcom.mycompany.app.CommitObject"__id*'
-%
-%31com.mycompany.app.CommitObject–Õ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaß ß(4
-%33void"Gcom.mycompany.app.IssueObject#append(Lcom/mycompany/app/CommitObject;)V*(
-&
-issuecom.mycompany.app.IssueObject*0
-.
-commitObjectcom.mycompany.app.CommitObject2(append(Lcom/mycompany/app/CommitObject;)*
-3*ı
-5o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¶F ¶(LÍ
-Á
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¶^ ¶(q-
-%30&com.mycompany.app.GitRepositoryManager"__id*?*=)
-'com.mycompany.app.IssueLifeCycleManager"
-gitRepoManagerª∏
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¶8 ¶(D%
-%31com.mycompany.app.CommitObject"com.mycompany.app.CommitObjectŒ
-À
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¶4 ¶(s
-%32"îcom.mycompany.app.CommitObject#<init>(Lorg/eclipse/jgit/revwalk/RevCommit;Lcom/mycompany/app/IssueObject;ILcom/mycompany/app/GitRepositoryManager;)V*'
-%
-%31com.mycompany.app.CommitObject*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit*(
-&
-issuecom.mycompany.app.IssueObject*
-""*/
--
-%30&com.mycompany.app.GitRepositoryManager*
-4*≤
-8o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¢4 ¢(:∂≥
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¢4 ¢(G)
-%29"org.eclipse.jgit.revwalk.RevCommit"Sorg.eclipse.jgit.revwalk.RevCommit#getParent(I)Lorg/eclipse/jgit/revwalk/RevCommit;*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit*2 2getParent(I)*
-5*Û
-20o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaô ô(£
-†
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaô ô(
-reforg.eclipse.jgit.lib.Ref"__id*
-""Ã
-…
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaô ô(
-reforg.eclipse.jgit.lib.Ref"
-__arrayGet*!
-
-allRefsjava.util.Collection*
-""*
-3
-23*ﬂ
-21o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaö ö(P·ﬁ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaö ö(P
-%20void"Qorg.eclipse.jgit.revwalk.RevWalk#markStart(Lorg/eclipse/jgit/revwalk/RevCommit;)V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*+
-)
-%19"org.eclipse.jgit.revwalk.RevCommit2/markStart(Lorg/eclipse/jgit/revwalk/RevCommit;)*
-20*õ
-22o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaö' ö(Oùö
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaö' ö(O)
-%19"org.eclipse.jgit.revwalk.RevCommit"torg.eclipse.jgit.revwalk.RevWalk#parseCommit(Lorg/eclipse/jgit/lib/AnyObjectId;)Lorg/eclipse/jgit/revwalk/RevCommit;*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*&
-$
-%18org.eclipse.jgit.lib.ObjectId2/parseCommit(Lorg/eclipse/jgit/lib/AnyObjectId;)*
-21*ë
-23o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaö ö(ìê
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaö< ö(M$
-%18org.eclipse.jgit.lib.ObjectId"Eorg.eclipse.jgit.lib.Ref#getObjectId()Lorg/eclipse/jgit/lib/ObjectId;*!
-
-reforg.eclipse.jgit.lib.Ref2getObjectId()*
-22B+)
-'com.mycompany.app.IssueLifeCycleManager

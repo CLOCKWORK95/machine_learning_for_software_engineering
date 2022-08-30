@@ -1,3 +1,0 @@
-com.mycompany.app.GitRepositoryManager#listDiff(Ljava/lang/String;Ljava/lang/String;)V
-com.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;
-java.lang.String#equals(Ljava/lang/Object;)Z

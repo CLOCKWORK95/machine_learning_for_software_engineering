@@ -1,5 +1,0 @@
-com.mycompany.app.App#main([Ljava/lang/String;)V
-com.mycompany.app.IssueLifeCycleManager#<init>(Ljava/lang/String;Ljava/lang/String;)V
-com.mycompany.app.ClassifierModel#<init>()V
-com.mycompany.app.ClassifierModel#instance-init#
-com.mycompany.app.IssueLifeCycleManager#instance-init#

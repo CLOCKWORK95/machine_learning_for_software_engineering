@@ -1,9 +1,0 @@
-com.mycompany.app.CommitObject#<init>(Lorg/eclipse/jgit/revwalk/RevCommit;Lcom/mycompany/app/IssueObject;ILcom/mycompany/app/GitRepositoryManager;)V
-org.eclipse.jgit.revwalk.RevCommit#getParent(I)Lorg/eclipse/jgit/revwalk/RevCommit;
-java.time.Instant#atZone(Ljava/time/ZoneId;)Ljava/time/ZonedDateTime;
-org.eclipse.jgit.revwalk.RevCommit#getCommitterIdent()Lorg/eclipse/jgit/lib/PersonIdent;
-org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;
-java.time.ZonedDateTime#toLocalDate()Ljava/time/LocalDate;
-java.time.ZoneId#systemDefault()Ljava/time/ZoneId;
-org.eclipse.jgit.revwalk.RevCommit#getAuthorIdent()Lorg/eclipse/jgit/lib/PersonIdent;
-org.eclipse.jgit.revwalk.RevCommit#getFullMessage()Ljava/lang/String;

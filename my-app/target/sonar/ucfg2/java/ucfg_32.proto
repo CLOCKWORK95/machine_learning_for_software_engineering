@@ -1,511 +1,0 @@
-
-~com.mycompany.app.GitRepositoryManager#getCommitChangedFilesWithMetrics(Lcom/mycompany/app/CommitObject;)Ljava/util/ArrayList;n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java®! ®(A"18*¶
-13n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ Ç(ÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ Ç()
-
-%34int"'org.eclipse.jgit.diff.Edit#getBeginA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginA()×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ, Ç(:
-
-%35int"%org.eclipse.jgit.diff.Edit#getEndA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndA()*
-10
-12*Á
-14n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÆ" Æ($ž›
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÆ" Æ(9(
-%32!org.eclipse.jgit.patch.FileHeader"vorg.eclipse.jgit.diff.DiffFormatter#toFileHeader(Lorg/eclipse/jgit/diff/DiffEntry;)Lorg/eclipse/jgit/patch/FileHeader;*+
-)
-df#org.eclipse.jgit.diff.DiffFormatter*)
-'
-difforg.eclipse.jgit.diff.DiffEntry2/toFileHeader(Lorg/eclipse/jgit/diff/DiffEntry;)¤¡
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÆ" Æ(F%
-%33org.eclipse.jgit.diff.EditList"Norg.eclipse.jgit.patch.FileHeader#toEditList()Lorg/eclipse/jgit/diff/EditList;**
-(
-%32!org.eclipse.jgit.patch.FileHeader2toEditList()*
-4*‘
-15n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÂ Â(…‚
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÃ# Ã(4
-%29java.lang.String">org.eclipse.jgit.diff.DiffEntry#getNewPath()Ljava/lang/String;*)
-'
-difforg.eclipse.jgit.diff.DiffEntry2getNewPath()²
-¯
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÃ Ã(5
-filepathjava.lang.String"__id*
-
-%29java.lang.Stringæã
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÄ# Ä(O
-%30java.lang.String"‰com.mycompany.app.GitRepositoryManager#getTextfromCommittedFile(Lorg/eclipse/jgit/revwalk/RevCommit;Ljava/lang/String;)Ljava/lang/String;**(
-&com.mycompany.app.GitRepositoryManager*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit*
-
-filepathjava.lang.String2PgetTextfromCommittedFile(Lorg/eclipse/jgit/revwalk/RevCommit;Ljava/lang/String;)²
-¯
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÄ Ä(P
-fileTextjava.lang.String"__id*
-
-%30java.lang.String¹¶
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÅ" Å(G
-
-%31int"qcom.mycompany.app.GitRepositoryManager#getFileAgeInWeeks(Lorg/eclipse/jgit/revwalk/RevCommit;Ljava/lang/String;)I**(
-&com.mycompany.app.GitRepositoryManager*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit*
-
-filepathjava.lang.String2IgetFileAgeInWeeks(Lorg/eclipse/jgit/revwalk/RevCommit;Ljava/lang/String;)*
-14*ä
-16n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¾ ¾(…‚
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÁ Á("
-%26java.lang.String">org.eclipse.jgit.diff.DiffEntry#getNewPath()Ljava/lang/String;*)
-'
-difforg.eclipse.jgit.diff.DiffEntry2getNewPath()Ò
-Ï
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÁ- Á(;
-%27java.lang.String"__id*>*<(
-&com.mycompany.app.GitRepositoryManager"
-FILE_EXTENSION‡„
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÁ Á(=
-%28boolean".java.lang.String#endsWith(Ljava/lang/String;)Z*
-
-%26java.lang.String*
-
-%27java.lang.String2endsWith(Ljava/lang/String;)*
-2
-15*ÕC
-18n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¯ ¯(Î
-Ë
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¯ ¯(
-%0org.eclipse.jgit.api.Git"__id*3*1(
-&com.mycompany.app.GitRepositoryManager"
-git¼
-¹
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¯ ¯(
-gitorg.eclipse.jgit.api.Git"__id* 
-
-%0org.eclipse.jgit.api.Git¬©
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java° °(3(
-%1"org.eclipse.jgit.revwalk.RevCommit"Ncom.mycompany.app.CommitObject#getCommit()Lorg/eclipse/jgit/revwalk/RevCommit;*0
-.
-commitObjectcom.mycompany.app.CommitObject2getCommit()Ó
-Ð
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java° °(4,
-commit"org.eclipse.jgit.revwalk.RevCommit"__id**
-(
-%1"org.eclipse.jgit.revwalk.RevCommit£ 
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java±* ±(?
-%2java.util.ArrayList"java.util.ArrayListµ
-²
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java±& ±(A
-%3"java.util.ArrayList#<init>()V*
-
-%2java.util.ArrayList´
-±
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java± ±(B
-filesjava.util.ArrayList"__id*
-
-%2java.util.ArrayList¶
-³
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java². ²(K3
-%4-org.eclipse.jgit.util.io.DisabledOutputStream"__id*
-""ÃÀ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java² ²(,)
-%5#org.eclipse.jgit.diff.DiffFormatter"#org.eclipse.jgit.diff.DiffFormatter¢
-Ÿ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java² ²(M
-%6"Corg.eclipse.jgit.diff.DiffFormatter#<init>(Ljava/io/OutputStream;)V*+
-)
-%5#org.eclipse.jgit.diff.DiffFormatter*5
-3
-%4-org.eclipse.jgit.util.io.DisabledOutputStreamÑ
-Î
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java² ²(N)
-df#org.eclipse.jgit.diff.DiffFormatter"__id*+
-)
-%5#org.eclipse.jgit.diff.DiffFormatterº·
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java³ ³(.%
-%7org.eclipse.jgit.lib.Repository"\com.mycompany.app.GitRepositoryManager#openJGitRepository()Lorg/eclipse/jgit/lib/Repository;**(
-&com.mycompany.app.GitRepositoryManager2openJGitRepository()ÞÛ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java³ ³(0
-
-%8void"Uorg.eclipse.jgit.diff.DiffFormatter#setRepository(Lorg/eclipse/jgit/lib/Repository;)V*+
-)
-df#org.eclipse.jgit.diff.DiffFormatter*'
-%
-%7org.eclipse.jgit.lib.Repository20setRepository(Lorg/eclipse/jgit/lib/Repository;)°
-­
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java´ ´(7-
-%9'org.eclipse.jgit.diff.RawTextComparator"__id*
-""ÿü
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java´ ´(9
-%10void"aorg.eclipse.jgit.diff.DiffFormatter#setDiffComparator(Lorg/eclipse/jgit/diff/RawTextComparator;)V*+
-)
-df#org.eclipse.jgit.diff.DiffFormatter*/
--
-%9'org.eclipse.jgit.diff.RawTextComparator2<setDiffComparator(Lorg/eclipse/jgit/diff/RawTextComparator;)‚ÿ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaµ µ(#
-%11void"8org.eclipse.jgit.diff.DiffFormatter#setDetectRenames(Z)V*+
-)
-df#org.eclipse.jgit.diff.DiffFormatter*22setDetectRenames(Z)Š‡
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¶& ¶(0'
-%12 org.eclipse.jgit.api.DiffCommand"Aorg.eclipse.jgit.api.Git#diff()Lorg/eclipse/jgit/api/DiffCommand;*!
-
-gitorg.eclipse.jgit.api.Git2diff()»¸
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java·. ·(B&
-%13org.eclipse.jgit.lib.Repository"\com.mycompany.app.GitRepositoryManager#openJGitRepository()Lorg/eclipse/jgit/lib/Repository;**(
-&com.mycompany.app.GitRepositoryManager2openJGitRepository()µ²
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java·D ·(W)
-%14"org.eclipse.jgit.revwalk.RevCommit"Sorg.eclipse.jgit.revwalk.RevCommit#getParent(I)Lorg/eclipse/jgit/revwalk/RevCommit;*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit*2 2getParent(I)š—
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java·D ·(_$
-%15org.eclipse.jgit.lib.ObjectId"Iorg.eclipse.jgit.revwalk.RevObject#getId()Lorg/eclipse/jgit/lib/ObjectId;*+
-)
-%14"org.eclipse.jgit.revwalk.RevCommit2getId()ýú
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java·D ·(i
-%16java.lang.String"<org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;*&
-$
-%15org.eclipse.jgit.lib.ObjectId2	getName()»
-¸
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java· ·(j5
-%17.org.eclipse.jgit.treewalk.AbstractTreeIterator"com.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;**(
-&com.mycompany.app.GitRepositoryManager*(
-&
-%13org.eclipse.jgit.lib.Repository*
-
-%16java.lang.String¿¼
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¶& ·(k'
-%18 org.eclipse.jgit.api.DiffCommand"org.eclipse.jgit.api.DiffCommand#setOldTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)Lorg/eclipse/jgit/api/DiffCommand;*)
-'
-%12 org.eclipse.jgit.api.DiffCommand*7
-5
-%17.org.eclipse.jgit.treewalk.AbstractTreeIterator2<setOldTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)»¸
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¸. ¸(B&
-%19org.eclipse.jgit.lib.Repository"\com.mycompany.app.GitRepositoryManager#openJGitRepository()Lorg/eclipse/jgit/lib/Repository;**(
-&com.mycompany.app.GitRepositoryManager2openJGitRepository()š
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¸D ¸(R$
-%20org.eclipse.jgit.lib.ObjectId"Iorg.eclipse.jgit.revwalk.RevObject#getId()Lorg/eclipse/jgit/lib/ObjectId;*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit2getId()ýú
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¸D ¸(\
-%21java.lang.String"<org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;*&
-$
-%20org.eclipse.jgit.lib.ObjectId2	getName()»
-¸
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¸ ¸(]5
-%22.org.eclipse.jgit.treewalk.AbstractTreeIterator"com.mycompany.app.GitRepositoryManager#prepareTreeParser(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;**(
-&com.mycompany.app.GitRepositoryManager*(
-&
-%19org.eclipse.jgit.lib.Repository*
-
-%21java.lang.String¿¼
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¶& ¸(^'
-%23 org.eclipse.jgit.api.DiffCommand"org.eclipse.jgit.api.DiffCommand#setNewTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)Lorg/eclipse/jgit/api/DiffCommand;*)
-'
-%18 org.eclipse.jgit.api.DiffCommand*7
-5
-%22.org.eclipse.jgit.treewalk.AbstractTreeIterator2<setNewTree(Lorg/eclipse/jgit/treewalk/AbstractTreeIterator;)öó
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¶& ¹(
-%24java.util.List"7org.eclipse.jgit.api.DiffCommand#call()Ljava/util/List;*)
-'
-%23 org.eclipse.jgit.api.DiffCommand2call()«
-¨
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¶ ¹(
-diffsjava.util.List"__id*
-
-%24java.util.Listº·
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaº º((
-
-%25int"java.util.List#size()I*
-
-diffsjava.util.List2size()*
-2*í
-1n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÚ Ú(
-äá
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÚ Ú(
-%60void",org.eclipse.jgit.diff.DiffFormatter#close()V*+
-)
-df#org.eclipse.jgit.diff.DiffFormatter2close()"
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÛ Û(
-
-filesjava.util.ArrayList*÷
-2n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¼ ¼(ª
-§
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¼ ¼('
-difforg.eclipse.jgit.diff.DiffEntry"__id*
-""Ë
-È
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java¼ ¼('
-difforg.eclipse.jgit.diff.DiffEntry"
-__arrayGet*
-
-diffsjava.util.List*
-""*
-16
-1*¶
-3n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÒ" Ò(.íê
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÒ" Ò(;
-
-%52int",com.mycompany.app.CommitObject#getVersion()I*0
-.
-commitObjectcom.mycompany.app.CommitObject2getVersion()«¨
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÓ Ó(0
-
-%53int"Bcom.mycompany.app.GitRepositoryManager#getLoc(Ljava/lang/String;)I**(
-&com.mycompany.app.GitRepositoryManager*
-
-fileTextjava.lang.String2getLoc(Ljava/lang/String;)¹¶
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÔ% Ô(<
-
-%54int"Icom.mycompany.app.GitRepositoryManager#getNumImports(Ljava/lang/String;)I**(
-&com.mycompany.app.GitRepositoryManager*
-
-fileTextjava.lang.String2!getNumImports(Ljava/lang/String;)»¸
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÕ& Õ(>
-
-%55int"Jcom.mycompany.app.GitRepositoryManager#getNumComments(Ljava/lang/String;)I**(
-&com.mycompany.app.GitRepositoryManager*
-
-fileTextjava.lang.String2"getNumComments(Ljava/lang/String;)‘Ž
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java×; ×(W
-%56java.lang.String"@com.mycompany.app.CommitObject#getAuthorName()Ljava/lang/String;*0
-.
-commitObjectcom.mycompany.app.CommitObject2getAuthorName()¶³
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÖ Ö()#
-%57com.mycompany.app.FileObject"com.mycompany.app.FileObjectù
-ö
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÖ ×(r
-%58"Scom.mycompany.app.FileObject#<init>(Ljava/lang/String;IIIIIIILjava/lang/String;II)V*%
-#
-%57com.mycompany.app.FileObject*
-
-filepathjava.lang.String*
-""*
-""*
-""*
-""*
-""*
-""*
-""*
-
-%56java.lang.String*
-""*
-""Ú
-×
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÖ ×(t
-%59boolean"
-__arrayAdd*
-
-filesjava.util.ArrayList*: *%
-#
-%57com.mycompany.app.FileObject*
-2*û
-4n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÆ Æ(¥
-¢
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÆ Æ("
-editorg.eclipse.jgit.diff.Edit"__id*
-""Ô
-Ñ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÆ Æ("
-editorg.eclipse.jgit.diff.Edit"
-__arrayGet*'
-%
-%33org.eclipse.jgit.diff.EditList*
-""*
-13
-3*°
-5n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÎ Î("×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÎ& Î(4
-
-%50int"%org.eclipse.jgit.diff.Edit#getEndB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndB()ÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÎ7 Î(G
-
-%51int"'org.eclipse.jgit.diff.Edit#getBeginB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginB()*
-4*³
-6n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÍ? Í(CÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÍ? Í(O
-
-%48int"'org.eclipse.jgit.diff.Edit#getBeginB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginB()×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÍR Í(`
-
-%49int"%org.eclipse.jgit.diff.Edit#getEndB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndB()*
-4
-5*³
-7n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÍ Í(ÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÍ Í()
-
-%46int"'org.eclipse.jgit.diff.Edit#getBeginA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginA()×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÍ- Í(;
-
-%47int"%org.eclipse.jgit.diff.Edit#getEndA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndA()*
-4
-6*°
-8n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaË Ë($×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaË( Ë(6
-
-%44int"%org.eclipse.jgit.diff.Edit#getEndA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndA()ÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaË9 Ë(I
-
-%45int"'org.eclipse.jgit.diff.Edit#getBeginA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginA()*
-7*³
-9n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÊ> Ê(BÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÊ> Ê(N
-
-%42int"'org.eclipse.jgit.diff.Edit#getBeginB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginB()×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÊR Ê(`
-
-%43int"%org.eclipse.jgit.diff.Edit#getEndB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndB()*
-7
-8*´
-10n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÊ Ê(ÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÊ Ê()
-
-%40int"'org.eclipse.jgit.diff.Edit#getBeginA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginA()×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÊ, Ê(:
-
-%41int"%org.eclipse.jgit.diff.Edit#getEndA()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndA()*
-7
-9*²
-11n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÈ È(%×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÈ) È(7
-
-%38int"%org.eclipse.jgit.diff.Edit#getEndB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndB()ÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÈ: È(J
-
-%39int"'org.eclipse.jgit.diff.Edit#getBeginB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginB()*
-10*¶
-12n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ> Ç(BÛØ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇ> Ç(N
-
-%36int"'org.eclipse.jgit.diff.Edit#getBeginB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2getBeginB()×Ô
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÇQ Ç(_
-
-%37int"%org.eclipse.jgit.diff.Edit#getEndB()I*$
-"
-editorg.eclipse.jgit.diff.Edit2	getEndB()*
-10
-11:.
-commitObjectcom.mycompany.app.CommitObjectB*(
-&com.mycompany.app.GitRepositoryManager

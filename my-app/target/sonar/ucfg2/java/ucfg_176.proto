@@ -1,428 +1,0 @@
-
-Lcom.mycompany.app.DatasetBuilder#populateFileDataset(Ljava/util/ArrayList;)Vf
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java/ /(#"10*â
-2f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java3 3(%£
- 
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java3 3(%(
-commitcom.mycompany.app.CommitObject"__id*
-""Æ
-Ã
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java3 3(%(
-commitcom.mycompany.app.CommitObject"
-__arrayGet*
-
-%0java.util.ArrayList*
-""*
-7
-1*Ú
-3f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java4 4(%Ÿ
-œ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java4 4(%$
-filecom.mycompany.app.FileObject"__id*
-""Â
-¿
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java4 4(%$
-filecom.mycompany.app.FileObject"
-__arrayGet*
-
-%1java.util.ArrayList*
-""*
-2
-6*…
-4f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaK9 K(Dà
-Ý
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaK9 K(D6
-%39/org.apache.commons.collections4.map.MultiKeyMap"__id*5*3"
- com.mycompany.app.DatasetBuilder"
-fileDatasetþû
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaK9 K(]
-%40java.lang.Object"korg.apache.commons.collections4.map.MultiKeyMap#get(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*8
-6
-%39/org.apache.commons.collections4.map.MultiKeyMap*
-""*
-
-filepathjava.lang.String2)get(Ljava/lang/Object;Ljava/lang/Object;)µ
-²
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaK K(^'
-
-oldMetricscom.mycompany.app.Metrics"__id*
-
-%40java.lang.Object•
-’
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaL L(
-%41java.io.PrintStream"__id*
-""õò
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaL L(&
-%42void"0java.io.PrintStream#println(Ljava/lang/String;)V*
-
-%41java.io.PrintStream*
-
-OLD entry!2println(Ljava/lang/String;)³°
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaM M(7
-%43void">com.mycompany.app.Metrics#update(Lcom/mycompany/app/Metrics;)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*)
-'
-
-oldMetricscom.mycompany.app.Metrics2#update(Lcom/mycompany/app/Metrics;)à
-Ý
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaN N(#6
-%44/org.apache.commons.collections4.map.MultiKeyMap"__id*5*3"
- com.mycompany.app.DatasetBuilder"
-fileDatasetÍÊ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaN N(H
-%45java.lang.Object"}org.apache.commons.collections4.map.MultiKeyMap#put(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*8
-6
-%44/org.apache.commons.collections4.map.MultiKeyMap*
-""*
-
-filepathjava.lang.String*)
-'
-
-newMetricscom.mycompany.app.Metrics2;put(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)*
-3*³	
-5f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaH H(•
-’
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaH H(
-%35java.io.PrintStream"__id*
-""õò
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaH H(&
-%36void"0java.io.PrintStream#println(Ljava/lang/String;)V*
-
-%35java.io.PrintStream*
-
-NEW entry!2println(Ljava/lang/String;)à
-Ý
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaI I(#6
-%37/org.apache.commons.collections4.map.MultiKeyMap"__id*5*3"
- com.mycompany.app.DatasetBuilder"
-fileDatasetÍÊ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaI I(H
-%38java.lang.Object"}org.apache.commons.collections4.map.MultiKeyMap#put(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;*8
-6
-%37/org.apache.commons.collections4.map.MultiKeyMap*
-""*
-
-filepathjava.lang.String*)
-'
-
-newMetricscom.mycompany.app.Metrics2;put(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)*
-3*ÁA
-6f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java5 5('§¤
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java5 5(%
-%2com.mycompany.app.Metrics"com.mycompany.app.Metrics¹
-¶
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java5 5('
-%3"#com.mycompany.app.Metrics#<init>()V*!
-
-%2com.mycompany.app.Metrics½
-º
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java5 5(('
-
-newMetricscom.mycompany.app.Metrics"__id*!
-
-%2com.mycompany.app.MetricsØÕ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java6 6(/	
-%4int"*com.mycompany.app.FileObject#getVersion()I*&
-$
-filecom.mycompany.app.FileObject2getVersion()øõ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java7 7(1
-%5java.lang.String"<com.mycompany.app.FileObject#getFilepath()Ljava/lang/String;*&
-$
-filecom.mycompany.app.FileObject2getFilepath()©
-¦
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java7 7(1
-filepathjava.lang.String"__id*
-
-%5java.lang.Stringãà
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java8 8(2
-
-%6void"(com.mycompany.app.Metrics#setVersion(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-""2setVersion(I)Ÿœ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java9 9(4
-
-%7void":com.mycompany.app.Metrics#setFilepath(Ljava/lang/String;)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-filepathjava.lang.String2setFilepath(Ljava/lang/String;)×Ô
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java: :()
-
-%8void"#com.mycompany.app.Metrics#setNR(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*22setNR(I)ÐÍ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java;' ;(4	
-%9int"&com.mycompany.app.FileObject#getAGE()I*&
-$
-filecom.mycompany.app.FileObject2getAGE()áÞ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java; ;(5
-%10void"$com.mycompany.app.Metrics#setAGE(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-	
-%9int2	setAGE(I)ÕÒ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java<( <(7
-
-%11int"(com.mycompany.app.FileObject#getCHURN()I*&
-$
-filecom.mycompany.app.FileObject2
-getCHURN()æã
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java< <(8
-%12void"&com.mycompany.app.Metrics#setCHURN(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%11int2setCHURN(I)õò
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java=, =(<
-%13java.lang.String":com.mycompany.app.FileObject#getAUTHOR()Ljava/lang/String;*&
-$
-filecom.mycompany.app.FileObject2getAUTHOR()š
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java= =(=
-%14void";com.mycompany.app.Metrics#appendAuthor(Ljava/lang/String;)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-%13java.lang.String2 appendAuthor(Ljava/lang/String;)áÞ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java> >(4
-
-%15int".com.mycompany.app.FileObject#getLOC_TOUCHED()I*&
-$
-filecom.mycompany.app.FileObject2getLOC_TOUCHED()òï
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java> >(5
-%16void",com.mycompany.app.Metrics#setLOC_TOUCHED(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%15int2setLOC_TOUCHED(I)ßÜ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java?0 ?(D
-
-%17int"-com.mycompany.app.FileObject#getLinesAdded()I*&
-$
-filecom.mycompany.app.FileObject2getLinesAdded()öó
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java? ?(E
-%18void".com.mycompany.app.Metrics#setMAX_LOC_ADDED(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%17int2setMAX_LOC_ADDED(I)ÑÎ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java@& @(3
-
-%19int"&com.mycompany.app.FileObject#getLOC()I*&
-$
-filecom.mycompany.app.FileObject2getLOC()âß
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java@ @(4
-%20void"$com.mycompany.app.Metrics#setLOC(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%19int2	setLOC(I)ßÜ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaA0 A(D
-
-%21int"-com.mycompany.app.FileObject#getLinesAdded()I*&
-$
-filecom.mycompany.app.FileObject2getLinesAdded()öó
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaA A(E
-%22void".com.mycompany.app.Metrics#setAVG_LOC_ADDED(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%21int2setAVG_LOC_ADDED(I)åâ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaB1 B(H
-
-%23int"0com.mycompany.app.FileObject#getChangeSetSize()I*&
-$
-filecom.mycompany.app.FileObject2getChangeSetSize()øõ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaB B(I
-%24void"/com.mycompany.app.Metrics#setAVG_CHANGE_SET(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%23int2setAVG_CHANGE_SET(I)åâ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaC1 C(H
-
-%25int"0com.mycompany.app.FileObject#getChangeSetSize()I*&
-$
-filecom.mycompany.app.FileObject2getChangeSetSize()øõ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaC C(I
-%26void"/com.mycompany.app.Metrics#setMAX_CHANGE_SET(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%25int2setMAX_CHANGE_SET(I)ßÜ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaD D(2
-
-%27int"-com.mycompany.app.FileObject#getNumImports()I*&
-$
-filecom.mycompany.app.FileObject2getNumImports()ðí
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaD D(3
-%28void"+com.mycompany.app.Metrics#setNumImports(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%27int2setNumImports(I)áÞ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaE E(4
-
-%29int".com.mycompany.app.FileObject#getNumComments()I*&
-$
-filecom.mycompany.app.FileObject2getNumComments()òï
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaE E(5
-%30void",com.mycompany.app.Metrics#setNumComments(I)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-
-%29int2setNumComments(I)ûø
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaF, F(?
-%31java.lang.String"=com.mycompany.app.FileObject#getBuggyness()Ljava/lang/String;*&
-$
-filecom.mycompany.app.FileObject2getBuggyness()š
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaF F(@
-%32void";com.mycompany.app.Metrics#setBUGGYNESS(Ljava/lang/String;)V*)
-'
-
-newMetricscom.mycompany.app.Metrics*
-
-%31java.lang.String2 setBUGGYNESS(Ljava/lang/String;)à
-Ý
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaG G($6
-%33/org.apache.commons.collections4.map.MultiKeyMap"__id*5*3"
- com.mycompany.app.DatasetBuilder"
-fileDatasetôñ
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaG G(B
-%34boolean"borg.apache.commons.collections4.map.MultiKeyMap#containsKey(Ljava/lang/Object;Ljava/lang/Object;)Z*8
-6
-%33/org.apache.commons.collections4.map.MultiKeyMap*
-""*
-
-filepathjava.lang.String21containsKey(Ljava/lang/Object;Ljava/lang/Object;)*
-4
-5*ñ
-7f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java4( 4(.þû
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java4( 4(9
-%1java.util.ArrayList">com.mycompany.app.CommitObject#getFiles()Ljava/util/ArrayList;**
-(
-commitcom.mycompany.app.CommitObject2
-getFiles()*
-3*ò
-8f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java3( 3(-ÿü
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java3( 3(:
-%0java.util.ArrayList"?com.mycompany.app.IssueObject#getCommits()Ljava/util/ArrayList;*(
-&
-issuecom.mycompany.app.IssueObject2getCommits()*
-2*‹
-10f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java0 0(—
-”
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java1 1(
-filepathjava.lang.String"__id*
-""*
-1*„
-0 "}
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.javaS S(
-implicit return*â
-1f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java2 2(¡
-ž
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java2 2(&
-issuecom.mycompany.app.IssueObject"__id*
-""È
-Å
-f
-\/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/DatasetBuilder.java2 2(&
-issuecom.mycompany.app.IssueObject"
-__arrayGet*
-
-issuesjava.util.ArrayList*
-""*
-8
-0:
-issuesjava.util.ArrayListB$"
- com.mycompany.app.DatasetBuilder

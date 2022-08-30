@@ -1,22 +1,0 @@
-
-Lcom.mycompany.app.IssueLifeCycleManager#getVersionMapKeySet()Ljava/util/Set;m
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java_ _(-"1*Ù
-1m
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java` `(ß
-Ü
-m
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java` `((
-%0"com.google.common.collect.Multimap"__id*;*9)
-'com.mycompany.app.IssueLifeCycleManager"
-
-versionMapùö
-m
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java` `('
-%1java.util.Set":com.google.common.collect.Multimap#keySet()Ljava/util/Set;**
-(
-%0"com.google.common.collect.Multimap2keySet()"†
-m
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java` `((
-
-%1java.util.SetB+)
-'com.mycompany.app.IssueLifeCycleManager

@@ -1,8 +1,0 @@
-com.mycompany.app.GitRepositoryManager#getFileAgeInWeeks(Lorg/eclipse/jgit/revwalk/RevCommit;Ljava/lang/String;)I
-org.eclipse.jgit.revwalk.RevWalk#instance-init#
-org.eclipse.jgit.revwalk.RevWalk#<init>(Lorg/eclipse/jgit/lib/Repository;)V
-org.eclipse.jgit.treewalk.filter.PathFilter#create(Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/filter/PathFilter;
-java.util.concurrent.TimeUnit#convert(JLjava/util/concurrent/TimeUnit;)J
-org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;
-org.eclipse.jgit.revwalk.RevCommit#getAuthorIdent()Lorg/eclipse/jgit/lib/PersonIdent;
-java.lang.Math#abs(J)J

@@ -632,7 +632,7 @@ public class ClassifierModel {
 
 	public Evaluation applyFilterForSampling( FilteredClassifier fc, Evaluation eval, Instances training, Instances testing, AbstractClassifier classifierName ) throws SamplingException {
 
-		// In filter needed, applyt it and evaluate the model 
+		// In filter needed, apply it and evaluate the model 
 		try {
 			if (fc != null) {
 				fc.setClassifier( classifierName );
@@ -667,7 +667,7 @@ public class ClassifierModel {
 
 
     public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) throws Exception {
-		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(1)  + "," + eval.falsePositiveRate(1)  + "," + eval.trueNegativeRate(1)  + "," + eval.falseNegativeRate(1)  + "," + eval.precision(1)  + "," + eval.recall(1)  + "," + eval.areaUnderROC(1)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
+		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(0)  + "," + eval.falsePositiveRate(0)  + "," + eval.trueNegativeRate(0)  + "," + eval.falseNegativeRate(0)  + "," + eval.precision(0)  + "," + eval.recall(0)  + "," + eval.areaUnderROC(0)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
 	}
 
 

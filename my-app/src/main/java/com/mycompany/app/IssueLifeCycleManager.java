@@ -34,6 +34,7 @@ public class IssueLifeCycleManager{
     private JiraTicketManager               jiraTicketManager;
     private Multimap<LocalDate, String>     versionMap;
     private double                          p;
+    private double                          avgDistanceOVFV;
     private DatasetBuilder                  datasetBuilder;
 
 
@@ -157,15 +158,18 @@ public class IssueLifeCycleManager{
                 for( RevCommit commit : revWalk ) {
                     LocalDate commitLocalDate = commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     int version = getVersionFromLocalDate( commitLocalDate );
-                    if ( issue.getFv() >= version ){ // bypass all the commits with version greater than ticket's fixed version.
-                        try{
-                            RevCommit checkparent = commit.getParent(0);
-                        } catch ( ArrayIndexOutOfBoundsException e ){
-                            continue;
-                        }
-                        CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
-                        issue.append( commitObject );
+                    
+                    // The following is important : Jira could be not consistent in FV!!! Git has the truth!!!
+                    if ( issue.getFv() < version )  issue.setFv( version ); 
+                    try{
+                        // if the commit has not a parent one just skip it (it would be impossible to retrieve some metrics!!)
+                        RevCommit checkparent = commit.getParent(0);
+                    } catch ( ArrayIndexOutOfBoundsException e ){
+                        continue;
                     }
+                    CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
+                    issue.append( commitObject );
+                    
                     
                 }
             } 
@@ -220,13 +224,19 @@ public class IssueLifeCycleManager{
                     }
                 } 
                 // Check if the reported affected versions for the current issue are not coherent 
-                // with the reported fixed version ( i.e. av > fv ).
+                // with the reported fixed version and opening version, and populate with all remaining 
+                // versions between them.
                 avs.removeIf( av -> av >= issue.getFv() );
-                if ( avs.isEmpty() ) { 
-                    this.issuesWithoutAffectedVersions.add( issue ); 
-                } 
-                else{
-                    int minValue = Collections.min( avs );
+                if (avs.isEmpty()) this.issuesWithoutAffectedVersions.add( issue ); 
+                else if (Collections.min(avs)<=issue.getOv()){
+                    int minValue = Collections.min(avs);
+                    int maxValue = ( issue.getFv() - 1 );
+                    avs = new ArrayList<>( IntStream.rangeClosed(minValue, maxValue).boxed().collect(Collectors.toList()) );
+                    issue.setAvs( avs );  
+                    this.issuesWithAffectedVersions.add( issue ); 
+                }
+                else if (Collections.min(avs)>issue.getOv()){
+                    int minValue = issue.getOv();
                     int maxValue = ( issue.getFv() - 1 );
                     avs = new ArrayList<>( IntStream.rangeClosed(minValue, maxValue).boxed().collect(Collectors.toList()) );
                     issue.setAvs( avs );  
@@ -276,6 +286,8 @@ public class IssueLifeCycleManager{
 
     public void computeProportionIncremental( ArrayList<IssueObject> issues ){
         ArrayList<Double> proportions = new ArrayList<>();
+        ArrayList<Double> OVFVDistances = new ArrayList<>();
+
         for ( IssueObject issue : issues ){
             if ( !( issue.getOv() == issue.getFv() ) ) {
                 double fv = (double) issue.getFv();
@@ -283,9 +295,11 @@ public class IssueLifeCycleManager{
                 double iv = (double) issue.getIv();
                 double p = ( fv - iv )/( fv - ov );
                 proportions.add( p );  
+                OVFVDistances.add(fv-ov);
             }
         }
         this.p = average( proportions );
+        this.avgDistanceOVFV = average(OVFVDistances);
     }
 
 
@@ -297,7 +311,7 @@ public class IssueLifeCycleManager{
             if ( fv == ov ) { 
                 // IS THIS CORRECT? MAYBE IN THIS CASE I JUST SHOULD DELETE THE ISSUE? 
                 // CAUSE I AM ACTUALLY APPLYING PROPORTION RIGHT (IN THE ELSE BLOCK)!
-                issue.setIv( ( fv - ( ( 1 ) * P ) ) );
+                issue.setIv( ( fv - ( avgDistanceOVFV * P ) ) );
             } else{
                 issue.setIv( ( fv - ( ( fv - ov ) * P ) ) );
             }

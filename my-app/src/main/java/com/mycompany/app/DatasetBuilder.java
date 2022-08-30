@@ -177,8 +177,8 @@ public class DatasetBuilder {
                     String MaxLocAdded =    Integer.toString(metrics.getMAX_LOC_ADDED());
                     String AvgChgSet =      Integer.toString((int) ( metrics.getAVG_CHANGE_SET()/nr ) );
                     String MaxChgSet =      Integer.toString(metrics.getMAX_CHANGE_SET());
-					String numImports = 	Integer.toString(metrics.getNumImports());
-					String numComments = 	Integer.toString(metrics.getNumComments());
+					String numImports = 	Integer.toString(metrics.getNumImports()/nr);
+					String numComments = 	Integer.toString(metrics.getNumComments()/nr);
                     String buggy =          metrics.getBUGGYNESS();
 
 					// Append the data to CSV file

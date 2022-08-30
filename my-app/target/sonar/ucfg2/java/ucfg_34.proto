@@ -1,214 +1,0 @@
-
-qcom.mycompany.app.GitRepositoryManager#getFileAgeInWeeks(Lorg/eclipse/jgit/revwalk/RevCommit;Ljava/lang/String;)In
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java÷ ÷( "3*¹
-2n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java‚  ‚(&µ²
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java‚  ‚(7'
-%15 org.eclipse.jgit.lib.PersonIdent"Uorg.eclipse.jgit.revwalk.RevCommit#getAuthorIdent()Lorg/eclipse/jgit/lib/PersonIdent;*.
-,
-commit"org.eclipse.jgit.revwalk.RevCommit2getAuthorIdent()üù
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java‚  ‚(A
-%16java.util.Date":org.eclipse.jgit.lib.PersonIdent#getWhen()Ljava/util/Date;*)
-'
-%15 org.eclipse.jgit.lib.PersonIdent2	getWhen()·
-´
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java‚ ‚(A#
-date_first_commitjava.util.Date"__id*
-
-%16java.util.Dateº·
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaƒ" ƒ(>'
-%17 org.eclipse.jgit.lib.PersonIdent"Uorg.eclipse.jgit.revwalk.RevCommit#getAuthorIdent()Lorg/eclipse/jgit/lib/PersonIdent;*3
-1
-startCommit"org.eclipse.jgit.revwalk.RevCommit2getAuthorIdent()üù
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaƒ" ƒ(H
-%18java.util.Date":org.eclipse.jgit.lib.PersonIdent#getWhen()Ljava/util/Date;*)
-'
-%17 org.eclipse.jgit.lib.PersonIdent2	getWhen()¹
-¶
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaƒ ƒ(H%
-date_current_commitjava.util.Date"__id*
-
-%18java.util.DateÏÌ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java„* „(G
-%19long"java.util.Date#getTime()J*'
-%
-date_current_commitjava.util.Date2	getTime()ÍÊ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java„J „(e
-%20long"java.util.Date#getTime()J*%
-#
-date_first_commitjava.util.Date2	getTime()´
-±
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java„! „(f
-%21long"java.lang.Math#abs(J)J*"
-java.lang.Math*
-""§
-¤
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java…  …(-$
-%22java.util.concurrent.TimeUnit"__id*
-""§
-¤
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java…E …(Z$
-%23java.util.concurrent.TimeUnit"__id*
-""ÍÊ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java…  …([
-%24long"Hjava.util.concurrent.TimeUnit#convert(JLjava/util/concurrent/TimeUnit;)J*&
-$
-%22java.util.concurrent.TimeUnit*
-""*&
-$
-%23java.util.concurrent.TimeUnit2)convert(JLjava/util/concurrent/TimeUnit;)ãà
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java‡ ‡(
-%25void")org.eclipse.jgit.revwalk.RevWalk#close()V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk2close()"x
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaˆ ˆ(
-""*”)
-3n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaù ù(¦
-£
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaù ù(#
-date_first_commitjava.util.Date"__id*
-""¨
-¥
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaù ù(4%
-date_current_commitjava.util.Date"__id*
-""Ü
-Ù
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaû' û(6%
-%0org.eclipse.jgit.lib.Repository"__id*:*8(
-&com.mycompany.app.GitRepositoryManager"
-
-repository½º
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaû û(%&
-%1 org.eclipse.jgit.revwalk.RevWalk" org.eclipse.jgit.revwalk.RevWalk™
-–
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaû û(8
-%2"Korg.eclipse.jgit.revwalk.RevWalk#<init>(Lorg/eclipse/jgit/lib/Repository;)V*(
-&
-%1 org.eclipse.jgit.revwalk.RevWalk*'
-%
-%0org.eclipse.jgit.lib.RepositoryÐ
-Í
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaû û(9+
-revWalk org.eclipse.jgit.revwalk.RevWalk"__id*(
-&
-%1 org.eclipse.jgit.revwalk.RevWalkÜ
-Ù
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaü0 ü(?%
-%3org.eclipse.jgit.lib.Repository"__id*:*8(
-&com.mycompany.app.GitRepositoryManager"
-
-repository‰†
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaüI ü(^
-%4java.lang.String"<org.eclipse.jgit.lib.AnyObjectId#getName()Ljava/lang/String;*3
-1
-startCommit"org.eclipse.jgit.revwalk.RevCommit2	getName()ÔÑ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaü0 ü(`#
-%5org.eclipse.jgit.lib.ObjectId"Zorg.eclipse.jgit.lib.Repository#resolve(Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;*'
-%
-%3org.eclipse.jgit.lib.Repository*
-
-%4java.lang.String2resolve(Ljava/lang/String;)š—
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaü ü(b(
-%6"org.eclipse.jgit.revwalk.RevCommit"torg.eclipse.jgit.revwalk.RevWalk#parseCommit(Lorg/eclipse/jgit/lib/AnyObjectId;)Lorg/eclipse/jgit/revwalk/RevCommit;*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*%
-#
-%5org.eclipse.jgit.lib.ObjectId2/parseCommit(Lorg/eclipse/jgit/lib/AnyObjectId;)ÞÛ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaü ü(d
-
-%7void"Qorg.eclipse.jgit.revwalk.RevWalk#markStart(Lorg/eclipse/jgit/revwalk/RevCommit;)V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk**
-(
-%6"org.eclipse.jgit.revwalk.RevCommit2/markStart(Lorg/eclipse/jgit/revwalk/RevCommit;)ì
-é
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaý ý(<1
-%8+org.eclipse.jgit.treewalk.filter.PathFilter"sorg.eclipse.jgit.treewalk.filter.PathFilter#create(Ljava/lang/String;)Lorg/eclipse/jgit/treewalk/filter/PathFilter;*/"-
-+org.eclipse.jgit.treewalk.filter.PathFilter*
-
-filenamejava.lang.Stringþ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaý ý(>
-
-%9void"^org.eclipse.jgit.revwalk.RevWalk#setTreeFilter(Lorg/eclipse/jgit/treewalk/filter/TreeFilter;)V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*3
-1
-%8+org.eclipse.jgit.treewalk.filter.PathFilter2<setTreeFilter(Lorg/eclipse/jgit/treewalk/filter/TreeFilter;)ª
-§
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaþ þ(.'
-%10 org.eclipse.jgit.revwalk.RevSort"__id*
-""ÐÍ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaþ þ(0
-%11void"Jorg.eclipse.jgit.revwalk.RevWalk#sort(Lorg/eclipse/jgit/revwalk/RevSort;)V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*)
-'
-%10 org.eclipse.jgit.revwalk.RevSort2(sort(Lorg/eclipse/jgit/revwalk/RevSort;)ª
-§
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÿ ÿ(%'
-%12 org.eclipse.jgit.revwalk.RevSort"__id*
-""ØÕ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaÿ ÿ(-
-%13void"Korg.eclipse.jgit.revwalk.RevWalk#sort(Lorg/eclipse/jgit/revwalk/RevSort;Z)V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk*)
-'
-%12 org.eclipse.jgit.revwalk.RevSort*22)sort(Lorg/eclipse/jgit/revwalk/RevSort;Z)¢Ÿ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java€ €())
-%14"org.eclipse.jgit.revwalk.RevCommit"Korg.eclipse.jgit.revwalk.RevWalk#next()Lorg/eclipse/jgit/revwalk/RevCommit;*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk2next()Ô
-Ñ
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java€ €(*,
-commit"org.eclipse.jgit.revwalk.RevCommit"__id*+
-)
-%14"org.eclipse.jgit.revwalk.RevCommit*
-2
-1*Ó
-1n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaŠ Š(ãà
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.javaŠ Š(
-%26void")org.eclipse.jgit.revwalk.RevWalk#close()V*-
-+
-revWalk org.eclipse.jgit.revwalk.RevWalk2close()"x
-n
-b/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/GitRepositoryManager.java‹ ‹(
-"":1
-startCommit"org.eclipse.jgit.revwalk.RevCommit:
-filenamejava.lang.StringB*(
-&com.mycompany.app.GitRepositoryManager

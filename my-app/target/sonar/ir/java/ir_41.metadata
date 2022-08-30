@@ -1,3 +1,0 @@
-com.mycompany.app.JiraTicketManager#getJsonAffectedVersionList(Lorg/json/JSONArray;)Ljava/util/ArrayList;
-java.util.ArrayList#<init>()V
-java.util.ArrayList#instance-init#

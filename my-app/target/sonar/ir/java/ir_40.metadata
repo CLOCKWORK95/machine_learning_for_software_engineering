@@ -1,3 +1,0 @@
-com.mycompany.app.JiraTicketManager#getVersionsWithReleaseDate(Lcom/mycompany/app/IssueLifeCycleManager;)V
-java.lang.String#valueOf(I)Ljava/lang/String;
-java.time.LocalDate#parse(Ljava/lang/CharSequence;)Ljava/time/LocalDate;

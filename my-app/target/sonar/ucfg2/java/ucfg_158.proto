@@ -1,261 +1,0 @@
-
-Ecom.mycompany.app.IssueLifeCycleManager#setOpeningAndFixedVersions()Vo
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∂ ∂(*"12*ﬁ
-2o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaæ æ(ü
-ú
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaæ æ(
-datejava.time.LocalDate"__id*
-""Ω
-∫
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaæ æ(
-datejava.time.LocalDate"
-__arrayGet*
-
-%15java.util.Set*
-""*
-5
-1*”
-4o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿S ¿(Wéã
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿q ¿(à
-%24java.lang.String"Acom.mycompany.app.IssueObject#getCreationDate()Ljava/lang/String;*(
-&
-issuecom.mycompany.app.IssueObject2getCreationDate()è
-å
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿a ¿(â
-%25java.time.LocalDate"Hjava.time.LocalDate#parse(Ljava/lang/CharSequence;)Ljava/time/LocalDate;*"
-java.time.LocalDate*
-
-%24java.lang.String±Æ
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿S ¿(ã
-%26boolean"@java.time.LocalDate#isAfter(Ljava/time/chrono/ChronoLocalDate;)Z*
-
-datejava.time.LocalDate*
-
-%25java.time.LocalDate2+isAfter(Ljava/time/chrono/ChronoLocalDate;)*
-2
-1*Ø
-5o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaø ø(‚
-ﬂ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaøA ø(K)
-%16"com.google.common.collect.Multimap"__id*;*9)
-'com.mycompany.app.IssueLifeCycleManager"
-
-versionMap»≈
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaøA ø(U
-%17java.util.Collection"Pcom.google.common.collect.Multimap#get(Ljava/lang/Object;)Ljava/util/Collection;*+
-)
-%16"com.google.common.collect.Multimap*
-
-datejava.time.LocalDate2get(Ljava/lang/Object;)™
-ß
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaø. ø(W
-%18java.lang.String"Scom.google.common.collect.Iterables#getLast(Ljava/lang/Iterable;)Ljava/lang/Object;*'"%
-#com.google.common.collect.Iterables*
-
-%17java.util.CollectionÇ
-ˇ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaø ø(X
-%19java.lang.Integer"@java.lang.Integer#valueOf(Ljava/lang/String;)Ljava/lang/Integer;*"
-java.lang.Integer*
-
-%18java.lang.String˙˜
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaø ø(Z
-%20void"'com.mycompany.app.IssueObject#setOv(I)V*(
-&
-issuecom.mycompany.app.IssueObject*
-
-%19java.lang.Integer2setOv(I)çä
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿4 ¿(K
-%21java.lang.String"Acom.mycompany.app.IssueObject#getCreationDate()Ljava/lang/String;*(
-&
-issuecom.mycompany.app.IssueObject2getCreationDate()é
-ã
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿# ¿(M
-%22java.time.LocalDate"Hjava.time.LocalDate#parse(Ljava/lang/CharSequence;)Ljava/time/LocalDate;*"
-java.time.LocalDate*
-
-%21java.lang.String∞≠
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java¿ ¿(O
-%23boolean"@java.time.LocalDate#isEqual(Ljava/time/chrono/ChronoLocalDate;)Z*
-
-datejava.time.LocalDate*
-
-%22java.time.LocalDate2+isEqual(Ljava/time/chrono/ChronoLocalDate;)*
-4
-1*ﬁ
-6o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaæ" æ(&‚
-ﬂ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaæ" æ(1)
-%14"com.google.common.collect.Multimap"__id*;*9)
-'com.mycompany.app.IssueLifeCycleManager"
-
-versionMap˝˙
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaæ" æ(:
-%15java.util.Set":com.google.common.collect.Multimap#keySet()Ljava/util/Set;*+
-)
-%14"com.google.common.collect.Multimap2keySet()*
-2*ﬁ
-7o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∏ ∏(ü
-ú
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∏ ∏(
-datejava.time.LocalDate"__id*
-""º
-π
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∏ ∏(
-datejava.time.LocalDate"
-__arrayGet*
-
-%2java.util.Set*
-""*
-6
-10*◊
-9o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫U ∫(Yíè
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫s ∫(å
-%11java.lang.String"Ccom.mycompany.app.IssueObject#getResolutionDate()Ljava/lang/String;*(
-&
-issuecom.mycompany.app.IssueObject2getResolutionDate()è
-å
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫c ∫(ç
-%12java.time.LocalDate"Hjava.time.LocalDate#parse(Ljava/lang/CharSequence;)Ljava/time/LocalDate;*"
-java.time.LocalDate*
-
-%11java.lang.String±Æ
-p
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫U ∫(è
-%13boolean"@java.time.LocalDate#isAfter(Ljava/time/chrono/ChronoLocalDate;)Z*
-
-datejava.time.LocalDate*
-
-%12java.time.LocalDate2+isAfter(Ljava/time/chrono/ChronoLocalDate;)*
-6
-7*ß
-10o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaπ π(·
-ﬁ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaπA π(K(
-%3"com.google.common.collect.Multimap"__id*;*9)
-'com.mycompany.app.IssueLifeCycleManager"
-
-versionMap∆√
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaπA π(U
-%4java.util.Collection"Pcom.google.common.collect.Multimap#get(Ljava/lang/Object;)Ljava/util/Collection;**
-(
-%3"com.google.common.collect.Multimap*
-
-datejava.time.LocalDate2get(Ljava/lang/Object;)®
-•
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaπ. π(W
-%5java.lang.String"Scom.google.common.collect.Iterables#getLast(Ljava/lang/Iterable;)Ljava/lang/Object;*'"%
-#com.google.common.collect.Iterables*
-
-%4java.util.CollectionÄ
-˝
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaπ π(X
-%6java.lang.Integer"@java.lang.Integer#valueOf(Ljava/lang/String;)Ljava/lang/Integer;*"
-java.lang.Integer*
-
-%5java.lang.String¯ı
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.javaπ π(Z
-
-%7void"'com.mycompany.app.IssueObject#setFv(I)V*(
-&
-issuecom.mycompany.app.IssueObject*
-
-%6java.lang.Integer2setFv(I)êç
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫4 ∫(M
-%8java.lang.String"Ccom.mycompany.app.IssueObject#getResolutionDate()Ljava/lang/String;*(
-&
-issuecom.mycompany.app.IssueObject2getResolutionDate()å
-â
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫# ∫(O
-%9java.time.LocalDate"Hjava.time.LocalDate#parse(Ljava/lang/CharSequence;)Ljava/time/LocalDate;*"
-java.time.LocalDate*
-
-%8java.lang.StringØ¨
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∫ ∫(Q
-%10boolean"@java.time.LocalDate#isEqual(Ljava/time/chrono/ChronoLocalDate;)Z*
-
-datejava.time.LocalDate*
-
-%9java.time.LocalDate2+isEqual(Ljava/time/chrono/ChronoLocalDate;)*
-6
-9*é
-0 "Ü
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java≈ ≈(
-implicit return*‹
-11o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∏" ∏(&·
-ﬁ
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∏" ∏(1(
-%1"com.google.common.collect.Multimap"__id*;*9)
-'com.mycompany.app.IssueLifeCycleManager"
-
-versionMap˚¯
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∏" ∏(:
-%2java.util.Set":com.google.common.collect.Multimap#keySet()Ljava/util/Set;**
-(
-%1"com.google.common.collect.Multimap2keySet()*
-7*À
-12o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∑" ∑(&Œ
-À
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∑" ∑(-
-%0java.util.ArrayList"__id*7*5)
-'com.mycompany.app.IssueLifeCycleManager"
-issues*
-1*˙
-1o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∑ ∑(™
-ß
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∑ ∑(&
-issuecom.mycompany.app.IssueObject"__id*
-""Õ
- 
-o
-c/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/IssueLifeCycleManager.java∑ ∑(&
-issuecom.mycompany.app.IssueObject"
-__arrayGet*
-
-%0java.util.ArrayList*
-""*
-0
-11B+)
-'com.mycompany.app.IssueLifeCycleManager

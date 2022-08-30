@@ -1,5 +1,0 @@
-com.mycompany.app.IssueLifeCycleManager#getVersionFromLocalDate(Ljava/time/LocalDate;)I
-java.time.LocalDate#isAfter(Ljava/time/chrono/ChronoLocalDate;)Z
-com.google.common.collect.Iterables#getLast(Ljava/lang/Iterable;)Ljava/lang/Object;
-java.lang.Integer#valueOf(Ljava/lang/String;)Ljava/lang/Integer;
-java.time.LocalDate#isEqual(Ljava/time/chrono/ChronoLocalDate;)Z

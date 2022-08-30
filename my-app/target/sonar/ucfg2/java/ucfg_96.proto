@@ -1,658 +1,0 @@
-
-≥com.mycompany.app.ClassifierModel#modifiedWalkForwardTrainingAndTest(Ljava/lang/String;Lcom/mycompany/app/ModifiedWalkForwardReader;I)Lcom/mycompany/app/ModifiedWalkForwardReader;i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÇ" Ç(D"72*™
-68i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaè è(≤Ø
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaè è(,
-%12java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute LOC real\n2 append(Ljava/lang/CharSequence;)*
-67*≤
-24i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java« «(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java« «(4
-%50java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute AvgLocAdded real\n2 append(Ljava/lang/CharSequence;)*
-23*¥
-69i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaé é(ºπ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaé é(6
-%11java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*#!
-@attribute NumberAuthors real\n2 append(Ljava/lang/CharSequence;)*
-68*≤
-25i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java∆ ∆(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java∆ ∆(4
-%49java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute LOC_TOUCHED real\n2 append(Ljava/lang/CharSequence;)*
-24*¨
-26i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java≈ ≈(¥±
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java≈ ≈(.
-%48java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute CHURN real\n2 append(Ljava/lang/CharSequence;)*
-25*™
-27i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaƒ ƒ(≤Ø
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaƒ ƒ(,
-%47java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute AGE real\n2 append(Ljava/lang/CharSequence;)*
-26*™
-28i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java√ √(≤Ø
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java√ √(,
-%46java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute LOC real\n2 append(Ljava/lang/CharSequence;)*
-27*¥
-29i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¬ ¬(ºπ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¬ ¬(6
-%45java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*#!
-@attribute NumberAuthors real\n2 append(Ljava/lang/CharSequence;)*
-28*∂
-70i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaç ç(æª
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaç ç(8
-%10java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*%#
-!@attribute NumberRevisions real\n2 append(Ljava/lang/CharSequence;)*
-69*Ÿ
-71i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ â(a±
-Æ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ â(a
-	csvWriterjava.io.FileWriter"__id*
-
-%5java.io.FileWriter√
-¿
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaå å(.
-%7java.lang.String"__concat*
-
-@relation *!
-
-projectNamejava.lang.String¥
-±
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaå å(7
-%8java.lang.String"__concat*
-
-%7java.lang.String*
-\n\n∞≠
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaå å(8
-%9java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-
-%8java.lang.String2 append(Ljava/lang/CharSequence;)*
-70*Õ
-72i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ/ â(:ƒ
-¡
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ/ â(:
-%0java.lang.String"__id*6*4#
-!com.mycompany.app.ClassifierModel"
-path_to_dir∑
-¥
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ/ â(F
-%1java.lang.String"__concat*
-
-%0java.lang.String*	
-output/Õ
- 
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ/ â(T
-%2java.lang.String"__concat*
-
-%1java.lang.String*!
-
-projectNamejava.lang.String¡
-æ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâW â(_
-%3java.lang.String"__id*3*1#
-!com.mycompany.app.ClassifierModel"
-
-TRAININGƒ
-¡
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ/ â(_
-%4java.lang.String"__concat*
-
-%2java.lang.String*
-
-%3java.lang.Stringúô
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ# â(-
-%5java.io.FileWriter"java.io.FileWriter⁄
-◊
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaâ â(a
-%6".java.io.FileWriter#<init>(Ljava/lang/String;)V*
-
-%5java.io.FileWriter*
-
-%4java.lang.String*
-71*∂
-30i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¡ ¡(æª
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¡ ¡(8
-%44java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*%#
-!@attribute NumberRevisions real\n2 append(Ljava/lang/CharSequence;)*
-29*ﬂ
-31i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ Ω(`≤
-Ø
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ Ω(`
-	csvWriterjava.io.FileWriter"__id*
-
-%39java.io.FileWriterƒ
-¡
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¿ ¿(.
-%41java.lang.String"__concat*
-
-@relation *!
-
-projectNamejava.lang.String∂
-≥
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¿ ¿(7
-%42java.lang.String"__concat*
-
-%41java.lang.String*
-\n\n≤Ø
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¿ ¿(8
-%43java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-
-%42java.lang.String2 append(Ljava/lang/CharSequence;)*
-30*Ÿ
-32i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ/ Ω(:≈
-¬
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ/ Ω(:
-%34java.lang.String"__id*6*4#
-!com.mycompany.app.ClassifierModel"
-path_to_dirπ
-∂
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ/ Ω(F
-%35java.lang.String"__concat*
-
-%34java.lang.String*	
-output/œ
-Ã
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ/ Ω(T
-%36java.lang.String"__concat*
-
-%35java.lang.String*!
-
-projectNamejava.lang.String¡
-æ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩW Ω(^
-%37java.lang.String"__id*2*0#
-!com.mycompany.app.ClassifierModel"	
-TESTING«
-ƒ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ/ Ω(^
-%38java.lang.String"__concat*
-
-%36java.lang.String*
-
-%37java.lang.Stringùö
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ# Ω(-
-%39java.io.FileWriter"java.io.FileWriter›
-⁄
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaΩ Ω(`
-%40".java.io.FileWriter#<init>(Ljava/lang/String;)V*
-
-%39java.io.FileWriter*
-
-%38java.lang.String*
-31*ë
-35i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java≤ ≤(
-ôñ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java≤ ≤(&
-%33void"Ccom.mycompany.app.ModifiedWalkForwardReader#appendCounterResult(I)V*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader*
-""2appendCounterResult(I)*
-32*ë
-36i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java± ±(
-ôñ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java± ±()
-%32void"Ccom.mycompany.app.ModifiedWalkForwardReader#appendCounterResult(I)V*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader*
-""2appendCounterResult(I)*
-35*ƒ
-37i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java∞ ∞(Ã…
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java∞ ∞(
-%31void"#java.io.OutputStreamWriter#flush()V*!
-
-	csvWriterjava.io.FileWriter2flush()*
-36*Â
-39i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java™ ™(ÌÍ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java´ ´(1
-
-%30int"Vcom.mycompany.app.ClassifierModel#appendToCSV(Ljava/io/FileWriter;Ljava/lang/String;)I*%#
-!com.mycompany.app.ClassifierModel*!
-
-	csvWriterjava.io.FileWriter*
-
-linejava.lang.String23appendToCSV(Ljava/io/FileWriter;Ljava/lang/String;)*
-52*Ó
-43i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaß ß(!ˆÛ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaß$ ß(4
-
-%29int"6com.mycompany.app.ModifiedWalkForwardReader#getStep()I*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader2	getStep()*
-39*ˆ
-48i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java§ §(!ˆÛ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java§$ §(4
-
-%28int"6com.mycompany.app.ModifiedWalkForwardReader#getStep()I*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader2	getStep()*
-37
-39
-43*≠
-50i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¢ ¢(.©
-¶
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¢ ¢(.
-linejava.lang.String"__id*
-
-%27java.lang.String*
-37
-48
-39
-43*·
-51i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¢ ¢(.ÈÊ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¢ ¢(.
-%27java.lang.String"3java.io.BufferedReader#readLine()Ljava/lang/String;*
-
-%26java.io.BufferedReader2
-readLine()*
-50*î
-52i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¢ ¢(úô
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java¢ ¢(#
-%26java.io.BufferedReader"Kcom.mycompany.app.ModifiedWalkForwardReader#getBr()Ljava/io/BufferedReader;*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader2getBr()*
-51*°
-53i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaü ü(,©
-¶
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaü ü(,
-linejava.lang.String"__id*
-
-%25java.lang.String*
-52*·
-54i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaü ü(+ÈÊ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaü ü(+
-%25java.lang.String"3java.io.BufferedReader#readLine()Ljava/lang/String;*
-
-%24java.io.BufferedReader2
-readLine()*
-53*î
-55i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaü ü(úô
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaü ü( 
-%24java.io.BufferedReader"Kcom.mycompany.app.ModifiedWalkForwardReader#getBr()Ljava/io/BufferedReader;*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader2getBr()*
-54*Ò
-11i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java÷
- ÷(ˆÛ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java÷ ÷($
-
-%60int"6com.mycompany.app.ModifiedWalkForwardReader#getStep()I*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader2	getStep()*
-14
-9*§
-12i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‘ ‘(.©
-¶
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‘ ‘(.
-linejava.lang.String"__id*
-
-%59java.lang.String*
-7
-11*ú
-57i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaö ö(§°
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaö ö(
-%23java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*	
-@data\n2 append(Ljava/lang/CharSequence;)*
-55*·
-13i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‘ ‘(.ÈÊ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‘ ‘(.
-%59java.lang.String"3java.io.BufferedReader#readLine()Ljava/lang/String;*
-
-%58java.io.BufferedReader2
-readLine()*
-12*≥
-58i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaô ô(ª∏
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaô ô(5
-%22java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*" 
-@attribute Buggy {Yes, No}\n\n2 append(Ljava/lang/CharSequence;)*
-57*î
-14i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‘ ‘(úô
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‘ ‘(#
-%58java.io.BufferedReader"Kcom.mycompany.app.ModifiedWalkForwardReader#getBr()Ljava/io/BufferedReader;*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader2getBr()*
-13*≤
-59i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaò ò(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaò ò(4
-%21java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute numComments real\n2 append(Ljava/lang/CharSequence;)*
-58*é
-15i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java“ “(ñ
-ì
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java“ “(
-linejava.lang.String"__id*
-""*
-14*ú
-17i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaŒ Œ(§°
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaŒ Œ(
-%57java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*	
-@data\n2 append(Ljava/lang/CharSequence;)*
-15*≥
-18i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÕ Õ(ª∏
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÕ Õ(5
-%56java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*" 
-@attribute Buggy {Yes, No}\n\n2 append(Ljava/lang/CharSequence;)*
-17*≤
-19i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÃ Ã(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÃ Ã(4
-%55java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute numComments real\n2 append(Ljava/lang/CharSequence;)*
-18*à
-0 "Ä
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÓ Ó(
-implicit return*ï
-1i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÌ	 Ì("§
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÌ Ì(7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader*€
-2i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaËC Ë(uñ
-ì
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaËC È(X
-%65java.lang.String"__concat*42
-0There are not enough entries to build test set! *MK
-IPlease decrease the integer STEPS parameter of ModifiedWalkForwardReader.”–
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaË' Ë(B4
-%66-com.mycompany.app.NoTestSetAvailableException"-com.mycompany.app.NoTestSetAvailableExceptionì
-ê
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaË# È(Z
-%67"Icom.mycompany.app.NoTestSetAvailableException#<init>(Ljava/lang/String;)V*6
-4
-%66-com.mycompany.app.NoTestSetAvailableException*
-
-%65java.lang.String‡
-›
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaË È([2
-e-com.mycompany.app.NoTestSetAvailableException"__id*6
-4
-%66-com.mycompany.app.NoTestSetAvailableException*
-0*í
-5i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java· ·(
-ôñ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java· ·(&
-%64void"Ccom.mycompany.app.ModifiedWalkForwardReader#appendCounterResult(I)V*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader*
-""2appendCounterResult(I)*
-2
-1*è
-6i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‡ ‡(
-ôñ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java‡ ‡()
-%63void"Ccom.mycompany.app.ModifiedWalkForwardReader#appendCounterResult(I)V*7
-5
-reader+com.mycompany.app.ModifiedWalkForwardReader*
-""2appendCounterResult(I)*
-5*¬
-7i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaﬂ ﬂ(Ã…
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaﬂ ﬂ(
-%62void"#java.io.OutputStreamWriter#flush()V*!
-
-	csvWriterjava.io.FileWriter2flush()*
-6*‰
-9i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÿ ÿ(ÌÍ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java⁄ ⁄(2
-
-%61int"Vcom.mycompany.app.ClassifierModel#appendToCSV(Ljava/io/FileWriter;Ljava/lang/String;)I*%#
-!com.mycompany.app.ClassifierModel*!
-
-	csvWriterjava.io.FileWriter*
-
-linejava.lang.String23appendToCSV(Ljava/io/FileWriter;Ljava/lang/String;)*
-14*±
-60i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaó ó(π∂
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaó ó(3
-%20java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter* 
-@attribute numImports real\n2 append(Ljava/lang/CharSequence;)*
-59*∞
-61i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javañ ñ(∏µ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javañ ñ(2
-%19java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute MaxChgSet real\n2 append(Ljava/lang/CharSequence;)*
-60*∞
-62i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaï ï(∏µ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaï ï(2
-%18java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute AvgChgSet real\n2 append(Ljava/lang/CharSequence;)*
-61*≤
-63i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaî î(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaî î(4
-%17java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute MaxLocAdded real\n2 append(Ljava/lang/CharSequence;)*
-62*≤
-64i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaì ì(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaì ì(4
-%16java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute AvgLocAdded real\n2 append(Ljava/lang/CharSequence;)*
-63*±
-20i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÀ À(π∂
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaÀ À(3
-%54java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter* 
-@attribute numImports real\n2 append(Ljava/lang/CharSequence;)*
-19*≤
-65i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaí í(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaí í(4
-%15java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute LOC_TOUCHED real\n2 append(Ljava/lang/CharSequence;)*
-64*∞
-21i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java   (∏µ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java   (2
-%53java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute MaxChgSet real\n2 append(Ljava/lang/CharSequence;)*
-20*¨
-66i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaë ë(¥±
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaë ë(.
-%14java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute CHURN real\n2 append(Ljava/lang/CharSequence;)*
-65*∞
-22i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java… …(∏µ
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java… …(2
-%52java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute AvgChgSet real\n2 append(Ljava/lang/CharSequence;)*
-21*™
-67i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaê ê(≤Ø
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.javaê ê(,
-%13java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*
-@attribute AGE real\n2 append(Ljava/lang/CharSequence;)*
-66*≤
-23i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java» »(∫∑
-i
-]/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/ClassifierModel.java» »(4
-%51java.io.Writer"Kjava.io.OutputStreamWriter#append(Ljava/lang/CharSequence;)Ljava/io/Writer;*!
-
-	csvWriterjava.io.FileWriter*!
-@attribute MaxLocAdded real\n2 append(Ljava/lang/CharSequence;)*
-22:
-projectNamejava.lang.String:5
-reader+com.mycompany.app.ModifiedWalkForwardReader:
-""B%#
-!com.mycompany.app.ClassifierModel
