@@ -273,6 +273,7 @@ public class ClassifierModel {
 	    param : trainingLimit, the index of the last version to be included in the training set. */ 
 	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) {
 
+		BufferedReader br;
 		int counterElement = 0;
 		int counterBuggies = 0;
 
@@ -285,7 +286,7 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ); 
+			br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ); 
 
 			// Skip the first line (contains just column name)
 			String line = br.readLine();
@@ -300,20 +301,17 @@ public class ClassifierModel {
 
 					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
 				}
-			}
-			br.close();
+			}	br.close();
 			// Flush the file to the disk
 			csvWriter.flush();
 
 			counterList.add(counterElement);
 			counterList.add(counterBuggies);
 
-			return counterList;
-
 		} catch(Exception e){
 			logger.info("Some problems occurred while writing the arff file.");
-			return null;
-		}
+		} 
+		return counterList;
 	}
 
 
@@ -322,7 +320,8 @@ public class ClassifierModel {
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
 	public List<Integer> walkForwardTesting( String projectName, int testing ) throws NoTestSetAvailableException{
-
+		
+		BufferedReader br;
 		int counterElement = 0;
 		int counterBuggies = 0;
 		ArrayList<Integer> counterList = new ArrayList<>();
@@ -333,7 +332,7 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ));  
+			br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ));  
 
 			// Skip the first line (contains just column name)
 			String line = br.readLine();
@@ -349,19 +348,16 @@ public class ClassifierModel {
 					// Append the row readed from the CSV file, but without the first 2 column
 					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
 				}
-			}
-
-			br.close();
+			}	br.close();
 
 			// Flush the file to the disk
 			csvWriter.flush();
 			counterList.add(counterElement);
 			counterList.add(counterBuggies);
 
-			
 		} catch( Exception e){
 			logger.info("Some problems occurred while writing the arff file.");
-		}
+		} 
 
 		if ( counterElement <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are no entries in version", testing );
