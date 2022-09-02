@@ -17,7 +17,6 @@ import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.lib.*;
 import org.eclipse.jgit.lib.Repository;
@@ -37,19 +36,23 @@ import java.util.logging.Logger;
 public class GitRepositoryManager {
 
     // ------------------------------ Attributes -----------------------------
+
     private static final Logger 	logger = Logger.getLogger(GitRepositoryManager.class.getName());
     private String                  projectName = "";
     private String                  repositoryPath = "";
     private Repository              repository;
     public static final String      FILE_EXTENSION = ".java";
     private Git                     git;
+
     // ------------------------------ Builders --------------------------------
-    public GitRepositoryManager( String projectName, String repositoryPath ) throws IOException, InvalidRemoteException {
+
+    public GitRepositoryManager( String projectName, String repositoryPath ) throws IOException {
         this.projectName = projectName;
         this.repositoryPath = repositoryPath;
         this.repository = openJGitRepository();
         this.git = new Git( this.repository );
     }
+
     // ------------------------------ Setters --------------------------------
 
     public void setRepositoryPath( String repositoryPath ){
@@ -92,6 +95,7 @@ public class GitRepositoryManager {
     }
 
 
+
     public void cloneRepositoryFromUrl() throws GitAPIException {
         Git.cloneRepository()
           .setURI("https://github.com/apache/" + this.projectName )
@@ -99,19 +103,6 @@ public class GitRepositoryManager {
           .call();
     }
 
-
-    public void listDiff( String oldCommit, String newCommit ) throws GitAPIException, IOException {
-        final List<DiffEntry> diffs = this.git.diff()
-                .setOldTree(prepareTreeParser( this.repository, oldCommit ) )
-                .setNewTree(prepareTreeParser( this.repository, newCommit ) )
-                .call();
-
-        logger.info( "Found: " + diffs.size() + " differences" );
-        for (DiffEntry diff : diffs) {
-            logger.info("Diff: " + diff.getChangeType() + ": " +
-                    (diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath()));
-        }
-    }
 
 
     private AbstractTreeIterator prepareTreeParser( Repository repository, String objectId ) throws IOException {
@@ -132,20 +123,6 @@ public class GitRepositoryManager {
         }
     }
 
-
-
-    public void commitChanges( RevCommit commit ) throws IOException, GitAPIException {
-
-        final List<DiffEntry> diffs = this.git.diff()
-                .setOldTree(prepareTreeParser(openJGitRepository(), commit.getParent(0).getId().getName()))
-                .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
-                .call();
-        logger.info("Found " + diffs.size() + " differences.");
-        for (DiffEntry diff : diffs) {
-            logger.info("Diff: " + diff.getChangeType() + ": " +
-                    (diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath()));
-        }
-    }
 
 
     /*  This Method is called to retrieve all files that have been modified, added or removed by a single commit.
@@ -232,7 +209,7 @@ public class GitRepositoryManager {
 
 
 
-    public String getTextfromCommittedFile( RevCommit commit, String filename ) throws IOException, InvalidRemoteException {
+    public String getTextfromCommittedFile( RevCommit commit, String filename ) throws IOException {
         RevTree tree = commit.getTree();
         Repository repo = openJGitRepository();
         String fileText;
@@ -257,8 +234,8 @@ public class GitRepositoryManager {
 
     public int getFileAgeInWeeks( RevCommit startCommit, String filename ) throws IOException {
         
-        Date    dateFirstCommit,
-                dateCurrentCommit;
+        Date    dateFirstCommit;
+        Date    dateCurrentCommit;
         int     age;
         RevWalk revWalk = new RevWalk( this.repository );
         revWalk.markStart( revWalk.parseCommit( this.repository.resolve( startCommit.getName() ) ) );
