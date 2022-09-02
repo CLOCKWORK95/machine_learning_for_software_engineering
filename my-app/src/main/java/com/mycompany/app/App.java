@@ -1,35 +1,26 @@
 package com.mycompany.app;
-import java.util.Scanner; 
-import java.io.File;
-import org.eclipse.jgit.api.Git;
+import java.util.Scanner;
+import java.util.logging.Logger;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-import org.eclipse.jgit.errors.MissingObjectException;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import java.io.IOException;
 import org.json.JSONException;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.revwalk.RevWalk;
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
 
 
 public class App {
 
-    public static void main( String[] args ) throws Exception, InvalidRemoteException, TransportException, GitAPIException, IOException, JSONException 
-    {
+    private static Logger logger = Logger.getLogger(App.class.getName());
+
+
+    public static void main( String[] args ) throws Exception {
 
     String[] projectNames = {"bookkeeper"/*,"storm"*/};
 
     String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" /*,"/home/gianmarco/Scrivania/ML_4_SE/storm/.git"*/};
 
         Scanner sc= new Scanner(System.in);    
-        System.out.print("\n\nDATASET CREATION                    -   0\nPREDICTORS TRAINING AND EVALUATION  -   1\nEnter the operation code : ");  
+        logger.info("\n\nDATASET CREATION                    -   0\nPREDICTORS TRAINING AND EVALUATION  -   1\nEnter the operation code : ");  
         int opcode= sc.nextInt(); 
 
         /*  This block of code implements the csv creation by merging project informations from jira and git. */
@@ -55,8 +46,6 @@ public class App {
 
                 controller.setInjectedVersionAV();
 
-                //controller.computeProportionIncremental( issuesAV );
-
                 controller.setAffectedAndInjectedVersionsP();
 
                 controller.classify();
@@ -72,11 +61,6 @@ public class App {
             ClassifierModel controller = new ClassifierModel();
             controller.evaluateSamplingModified();
         }
-
-        else{
-            return;
-        }
-
     }
 
 }
