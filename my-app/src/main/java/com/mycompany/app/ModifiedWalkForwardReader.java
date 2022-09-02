@@ -48,13 +48,14 @@ public class ModifiedWalkForwardReader {
     
     public void getDatasetSize() throws IOException , FileNotFoundException {
         int lines = 0;
-        while( this.br.readLine() != null ){
+        String l;
+        while( (l = this.br.readLine()) != null ){
             lines ++;
         }
         if( lines > 2 ){
             this.SIZE = lines -1;
         }
-        this.STEP = (int) Math.floor( this.SIZE / this.STEPS );
+        this.STEP = (int) Math.floor( (double) this.SIZE / this.STEPS );
         this.br = new BufferedReader( new FileReader( path ) );
     }
 

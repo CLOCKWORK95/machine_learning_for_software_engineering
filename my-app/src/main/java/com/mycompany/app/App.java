@@ -1,4 +1,5 @@
 package com.mycompany.app;
+import java.util.Scanner; 
 import java.io.File;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -27,10 +28,12 @@ public class App {
 
     String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" /*,"/home/gianmarco/Scrivania/ML_4_SE/storm/.git"*/};
 
-        int condition = 1;
+        Scanner sc= new Scanner(System.in);    
+        System.out.print("\n\nDATASET CREATION                    -   0\nPREDICTORS TRAINING AND EVALUATION  -   1\nEnter the operation code : ");  
+        int opcode= sc.nextInt(); 
 
         /*  This block of code implements the csv creation by merging project informations from jira and git. */
-        if ( condition == 0 ){
+        if ( opcode == 0 ){
 
             for ( int i = 0; i < projectNames.length ; i ++ ){
 
@@ -65,9 +68,13 @@ public class App {
         }
 
         /*  This block of code implements the training of classifiers models and returns their evaluation metrics. */
-        if ( condition == 1 ){
+        else if ( opcode == 1 ){
             ClassifierModel controller = new ClassifierModel();
             controller.evaluateSamplingModified();
+        }
+
+        else{
+            return;
         }
 
     }

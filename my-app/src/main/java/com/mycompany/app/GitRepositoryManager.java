@@ -273,8 +273,9 @@ public class GitRepositoryManager {
 
     public int getLoc( String fileText ) {
         int lines = 0;
+        String l;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
-            while ( reader.readLine() != null ) lines++;
+            while ( (l = reader.readLine()) != null ) lines++;
         } catch ( IOException e ) {
             e.printStackTrace();
         }
