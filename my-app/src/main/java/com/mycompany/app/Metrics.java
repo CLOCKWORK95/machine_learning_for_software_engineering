@@ -33,28 +33,28 @@ public class Metrics {
     public void setBUGGYNESS(String buggyness) {
         this.buggyness = buggyness;
     }
-    public int getMAX_CHANGE_SET() {
+    public int getMaxChangeSetSize() {
         return maxChangeSet;
     }
-    public void setMAX_CHANGE_SET(int maxChangeSet) {
+    public void setMaxChangeSetSize(int maxChangeSet) {
         this.maxChangeSet = maxChangeSet;
     }
-    public int getAVG_CHANGE_SET() {
+    public int getAvgChangeSetSize() {
         return avgChangeSet;
     }
-    public void setAVG_CHANGE_SET(int avgChangeSet) {
+    public void setAvgChangeSetSize(int avgChangeSet) {
         this.avgChangeSet = avgChangeSet;
     }
-    public int getAVG_LOC_ADDED() {
+    public int getAvgLocAdded() {
         return avgLocAdded;
     }
-    public void setAVG_LOC_ADDED(int avgLocAdded) {
+    public void setAvgLocAdded(int avgLocAdded) {
         this.avgLocAdded = avgLocAdded;
     }
-    public int getMAX_LOC_ADDED() {
+    public int getMaxLocAdded() {
         return maxLocAdded;
     }
-    public void setMAX_LOC_ADDED(int maxLocAdded) {
+    public void setMaxLocAdded(int maxLocAdded) {
         this.maxLocAdded = maxLocAdded;
     }
     public int getCHURN() {
@@ -69,10 +69,10 @@ public class Metrics {
     public void setAGE(int age) {
         this.age = age;
     }
-    public int getLOC_TOUCHED(){
+    public int getLocTouched(){
         return this.locTouched;
     }
-    public void setLOC_TOUCHED( int locTouched ){
+    public void setLocTouched( int locTouched ){
         this.locTouched = locTouched;
     }
     public int getLOC() {
@@ -130,9 +130,9 @@ public class Metrics {
         // Sum up all CHURN (loc added - loc deleted) within the release.
         this.churn += oldMetrics.getCHURN();
         // Sum up all LOC TOUCHED within the release.
-        this.locTouched += oldMetrics.getLOC_TOUCHED();
+        this.locTouched += oldMetrics.getLocTouched();
         // Sum up all LOC ADDED within the release (average will be computed in a second time by dividing by NR).
-        this.avgLocAdded += oldMetrics.getAVG_LOC_ADDED();
+        this.avgLocAdded += oldMetrics.getAvgLocAdded();
         // Get the oldest version of this file within the release.
         if ( oldMetrics.getAGE() > this.age ){
             this.age = oldMetrics.getAGE();
@@ -140,14 +140,14 @@ public class Metrics {
         // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
         this.loc += oldMetrics.getLOC();
         // Update MAX LOC ADDED only if it is greater than the max loc added reached by previous commits within the release.
-        if (!( this.maxLocAdded > oldMetrics.getMAX_LOC_ADDED())){
-            this.maxLocAdded = oldMetrics.getMAX_LOC_ADDED();
+        if (!( this.maxLocAdded > oldMetrics.getMaxLocAdded())){
+            this.maxLocAdded = oldMetrics.getMaxLocAdded();
         }
         // Sum up all CHANGE SET SIZE over commits within the release (average will be computed in a second time by dividing by NR).
-        this.avgChangeSet += oldMetrics.getAVG_CHANGE_SET();
+        this.avgChangeSet += oldMetrics.getAvgChangeSetSize();
         // Update MAX CHANGE SET only if it is greater than the max chg set reached by previous commits within the release.
-        if (!( this.maxChangeSet> oldMetrics.getMAX_CHANGE_SET())){
-            this.maxChangeSet = oldMetrics.getMAX_CHANGE_SET();
+        if (!( this.maxChangeSet> oldMetrics.getMaxChangeSetSize())){
+            this.maxChangeSet = oldMetrics.getMaxChangeSetSize();
         }
         // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
         this.numImports += oldMetrics.getNumImports();
