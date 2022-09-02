@@ -140,12 +140,15 @@ public class IssueLifeCycleManager{
         // a RevWalk allows to walk over commits based on some filtering that is defined
         int stop = 0;
 
-        ProgressBar pb = new ProgressBar("SCANNING TICKET", this.issues.size()); 
+        ProgressBar pb = new ProgressBar("SCANNING TICKETS", this.issues.size()); 
         pb.start();
 
+        
         for ( IssueObject issue : this.issues ){
             
             pb.step();
+
+            int declaredFV = issue.getFv();
 
             try ( RevWalk revWalk = new RevWalk( this.gitRepoManager.getRepository()) ) {
 
@@ -156,17 +159,18 @@ public class IssueLifeCycleManager{
                 }
                 
                 for( RevCommit commit : revWalk ) {
-                    LocalDate commitLocalDate = commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    int version = getVersionFromLocalDate( commitLocalDate );
-                    
-                    // The following is important : Jira could be not consistent in FV!!! Git has the truth!!!
-                    if ( issue.getFv() < version )  issue.setFv( version ); 
                     try{
                         // if the commit has not a parent one just skip it (it would be impossible to retrieve some metrics!!)
                         RevCommit checkparent = commit.getParent(0);
                     } catch ( ArrayIndexOutOfBoundsException e ){
                         continue;
                     }
+                    LocalDate commitLocalDate = commit.getCommitterIdent().getWhen().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    int version = getVersionFromLocalDate( commitLocalDate );
+                    
+                    // The following is important : Jira could be not consistent in FV!!! Git has the truth!!!
+                    if ( (issue.getFv() < version) )  issue.setFv( version ); 
+                   
                     CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
                     issue.append( commitObject );
                     
@@ -266,6 +270,7 @@ public class IssueLifeCycleManager{
     }
 
 
+    /*  This method is used to remove all commits related to files in a format different from ".java". */
     public void removeCommitsWithoutJavaExtension(){
         for ( IssueObject issue : this.issues ){
             issue.clean();
@@ -273,6 +278,7 @@ public class IssueLifeCycleManager{
     }
 
 
+    /*  Computes the average of of all entries in the input double arraylist */
     public double average( ArrayList<Double> array ){
         double avg = 0.0;
         double sum = 0.0;
@@ -284,53 +290,63 @@ public class IssueLifeCycleManager{
     }
 
 
-    public void computeProportionIncremental( ArrayList<IssueObject> issues ){
+    /*  ------ PROPORTION INCREMENT ------
+        This method computes the value of P for every entry of the input array of issue objects.
+        After that, the mean value is computed and returned.
+        The input array should contain all issues having FV smaller than the issue for which 
+        the value of P is going to be computed (this is the implementation of PROPORTION - INCREMENT)   */
+    public int computeProportionIncremental( ArrayList<IssueObject> filteredIssues ){
         ArrayList<Double> proportions = new ArrayList<>();
-        ArrayList<Double> OVFVDistances = new ArrayList<>();
-
-        for ( IssueObject issue : issues ){
+        for ( IssueObject issue : filteredIssues ){
             if ( !( issue.getOv() == issue.getFv() ) ) {
                 double fv = (double) issue.getFv();
                 double ov = (double) issue.getOv();
                 double iv = (double) issue.getIv();
                 double p = ( fv - iv )/( fv - ov );
                 proportions.add( p );  
-                OVFVDistances.add(fv-ov);
             }
         }
-        this.p = average( proportions );
-        this.avgDistanceOVFV = average(OVFVDistances);
+        return (int) average( proportions );
     }
 
-
-    public void setAffectedAndInjectedVersionsP( ArrayList<IssueObject> issues ){
-        for ( IssueObject issue : issues ){
-            int fv = issue.getFv();
-            int ov = issue.getOv();
-            int P = (int) this.p;
+    /*  This Method estimates IV (and set AVs) for all issues without declared AVs,
+        using Proportion Increment algorithm.   */
+    public void setAffectedAndInjectedVersionsP(){
+        for ( IssueObject targetIssue : issuesWithoutAffectedVersions ){
+            int fv = targetIssue.getFv();
+            int ov = targetIssue.getOv();
+            List<IssueObject> filteredIssues = issuesWithAffectedVersions.stream()
+                .filter(issue -> issue.getFv() <= fv)
+                .collect(Collectors.toList());
+            int P = computeProportionIncremental(new ArrayList<IssueObject>(filteredIssues));
             if ( fv == ov ) { 
-                // IS THIS CORRECT? MAYBE IN THIS CASE I JUST SHOULD DELETE THE ISSUE? 
-                // CAUSE I AM ACTUALLY APPLYING PROPORTION RIGHT (IN THE ELSE BLOCK)!
-                issue.setIv( ( fv - ( avgDistanceOVFV * P ) ) );
+                // The following formula is an approximation of the correct one (the one in the else block). 
+                targetIssue.setIv( ( fv - ( 1 * P ) ) );
+                continue;
             } else{
-                issue.setIv( ( fv - ( ( fv - ov ) * P ) ) );
+                targetIssue.setIv( ( fv - ( ( fv - ov ) * P ) ) );
             }
-            int minAVValue = issue.getIv();
-            int maxAVValue = ( issue.getFv() - 1 );
+            int minAVValue = targetIssue.getIv();
+            int maxAVValue = ( targetIssue.getFv() - 1 );
             ArrayList<Integer> avs = new ArrayList<>( IntStream.rangeClosed(minAVValue, maxAVValue).boxed().collect(Collectors.toList()) );
-            issue.setAvs( avs );
+            targetIssue.setAvs( avs );
         }
     }
 
 
-    public void classify( ArrayList<IssueObject> issues ){
-        for ( IssueObject issue : issues ){
+    /* This Method is used to set the buggyness of all considered classes to "Yes" or "No". */
+    public void classify(){
+        for ( IssueObject issue : issuesWithAffectedVersions ){
+            issue.classify();
+        }
+        for ( IssueObject issue : issuesWithoutAffectedVersions ){
             issue.classify();
         }
     }
 
 
     public void populateDatasetMapAndWriteToCSV() throws IOException{
+        this.datasetBuilder.initiateFileDataset();
         this.datasetBuilder.populateFileDataset(issuesWithAffectedVersions);
         this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
         this.datasetBuilder.writeToCSV(this.projectName);

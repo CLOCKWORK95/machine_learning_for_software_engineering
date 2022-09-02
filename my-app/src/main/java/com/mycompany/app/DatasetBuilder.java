@@ -6,13 +6,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.collections4.map.LinkedMap;
 import org.apache.commons.collections4.map.MultiKeyMap;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.util.stream.Stream;
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class DatasetBuilder {
 
@@ -29,6 +36,12 @@ public class DatasetBuilder {
 
 	private String 							path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
 
+	private String 							project_dir = "/home/gianmarco/Scrivania/ML_4_SE";
+
+	private String							FILE_EXTENSION = ".java";
+
+	public static final String USER_DIR = "user.dir";
+
     //------------------------------------- Builders ---------------------------------------------
 
     public DatasetBuilder( String projectName ){
@@ -42,6 +55,56 @@ public class DatasetBuilder {
 	}
 
     //------------------------------------- Methods ----------------------------------------------
+
+
+	/*  This Method is used to initialize (with all files of the project) 
+		the Multi Key Map representing the dataset to be created. */
+    public void initiateFileDataset() throws IOException{
+
+		Metrics newMetrics = new Metrics();
+		newMetrics.setNR(1);
+		newMetrics.setAGE(0);
+		newMetrics.setCHURN(0);
+		newMetrics.appendAuthor("");
+		newMetrics.setLOC_TOUCHED(0);
+		newMetrics.setMAX_LOC_ADDED(0);
+		newMetrics.setLOC(0);
+		newMetrics.setAVG_LOC_ADDED(0);
+		newMetrics.setAVG_CHANGE_SET(0);
+		newMetrics.setMAX_CHANGE_SET(0);
+		newMetrics.setNumImports(0);
+		newMetrics.setNumComments(0);
+		newMetrics.setBUGGYNESS("No");
+
+		// Get all the file in the repo folder
+		try (Stream<File> fileStream = Files.walk(Paths.get(project_dir + "/" + projectName + "/"))
+		.filter(Files::isRegularFile).map(Path::toFile)){
+
+			List<File> filesInFolder = fileStream.collect(Collectors.toList());
+
+			// For each file in the folder that ends with .java...
+			for (File i : filesInFolder) {
+				if (i.toString().endsWith(FILE_EXTENSION)) {
+
+					// ... put the pair (version, filePath) in the dataset map
+					for (int j = 1; j < (lastVersion) + 1; j++) {
+						putEmptyRecord(j, i.toString().replace(
+								project_dir + "/" + projectName + "/",""), newMetrics);
+					}
+				}
+			}
+		}
+	}
+
+
+	public void putEmptyRecord(int version, String filepath, Metrics emptyMetrics){
+		emptyMetrics.setFilepath(filepath);
+		emptyMetrics.setVersion(version);
+		System.out.println("NEW EMPTY RECORD!!");
+		fileDataset.put( version, filepath, emptyMetrics );
+	}
+        
+       
 
     /*  This Method is used to populate the  Multi Key Map representing the dataset to be created. */
     public void populateFileDataset( ArrayList<IssueObject> issues ){

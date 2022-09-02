@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.attributeSelection.GreedyStepwise;
 import weka.classifiers.CostMatrix;
+import weka.classifiers.trees.J48;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
@@ -106,7 +107,7 @@ public class ClassifierModel {
 			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
 
 				String 						projectName = this.projects[j];
-				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( 10, path_to_dir + "output/" + projectName + "_dataset.csv" );
+				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( limits[j], path_to_dir + "output/" + projectName + "_dataset.csv" );
 				int 						STEPS = reader.getSteps();
 				
 				// Append the first line of the evaluation results file.
@@ -507,16 +508,21 @@ public class ClassifierModel {
 		IBk classifierIBk = new IBk();
 		RandomForest classifierRF = new RandomForest();
 		NaiveBayes classifierNB = new NaiveBayes();
+		CostSensitiveClassifier classifierCS = new CostSensitiveClassifier();
 
 		int numAttrNoFilter = training.numAttributes();
 		training.setClassIndex(numAttrNoFilter - 1);
 		testing.setClassIndex(numAttrNoFilter - 1);
 
-		// Build the classifier
+		// Build the classifiers
 		try {
 			classifierNB.buildClassifier(training);
 			classifierRF.buildClassifier(training);
 			classifierIBk.buildClassifier(training);
+			
+			classifierCS.setClassifier(new J48());
+			classifierCS.setCostMatrix(createCostMatrix(10, 1));
+			classifierCS.buildClassifier(training);
 		} catch (Exception e) {
 			throw new SamplingException("Error building the classifier.");
 		}
@@ -524,7 +530,7 @@ public class ClassifierModel {
 		Evaluation eval;
 		try {
 
-			// NO SAMPLING
+			// NO SAMPLING --------------------------------------------------------------
 			eval = new Evaluation( testing );
 			eval = applyFilterForSampling(null, eval, training, testing, classifierRF);
 			addResult(eval, result, "RF", NO_SAMPLING, featureSelection);
@@ -537,7 +543,14 @@ public class ClassifierModel {
 			eval = applyFilterForSampling( null, eval, training, testing, classifierNB );
 			addResult( eval, result, "NB", NO_SAMPLING, featureSelection );
 
-			// UNDER SAMPLING the Majority Class.
+			// Evaluate the Cost Sensitive Classifier
+			eval = new Evaluation(testing, classifierCS.getCostMatrix());
+			eval = applyFilterForSampling(null, eval, training, testing, classifierCS);
+			addResult(eval, result, "Cost Sensitive", NO_SAMPLING, featureSelection);
+			//-----------------------------------------------------------------------------
+
+
+			// UNDER SAMPLING the Majority Class ------------------------------------------
 			FilteredClassifier fc = new FilteredClassifier();
 			SpreadSubsample  underSampling = new SpreadSubsample();
 			underSampling.setInputFormat( training );
@@ -557,7 +570,15 @@ public class ClassifierModel {
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
 			addResult(eval, result, "NB", UNDER_SAMPLING, featureSelection);
 
-			// OVER SAMPLING the Minority class.
+			// Evaluate the Cost Sensitive Classifier
+			eval = new Evaluation(testing, classifierCS.getCostMatrix());
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierCS);
+			addResult(eval, result, "Cost Sensitive", UNDER_SAMPLING, featureSelection);
+			//-----------------------------------------------------------------------------
+
+
+
+			// OVER SAMPLING the Minority class--------------------------------------------
 			fc = new FilteredClassifier();
 			Resample  overSampling = new Resample();
 			overSampling.setInputFormat( training );
@@ -579,7 +600,14 @@ public class ClassifierModel {
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
 			addResult(eval, result, "NB", OVER_SAMPLING, featureSelection);
 
-			// SMOTE
+			// Evaluate the Cost Sensitive Classifier
+			eval = new Evaluation(testing, classifierCS.getCostMatrix());
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierCS);
+			addResult(eval, result, "Cost Sensitive", OVER_SAMPLING, featureSelection);
+			//-----------------------------------------------------------------------------
+
+
+			// SMOTE-----------------------------------------------------------------------
 			fc = new FilteredClassifier();
 			SMOTE smote = new SMOTE();
 			smote.setInputFormat( training );
@@ -598,26 +626,11 @@ public class ClassifierModel {
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
 			addResult(eval, result, "NB", SMOTE, featureSelection);
 
-			/*
-			// COST SENSITIVE EVALUATION
-			fc = new FilteredClassifier();
-			CostMatrix costMatrix = new CostMatrix( 2 );
-			
-			fc.setFilter( smote );
-
-			// Evaluate the three classifiers
-			eval = new Evaluation( testing );	
-			eval = applyFilterForSampling(fc, eval, training, testing, classifierRF);
-			addResult(eval, result, "RF", SMOTE, featureSelection);
-
-			eval = new Evaluation( testing );
-			eval = applyFilterForSampling(fc, eval, training, testing, classifierIBk);
-			addResult(eval, result, "IBk", SMOTE, featureSelection);
-
-			eval = new Evaluation( testing );
-			eval = applyFilterForSampling(fc, eval, training, testing, classifierNB);
-			addResult(eval, result, "NB", SMOTE, featureSelection); */
-
+			// Evaluate the Cost Sensitive Classifier
+			eval = new Evaluation(testing, classifierCS.getCostMatrix());
+			eval = applyFilterForSampling(fc, eval, training, testing, classifierCS);
+			addResult(eval, result, "Cost Sensitive", SMOTE, featureSelection);
+			//-----------------------------------------------------------------------------
 
 		} catch ( Exception e ) {
 			throw new SamplingException("Errore nell'applicazione del sampling.");
@@ -626,6 +639,17 @@ public class ClassifierModel {
 		return result;
 
 
+	}
+
+
+
+	private CostMatrix createCostMatrix(double weightFalsePositive, double weightFalseNegative) {
+		CostMatrix costMatrix = new CostMatrix(2);
+		costMatrix.setCell(0, 0, 0.0);
+		costMatrix.setCell(1, 0, weightFalsePositive);
+		costMatrix.setCell(0, 1, weightFalseNegative);
+		costMatrix.setCell(1, 1, 0.0);
+		return costMatrix;
 	}
 
 
