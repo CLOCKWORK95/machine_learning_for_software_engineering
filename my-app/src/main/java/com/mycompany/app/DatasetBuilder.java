@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
 import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.collections4.map.LinkedMap;
@@ -19,6 +18,7 @@ import java.util.stream.Stream;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
 
 
 public class DatasetBuilder {
@@ -26,21 +26,25 @@ public class DatasetBuilder {
     //------------------------------------ Attributes --------------------------------------------
 
     // Dataset as a MultiKeyMap with key :<version,filepath> and value <metrics>
-	private MultiKeyMap                     fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap() );
+	private MultiKeyMap 									fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap() );
 
-    private Multimap<LocalDate,String>      versionMap;
+	private static 	Logger 									logger = Logger.getLogger(ClassifierModel.class.getName());
 
-    private int                             lastVersion;
+    private Multimap<LocalDate,String>      				versionMap;
 
-	private String							projectName;
+    private int                             				lastVersion;
 
-	private String 							path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
+	private String											projectName;
 
-	private String 							project_dir = "/home/gianmarco/Scrivania/ML_4_SE";
+	private static final String								PATH_TO_OUTPUTDIR = getOutputDirPath();
 
-	private String							FILE_EXTENSION = ".java";
+	private static final String								DATASET_FILE_FORMAT = "_dataset.csv";
 
-	public static final String USER_DIR = "user.dir";
+	private static final String 							PROJECT_DIR = "/home/gianmarco/Scrivania/ML_4_SE";
+
+	private static final String								FILE_EXTENSION = ".java";
+
+	private static final String 							USER_DIR = "user.dir";
 
     //------------------------------------- Builders ---------------------------------------------
 
@@ -51,10 +55,18 @@ public class DatasetBuilder {
 	public void setVersionMap( Multimap<LocalDate,String> versionMap ){
 		this.versionMap = versionMap;
 		this.lastVersion = (versionMap.size()/2)/2;
-		System.out.println( this.lastVersion );
 	}
 
     //------------------------------------- Methods ----------------------------------------------
+
+	public static String getCurrentDirectory() {
+		return System.getProperty(USER_DIR);
+	}
+
+
+	public static String getOutputDirPath(){
+		return getCurrentDirectory() + "/src/main/java/com/mycompany/app/output/";
+	}
 
 
 	/*  This Method is used to initialize (with all files of the project) 
@@ -77,7 +89,7 @@ public class DatasetBuilder {
 		newMetrics.setBUGGYNESS("No");
 
 		// Get all the file in the repo folder
-		try (Stream<File> fileStream = Files.walk(Paths.get(project_dir + "/" + projectName + "/"))
+		try (Stream<File> fileStream = Files.walk(Paths.get(PROJECT_DIR + "/" + projectName + "/"))
 		.filter(Files::isRegularFile).map(Path::toFile)){
 
 			List<File> filesInFolder = fileStream.collect(Collectors.toList());
@@ -89,7 +101,7 @@ public class DatasetBuilder {
 					// ... put the pair (version, filePath) in the dataset map
 					for (int j = 1; j < (lastVersion) + 1; j++) {
 						putEmptyRecord(j, i.toString().replace(
-								project_dir + "/" + projectName + "/",""), newMetrics);
+								PROJECT_DIR + "/" + projectName + "/",""), newMetrics);
 					}
 				}
 			}
@@ -100,7 +112,7 @@ public class DatasetBuilder {
 	public void putEmptyRecord(int version, String filepath, Metrics emptyMetrics){
 		emptyMetrics.setFilepath(filepath);
 		emptyMetrics.setVersion(version);
-		System.out.println("NEW EMPTY RECORD!!");
+		logger.info("NEW EMPTY RECORD!!");
 		fileDataset.put( version, filepath, emptyMetrics );
 	}
         
@@ -132,11 +144,11 @@ public class DatasetBuilder {
 					newMetrics.setNumComments(file.getNumComments());
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
-						System.out.println("NEW entry!");
+						logger.info("NEW entry!");
                         fileDataset.put( version, filepath, newMetrics );
                     } else{
                         Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
-						System.out.println("OLD entry!");
+						logger.info("OLD entry!");
                         newMetrics.update( oldMetrics );
                         fileDataset.put( version, filepath, newMetrics );
                     }
@@ -149,7 +161,7 @@ public class DatasetBuilder {
 	public void writeToCSV( String projectName ) throws IOException {
 
 		// Set the name of the file
-		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + "_dataset.csv" ) ) {
+		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ) {
 
 			/*	
 			 * Metrics Data Structure

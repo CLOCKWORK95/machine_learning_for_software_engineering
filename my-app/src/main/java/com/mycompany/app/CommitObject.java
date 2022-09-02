@@ -1,12 +1,10 @@
 package com.mycompany.app;
-import java.util.*;
+import java.util.List;
 import java.util.ArrayList;
 import org.eclipse.jgit.revwalk.RevCommit;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.errors.MissingObjectException;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import java.io.IOException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 
@@ -28,7 +26,7 @@ public class CommitObject{
 
     // ------------------------------ Builders ----------------------------------
     
-    public CommitObject( RevCommit commit, IssueObject issue, int version, GitRepositoryManager gitRepoManager ) throws IOException, InvalidRemoteException, GitAPIException{
+    public CommitObject( RevCommit commit, IssueObject issue, int version, GitRepositoryManager gitRepoManager ) throws IOException, GitAPIException{
         this.issue =            issue;
         this.commit =           commit;
         this.version =          version;
@@ -62,7 +60,10 @@ public class CommitObject{
     public int getVersion(){
         return this.version;
     }
-    public ArrayList<FileObject> getFiles(){
+    public RevCommit getParent(){
+        return this.parent;
+    }
+    public List<FileObject> getFiles(){
         return this.files;
     }
     public String getFullMessage(){
@@ -79,7 +80,7 @@ public class CommitObject{
         this.files.add( file );
     }
 
-    public void fileManagementFromFilepaths() throws IOException, InvalidRemoteException, GitAPIException{
+    public void fileManagementFromFilepaths() throws IOException, GitAPIException{
         // To be continued... with metrics!!!
         ArrayList<String> filepaths = this.gitRepoManager.getCommitChangedFiles( this.commit );
         for ( String filepath : filepaths ){
@@ -93,7 +94,7 @@ public class CommitObject{
     }
 
 
-    public void fileManagement() throws IOException, InvalidRemoteException, GitAPIException{
+    public void fileManagement() throws IOException, GitAPIException{
         this.files = this.gitRepoManager.getCommitChangedFilesWithMetrics( this );
     }
 
