@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import java.io.IOException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
 
 public class CommitObject{
 

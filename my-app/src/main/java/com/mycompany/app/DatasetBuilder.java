@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 import java.util.TreeMap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.collections4.MapIterator;
@@ -26,9 +27,9 @@ public class DatasetBuilder {
     //------------------------------------ Attributes --------------------------------------------
 
     // Dataset as a MultiKeyMap with key :<version,filepath> and value <metrics>
-	private MultiKeyMap 									fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap() );
+	private MultiKeyMap<MultiKey<Object>,Metrics> 			fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap() );
 
-	private static 	Logger 									logger = Logger.getLogger(ClassifierModel.class.getName());
+	private static 	Logger 									logger = Logger.getLogger(DatasetBuilder.class.getName());
 
     private Multimap<LocalDate,String>      				versionMap;
 
@@ -69,6 +70,11 @@ public class DatasetBuilder {
 	}
 
 
+	public Multimap<LocalDate,String>  getVersionMap(){
+		return this.versionMap;
+	}
+
+
 	/*  This Method is used to initialize (with all files of the project) 
 		the Multi Key Map representing the dataset to be created. */
     public void initiateFileDataset() throws IOException{
@@ -97,11 +103,11 @@ public class DatasetBuilder {
 			// For each file in the folder that ends with .java...
 			for (File i : filesInFolder) {
 				if (i.toString().endsWith(FILE_EXTENSION)) {
-
+					
 					// ... put the pair (version, filePath) in the dataset map
 					for (int j = 1; j < (lastVersion) + 1; j++) {
-						putEmptyRecord(j, i.toString().replace(
-								PROJECT_DIR + "/" + projectName + "/",""), newMetrics);
+						MultiKey<Object> key = new MultiKey( j, i.toString().replace(PROJECT_DIR + "/" + projectName + "/",""));
+						putEmptyRecord(key, newMetrics);
 					}
 				}
 			}
@@ -109,17 +115,17 @@ public class DatasetBuilder {
 	}
 
 
-	public void putEmptyRecord(int version, String filepath, Metrics emptyMetrics){
-		emptyMetrics.setFilepath(filepath);
-		emptyMetrics.setVersion(version);
+	public void putEmptyRecord(MultiKey keys, Metrics emptyMetrics){
+		emptyMetrics.setVersion( (int) keys.getKey(0));
+		emptyMetrics.setFilepath( (String) keys.getKey(1));
 		logger.info("NEW EMPTY RECORD!!");
-		fileDataset.put( version, filepath, emptyMetrics );
+		fileDataset.put( keys, emptyMetrics );
 	}
         
        
 
     /*  This Method is used to populate the  Multi Key Map representing the dataset to be created. */
-    public void populateFileDataset( ArrayList<IssueObject> issues ){
+    public void populateFileDataset( List<IssueObject> issues ){
         int     version;
         String  filepath;
         for ( IssueObject issue : issues ){
@@ -145,12 +151,14 @@ public class DatasetBuilder {
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
 						logger.info("NEW entry!");
-                        fileDataset.put( version, filepath, newMetrics );
+						MultiKey key = new MultiKey(version,filepath);
+                        fileDataset.put( key, newMetrics );
                     } else{
                         Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
 						logger.info("OLD entry!");
                         newMetrics.update( oldMetrics );
-                        fileDataset.put( version, filepath, newMetrics );
+                        MultiKey key = new MultiKey(version,filepath);
+                        fileDataset.put( key, newMetrics );
                     }
                 }
             }
@@ -221,7 +229,7 @@ public class DatasetBuilder {
 			// Iterate over the dataset
 			while ( dataSetIterator.hasNext() ) {
 				dataSetIterator.next();
-				MultiKey key = (MultiKey) dataSetIterator.getKey();
+				MultiKey<Object> key = (MultiKey<Object>) dataSetIterator.getKey();
 
 				// Get the metrics list associated to the multikey
 				Metrics metrics = (Metrics) fileDataset.get(key.getKey(0), key.getKey(1));
