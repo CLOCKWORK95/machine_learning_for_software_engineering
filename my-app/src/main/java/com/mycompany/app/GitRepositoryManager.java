@@ -30,30 +30,26 @@ import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.diff.Edit;
 import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.revwalk.RevSort;
+import java.util.logging.Logger;
 
 
 
 public class GitRepositoryManager {
 
     // ------------------------------ Attributes -----------------------------
-
-    private String          projectName = "";
-    private String          repositoryPath = "";
-    private Repository      repository;
-    public final String     FILE_EXTENSION = ".java";
-    private Git             git;
-
+    private static final Logger 	logger = Logger.getLogger(GitRepositoryManager.class.getName());
+    private String                  projectName = "";
+    private String                  repositoryPath = "";
+    private Repository              repository;
+    public static final String      FILE_EXTENSION = ".java";
+    private Git                     git;
     // ------------------------------ Builders --------------------------------
-
-
     public GitRepositoryManager( String projectName, String repositoryPath ) throws IOException, InvalidRemoteException {
         this.projectName = projectName;
         this.repositoryPath = repositoryPath;
         this.repository = openJGitRepository();
         this.git = new Git( this.repository );
     }
-
-
     // ------------------------------ Setters --------------------------------
 
     public void setRepositoryPath( String repositoryPath ){
@@ -87,7 +83,7 @@ public class GitRepositoryManager {
 
     // This method returns a Repository instance from the path specified in 
     // private attribute repositoryPath.
-    public Repository openJGitRepository() throws IOException, InvalidRemoteException{
+    public Repository openJGitRepository() throws IOException{
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
         return builder.setGitDir( new File( this.repositoryPath ) )
                 .readEnvironment()  // scan environment GIT_* variables
@@ -96,7 +92,7 @@ public class GitRepositoryManager {
     }
 
 
-    public void cloneRepositoryFromUrl() throws InvalidRemoteException, TransportException, GitAPIException {
+    public void cloneRepositoryFromUrl() throws GitAPIException {
         Git.cloneRepository()
           .setURI("https://github.com/apache/" + this.projectName )
           .setDirectory(new File( this.repositoryPath )) 
@@ -110,9 +106,9 @@ public class GitRepositoryManager {
                 .setNewTree(prepareTreeParser( this.repository, newCommit ) )
                 .call();
 
-        System.out.println( "Found: " + diffs.size() + " differences" );
+        logger.info( "Found: " + diffs.size() + " differences" );
         for (DiffEntry diff : diffs) {
-            System.out.println("Diff: " + diff.getChangeType() + ": " +
+            logger.info("Diff: " + diff.getChangeType() + ": " +
                     (diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath()));
         }
     }
@@ -137,15 +133,16 @@ public class GitRepositoryManager {
     }
 
 
+
     public void commitChanges( RevCommit commit ) throws IOException, GitAPIException {
 
         final List<DiffEntry> diffs = this.git.diff()
                 .setOldTree(prepareTreeParser(openJGitRepository(), commit.getParent(0).getId().getName()))
                 .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
                 .call();
-        System.out.println("Found " + diffs.size() + " differences.");
+        logger.info("Found " + diffs.size() + " differences.");
         for (DiffEntry diff : diffs) {
-            System.out.println("Diff: " + diff.getChangeType() + ": " +
+            logger.info("Diff: " + diff.getChangeType() + ": " +
                     (diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath()));
         }
     }
@@ -153,7 +150,7 @@ public class GitRepositoryManager {
 
     /*  This Method is called to retrieve all files that have been modified, added or removed by a single commit.
         The method returns an array of file paths (String). */
-    public ArrayList<String> getCommitChangedFiles( RevCommit commit ) throws IOException, InvalidRemoteException, GitAPIException{
+    public List<String> getCommitChangedFiles( RevCommit commit ) throws IOException, GitAPIException{
         final List<DiffEntry> diffs = this.git.diff()
                 .setOldTree(prepareTreeParser(openJGitRepository(), commit.getParent(0).getId().getName()))
                 .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
@@ -171,51 +168,65 @@ public class GitRepositoryManager {
 
 
     
-    public ArrayList<FileObject> getCommitChangedFilesWithMetrics( CommitObject commitObject ) throws IOException, GitAPIException {
-        Git git = this.git;
-        RevCommit commit = commitObject.getCommit();
-        ArrayList<FileObject> files = new ArrayList<FileObject>();
-        DiffFormatter df = new DiffFormatter( DisabledOutputStream.INSTANCE );
-        df.setRepository( openJGitRepository() );
-        df.setDiffComparator( RawTextComparator.DEFAULT );
-        df.setDetectRenames( true );
-        final List<DiffEntry> diffs = git.diff()
+    public List<FileObject> getCommitChangedFilesWithMetrics( CommitObject commitObject ) throws IOException, GitAPIException {
+        Git                     g = this.git;
+        RevCommit               commit = commitObject.getCommit();
+        ArrayList<FileObject>   files = new ArrayList<>();
+        DiffFormatter           df = new DiffFormatter( DisabledOutputStream.INSTANCE );
+                                df.setRepository( openJGitRepository() );
+                                df.setDiffComparator( RawTextComparator.DEFAULT );
+                                df.setDetectRenames( true );
+        final List<DiffEntry>   diffs = g.diff()
                 .setOldTree(prepareTreeParser(openJGitRepository(), commit.getParent(0).getId().getName()))
                 .setNewTree(prepareTreeParser(openJGitRepository(), commit.getId().getName()))
                 .call();
+
         int changeSetSize = diffs.size();
-        int javafiles = 0;
+        
         for ( DiffEntry diff : diffs ) {
-            //String file_name = diff.getOldPath().equals(diff.getNewPath()) ? diff.getNewPath() : diff.getOldPath() + " -> " + diff.getNewPath();
-            int linesAdded = 0;
-            int linesDeleted = 0;
-            int linesReplaced = 0;
-            if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
-                javafiles ++;
-                String  filepath = diff.getNewPath();                          
-                String  fileText = getTextfromCommittedFile( commit, filepath );
-                int     fileAge = getFileAgeInWeeks( commit, filepath );
-                for ( Edit edit : df.toFileHeader( diff ).toEditList() ) {
-                    if ( edit.getBeginA() < edit.getEndA() && edit.getBeginB() < edit.getEndB() ){
-                        linesReplaced += edit.getEndB() - edit.getBeginB();
-                    }
-                    if ( edit.getBeginA() < edit.getEndA() && edit.getBeginB() == edit.getEndB() ){
-                        linesDeleted += edit.getEndA() - edit.getBeginA();
-                    }
-                    if ( edit.getBeginA() == edit.getEndA() && edit.getBeginB() < edit.getEndB() ){
-                        linesAdded += edit.getEndB() - edit.getBeginB();
-                    }
-                    
-                }
-                int     version = commitObject.getVersion();
-                int     loc = getLoc( fileText );
-                int     numImports = getNumImports(fileText);
-                int     numComments = getNumComments(fileText);
-                files.add( new FileObject(  filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced, 
-                                            changeSetSize, commitObject.getAuthorName(), numImports, numComments ) );
-            }       
+            files = (ArrayList<FileObject>) computeMetricsAndAppendFile(commitObject, files, diff, df, changeSetSize);      
         }
+
         df.close();
+        return files;
+    }
+
+
+
+    public List<FileObject> computeMetricsAndAppendFile(CommitObject commitObject, List<FileObject>files, DiffEntry diff, DiffFormatter df, int changeSetSize) throws IOException, InvalidRemoteException {
+
+        int linesAdded = 0;
+        int linesDeleted = 0;
+        int linesReplaced = 0;
+        RevCommit commit = commitObject.getCommit();
+
+        if ( diff.getNewPath().endsWith( FILE_EXTENSION ) ){
+            
+            String  filepath = diff.getNewPath();                          
+            String  fileText = getTextfromCommittedFile( commit, filepath );
+            int     fileAge = getFileAgeInWeeks( commit, filepath );
+
+            for ( Edit edit : df.toFileHeader( diff ).toEditList() ) {
+
+                if ( edit.getBeginA() < edit.getEndA() && edit.getBeginB() < edit.getEndB() ){
+                    linesReplaced += edit.getEndB() - edit.getBeginB();
+                }
+                if ( edit.getBeginA() < edit.getEndA() && edit.getBeginB() == edit.getEndB() ){
+                    linesDeleted += edit.getEndA() - edit.getBeginA();
+                }
+                if ( edit.getBeginA() == edit.getEndA() && edit.getBeginB() < edit.getEndB() ){
+                    linesAdded += edit.getEndB() - edit.getBeginB();
+                }
+                
+            }
+            int     version = commitObject.getVersion();
+            int     loc = getLoc( fileText );
+            int     numImports = getNumImports(fileText);
+            int     numComments = getNumComments(fileText);
+            files.add( new FileObject(  filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced, 
+                                        changeSetSize, commitObject.getAuthorName(), numImports, numComments ) );
+        }
+
         return files;
     }
 
@@ -223,10 +234,10 @@ public class GitRepositoryManager {
 
     public String getTextfromCommittedFile( RevCommit commit, String filename ) throws IOException, InvalidRemoteException {
         RevTree tree = commit.getTree();
-        Repository repository = openJGitRepository();
-        String file_text;
+        Repository repo = openJGitRepository();
+        String fileText;
         // now try to find a specific file
-        try (TreeWalk treeWalk = new TreeWalk(repository)) {
+        try (TreeWalk treeWalk = new TreeWalk(repo)) {
             treeWalk.addTree(tree);
             treeWalk.setRecursive(true);
             treeWalk.setFilter(PathFilter.create(filename));
@@ -234,20 +245,21 @@ public class GitRepositoryManager {
                 return "";
             }
             ObjectId objectId = treeWalk.getObjectId(0);
-            ObjectLoader loader = repository.open(objectId);
+            ObjectLoader loader = repo.open(objectId);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             loader.copyTo(stream);
-            file_text = stream.toString();
-            return file_text;
+            fileText = stream.toString();
+            return fileText;
         }
     }
 
 
 
-    public int getFileAgeInWeeks( RevCommit startCommit, String filename ) throws IOException, InvalidRemoteException {
-        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date_first_commit, date_current_commit;
-        int age;
+    public int getFileAgeInWeeks( RevCommit startCommit, String filename ) throws IOException {
+        
+        Date    dateFirstCommit,
+                dateCurrentCommit;
+        int     age;
         RevWalk revWalk = new RevWalk( this.repository );
         revWalk.markStart( revWalk.parseCommit( this.repository.resolve( startCommit.getName() ) ) );
         revWalk.setTreeFilter( PathFilter.create( filename ) );
@@ -255,11 +267,11 @@ public class GitRepositoryManager {
         revWalk.sort( RevSort.REVERSE, true );
         RevCommit commit = revWalk.next();
         if ( commit != null ){
-            date_first_commit = commit.getAuthorIdent().getWhen();
-            date_current_commit = startCommit.getAuthorIdent().getWhen();
-            long diffInMillies = Math.abs(date_current_commit.getTime() - date_first_commit.getTime());
-            long diff_in_days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-            age = (int) (diff_in_days/7);
+            dateFirstCommit = commit.getAuthorIdent().getWhen();
+            dateCurrentCommit = startCommit.getAuthorIdent().getWhen();
+            long diffInMillies = Math.abs(dateCurrentCommit.getTime() - dateFirstCommit.getTime());
+            long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            age = (int) (diffInDays/7);
             revWalk.close();
             return age;
         } else{
@@ -273,9 +285,8 @@ public class GitRepositoryManager {
 
     public int getLoc( String fileText ) {
         int lines = 0;
-        String l;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
-            while ( (l = reader.readLine()) != null ) lines++;
+            for ( String line = reader.readLine(); line != null; line = reader.readLine())  lines++;
         } catch ( IOException e ) {
             e.printStackTrace();
         }
@@ -303,9 +314,13 @@ public class GitRepositoryManager {
     public int getNumComments( String fileText ){
         int numComments = 0;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
-            for ( String line = reader.readLine(); line != null; line = reader.readLine()) {
-                if ( line.endsWith("}") || line.endsWith("{") || line.endsWith(";") ) continue;
-                else numComments ++;              
+            for ( String line = reader.readLine(); line != null; line = reader.readLine()) {   
+                if (    line.contains("//") || 
+                        line.contains("/*") || 
+                        line.contains("*/") || 
+                        !( line.endsWith("}") || line.endsWith("{") || line.endsWith(";") || line.equals("\n") || line.endsWith(")"))     ) {
+                            numComments ++;              
+                }     
             }         
         } catch ( IOException e ) {
             e.printStackTrace();

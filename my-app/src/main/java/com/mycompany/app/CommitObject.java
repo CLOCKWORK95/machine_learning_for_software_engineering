@@ -80,8 +80,7 @@ public class CommitObject{
     }
 
     public void fileManagementFromFilepaths() throws IOException, GitAPIException{
-        // To be continued... with metrics!!!
-        ArrayList<String> filepaths = this.gitRepoManager.getCommitChangedFiles( this.commit );
+        ArrayList<String> filepaths = (ArrayList<String>) this.gitRepoManager.getCommitChangedFiles( this.commit );
         for ( String filepath : filepaths ){
             String buggy = "Yes";
             if ( this.version >= this.issue.getFv() || this.version < this.issue.getIv() ){
@@ -94,7 +93,7 @@ public class CommitObject{
 
 
     public void fileManagement() throws IOException, GitAPIException{
-        this.files = this.gitRepoManager.getCommitChangedFilesWithMetrics( this );
+        this.files = (ArrayList<FileObject>) this.gitRepoManager.getCommitChangedFilesWithMetrics( this );
     }
 
 

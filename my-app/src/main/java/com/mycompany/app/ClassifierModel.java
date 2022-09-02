@@ -41,9 +41,12 @@ public class ClassifierModel {
 	private static final String 	ARF_EXC_MSG = "Some problems occurred while writing the arff file.";
 
 
+	
+
 	public static String getCurrentDirectory() {
 		return System.getProperty("user.dir");
 	}
+
 
 
 	public static String getOutputDirPath(){
@@ -640,7 +643,7 @@ public class ClassifierModel {
 	   	param classifierAbb, the abbreviation of the classifier
 	   	param sampling, the name of sampling technique
 	   	param featureSelection, the name of feature selection technique		*/ 
-	public void addResult(Evaluation eval, List<String> result, String classifierAbb, String sampling, String featureSelection) throws Exception {
+	public void addResult(Evaluation eval, List<String> result, String classifierAbb, String sampling, String featureSelection){
 		// Add the result to the List of instances metrics
 		result.add( getMetrics( eval,classifierAbb, sampling, featureSelection ) );
 
