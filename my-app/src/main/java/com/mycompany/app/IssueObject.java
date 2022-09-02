@@ -1,15 +1,5 @@
 package com.mycompany.app;
-
-import org.eclipse.jgit.revwalk.RevCommit;
 import java.util.ArrayList;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.api.Git;
-import java.io.IOException;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-
 
 public class IssueObject{
 
@@ -20,7 +10,6 @@ public class IssueObject{
     private String                      resolutionDate;
     private String                      creationDate;
     private ArrayList<String>           affectedVersions = null;
-    private ArrayList<String>           touchedFiles = null;
     private ArrayList<Integer>          avs;    // Affected Versions indexes
     private int                         iv;     // Injected Version  index
     private int                         ov;     // Opening Versions  index
@@ -29,23 +18,23 @@ public class IssueObject{
     // ------------------------------ Builders --------------------------------
 
     public IssueObject(){
-        this.commits = new ArrayList<CommitObject>();
-        this.affectedVersions = new ArrayList<String>();
+        this.commits = new ArrayList<>();
+        this.affectedVersions = new ArrayList<>();
     }
 
     public IssueObject( String ticketID ){
         this.ticketID = ticketID;
-        this.commits = new ArrayList<CommitObject>();
-        this.affectedVersions = new ArrayList<String>();
+        this.commits = new ArrayList<>();
+        this.affectedVersions = new ArrayList<>();
     }
 
     public IssueObject( String ticketID, String resolutionDate, String creationDate, ArrayList<String> affectedVersions ){
-        this.commits = new ArrayList<CommitObject>();
+        this.commits = new ArrayList<>();
         this.ticketID = ticketID;
         this.resolutionDate = resolutionDate;
         this.creationDate = creationDate;
         this.affectedVersions = affectedVersions;
-        this.avs = new ArrayList<Integer>();
+        this.avs = new ArrayList<>();
     }
 
     // ------------------------------ Getters --------------------------------
