@@ -1,5 +1,6 @@
 package com.mycompany.app;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Metrics {
 
@@ -81,11 +82,11 @@ public class Metrics {
     public void setLOC(int loc) {
         this.loc = loc;
     }
-    public ArrayList<String> getAUTHORS() {
+    public List<String> getAUTHORS() {
         return authors;
     }
-    public void setAUTHORS( ArrayList<String> authors ) {
-        this.authors = authors;
+    public void setAUTHORS( List<String> authors ) {
+        this.authors = (ArrayList<String>) authors;
     }
     public int getNR() {
         return nr;
@@ -123,35 +124,42 @@ public class Metrics {
         /* Append this author to the list of authors who have worked at this file within the release.
            At the end, the size of this array will represent the total number of authors.*/
         if ( !oldMetrics.getAUTHORS().contains(this.authors.get(0)) ){
-            ArrayList<String> updateAuthors = oldMetrics.getAUTHORS();
+            ArrayList<String> updateAuthors = (ArrayList<String>) oldMetrics.getAUTHORS();
             updateAuthors.add( this.authors.get(0) );
             this.authors = updateAuthors;
-        } else { this.authors = oldMetrics.getAUTHORS(); }
+        } else { this.authors = (ArrayList<String>) oldMetrics.getAUTHORS(); }
         // Sum up all CHURN (loc added - loc deleted) within the release.
         this.churn += oldMetrics.getCHURN();
         // Sum up all LOC TOUCHED within the release.
         this.locTouched += oldMetrics.getLocTouched();
-        // Sum up all LOC ADDED within the release (average will be computed in a second time by dividing by NR).
+        // Sum up all LOC ADDED within the release (average will 
+        // be computed in a second time by dividing by NR).
         this.avgLocAdded += oldMetrics.getAvgLocAdded();
         // Get the oldest version of this file within the release.
         if ( oldMetrics.getAGE() > this.age ){
             this.age = oldMetrics.getAGE();
         }
-        // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
+        // Sum up all LOC reported for this file over all commits within 
+        // the release (average will be computed in a second time by dividing by NR).
         this.loc += oldMetrics.getLOC();
-        // Update MAX LOC ADDED only if it is greater than the max loc added reached by previous commits within the release.
-        if (!( this.maxLocAdded > oldMetrics.getMaxLocAdded())){
+        // Update MAX LOC ADDED only if it is greater than the max 
+        // loc added reached by previous commits within the release.
+        if (this.maxLocAdded <= oldMetrics.getMaxLocAdded()){
             this.maxLocAdded = oldMetrics.getMaxLocAdded();
         }
-        // Sum up all CHANGE SET SIZE over commits within the release (average will be computed in a second time by dividing by NR).
+        // Sum up all CHANGE SET SIZE over commits within the release 
+        // (average will be computed in a second time by dividing by NR).
         this.avgChangeSet += oldMetrics.getAvgChangeSetSize();
-        // Update MAX CHANGE SET only if it is greater than the max chg set reached by previous commits within the release.
-        if (!( this.maxChangeSet> oldMetrics.getMaxChangeSetSize())){
+        // Update MAX CHANGE SET only if it is greater than the max 
+        // chg set reached by previous commits within the release.
+        if (this.maxChangeSet <= oldMetrics.getMaxChangeSetSize()){
             this.maxChangeSet = oldMetrics.getMaxChangeSetSize();
         }
-        // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
+        // Sum up all LOC reported for this file over all commits within 
+        // the release (average will be computed in a second time by dividing by NR).
         this.numImports += oldMetrics.getNumImports();
-        // Sum up all LOC reported for this file over all commits within the release (average will be computed in a second time by dividing by NR).
+        // Sum up all LOC reported for this file over all commits within the 
+        // release (average will be computed in a second time by dividing by NR).
         this.numComments += oldMetrics.getNumComments();
 
     }

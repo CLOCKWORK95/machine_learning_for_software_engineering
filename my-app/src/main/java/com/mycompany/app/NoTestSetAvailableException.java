@@ -1,5 +1,4 @@
 package com.mycompany.app;
-import java.lang.Exception;
 
 public class NoTestSetAvailableException extends Exception {
 

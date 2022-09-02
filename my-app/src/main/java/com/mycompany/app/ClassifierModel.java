@@ -155,7 +155,6 @@ public class ClassifierModel {
 				csvWriter.flush();
 			}
 
-			// Flush the output file to disk
 		}
 	}
 

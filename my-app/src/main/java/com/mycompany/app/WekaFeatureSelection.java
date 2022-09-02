@@ -3,11 +3,8 @@ package com.mycompany.app;
 import weka.core.Instances;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.attributeSelection.GreedyStepwise;
-import weka.classifiers.Evaluation;
-import weka.classifiers.trees.RandomForest;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.AttributeSelection;
-import weka.core.converters.ConverterUtils.DataSource;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,6 +12,7 @@ import java.util.ArrayList;
 
 public class WekaFeatureSelection{
 
+	public WekaFeatureSelection(){};
 
 	public static List<Instances> featureSelection( Instances training, Instances testing ) throws Exception{
 		
@@ -34,8 +32,6 @@ public class WekaFeatureSelection{
 		
 		int numAttrNoFilter = training.numAttributes();
 		int numAttrFiltered = filteredTraining.numAttributes();	
-		System.out.println("No filter attr: "+ numAttrNoFilter);
-		System.out.println("Filtered attr: "+ numAttrFiltered);
 
 		List<Instances> datasets =  new ArrayList<>();
 		datasets.add( filteredTraining );
