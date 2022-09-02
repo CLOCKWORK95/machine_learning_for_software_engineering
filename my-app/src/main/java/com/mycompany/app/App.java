@@ -1,12 +1,6 @@
 package com.mycompany.app;
 import java.util.Scanner;
 import java.util.logging.Logger;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
-import java.io.IOException;
-import org.json.JSONException;
-
 
 public class App {
 

@@ -1,8 +1,6 @@
 package com.mycompany.app;
 
 import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import weka.core.converters.ConverterUtils.DataSource;
 import java.util.logging.Logger;
-import weka.attributeSelection.CfsSubsetEval;
-import weka.attributeSelection.GreedyStepwise;
 import weka.classifiers.CostMatrix;
 import weka.classifiers.trees.J48;
 import weka.classifiers.AbstractClassifier;
@@ -22,8 +18,6 @@ import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.RandomForest;
 import weka.classifiers.meta.CostSensitiveClassifier;
 import weka.core.Instances;
-import weka.filters.Filter;
-import weka.filters.supervised.attribute.AttributeSelection;
 import weka.filters.supervised.instance.Resample;
 import weka.filters.supervised.instance.SMOTE;
 import weka.filters.supervised.instance.SpreadSubsample;
@@ -32,15 +26,16 @@ public class ClassifierModel {
 
     private String[]        		projects = {/*"storm",*/ "bookkeeper"};
     private Integer[]       		limits = {/*14,*/8};
-	private final String    		TRAINING = "_training.arff";
-	private final String    		TESTING = "_testing.arff";
-    private String 					path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
+	private static final String    	TRAINING = "_training.arff";
+	private static final String    	TESTING = "_testing.arff";
+	private static final String		PATH_TO_OUTPUTDIR = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/";
+	private static final String		EVALUATION_FILE_FORMAT = "_evaluation.csv";
 	private static final String 	OVER_SAMPLING = "Over sampling";
 	private static final String 	UNDER_SAMPLING = "Under sampling";
 	private static final String 	SMOTE = "Smote";
 	private static final String 	NO_SAMPLING = "No sampling";
 	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
-	private String 					FEATURE_SELECTION = "False";
+	private final String 			FEATURE_SELECTION = "False";
 
 
 	public void evaluateSampling() throws Exception{
@@ -49,7 +44,7 @@ public class ClassifierModel {
 		for ( int j = 0; j < this.projects.length; j++ ) {
 
 			// Open the FileWriter for the output file
-			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
+			try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + this.projects[j]+ EVALUATION_FILE_FORMAT ) ) {
 				
 				// Iterate over the single version for the WalkForward technique...
 				for ( int i = 1; i < this.limits[j]; i++ ) {
@@ -73,9 +68,9 @@ public class ClassifierModel {
 					double percentageMajorityClass = 1 - ( (resultTraining.get(1) + resultTesting.get(1)) / (double)(resultTraining.get(0) + resultTesting.get(0)));
 
 					// Read the Datasource created before and get each dataset
-					DataSource  source1 = new DataSource( path_to_dir + "output/" + projects[j] + TRAINING);
+					DataSource  source1 = new DataSource( PATH_TO_OUTPUTDIR + projects[j] + TRAINING);
 					Instances   trainingSet = source1.getDataSet();
-					DataSource  source2 = new DataSource( path_to_dir + "output/" + projects[j] + TESTING);
+					DataSource  source2 = new DataSource( PATH_TO_OUTPUTDIR + projects[j] + TESTING);
 					Instances   testSet = source2.getDataSet();
 
 					// Apply sampling to the two datasets
@@ -83,16 +78,9 @@ public class ClassifierModel {
 					for (String result : samplingResult) {
 						csvWriter.append(projects[j] + "," + i  + "," + resultTraining.get(0) + "," + resultTesting.get(0) + "," + percentTraining  + "," + percentDefectTraining  + "," + percentDefectTesting +"," + result);
 					}
-
 				}
-
-				// Delete the temp file
-				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
-				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
 				csvWriter.flush();
 			}
-
-			// Flush the output file to disk
 		}
 	}
 
@@ -104,10 +92,10 @@ public class ClassifierModel {
 		for ( int j = 0; j < this.projects.length; j++ ) {
 
 			// Open the FileWriter for the output file
-			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
+			try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + this.projects[j]+ EVALUATION_FILE_FORMAT ) ) {
 
 				String 						projectName = this.projects[j];
-				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( limits[j], path_to_dir + "output/" + projectName + "_dataset.csv" );
+				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( limits[j], PATH_TO_OUTPUTDIR + projectName + "_dataset.csv" );
 				int 						STEPS = reader.getSteps();
 				
 				// Append the first line of the evaluation results file.
@@ -128,9 +116,9 @@ public class ClassifierModel {
 					double percentageMajorityClass = 1 - ( (resultTraining.get(1) + resultTesting.get(1)) / (double)(resultTraining.get(0) + resultTesting.get(0)));
 
 					// Read the Datasource created before and get each dataset
-					DataSource  source1 = new DataSource( path_to_dir + "output/" + projects[j] + TRAINING);
+					DataSource  source1 = new DataSource( PATH_TO_OUTPUTDIR + projects[j] + TRAINING);
 					Instances   trainingSet = source1.getDataSet();
-					DataSource  source2 = new DataSource( path_to_dir + "output/" + projects[j] + TESTING);
+					DataSource  source2 = new DataSource( PATH_TO_OUTPUTDIR + projects[j] + TESTING);
 					Instances   testSet = source2.getDataSet();
 					
 					if ( FEATURE_SELECTION.equals( "True" ) ) {
@@ -162,7 +150,7 @@ public class ClassifierModel {
 		for ( int j = 0; j < this.projects.length; j++ ) {
 
 			// Open the FileWriter for the output file
-			try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + this.projects[j]+ "_evaluation.csv" ) ) {
+			try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + this.projects[j]+ EVALUATION_FILE_FORMAT ) ) {
 
 				// Append the first line of the evaluation results file.
 				csvWriter.append("Dataset,#TrainingRelease,Classifier,Precision,Recall,AUC,Kappa,Accuracy\n");
@@ -181,9 +169,9 @@ public class ClassifierModel {
 					}
 
 					// Read the Datasource created before and get each dataset
-					DataSource  source1 = new DataSource( path_to_dir + "output/" + projects[j] + TRAINING);
+					DataSource  source1 = new DataSource( PATH_TO_OUTPUTDIR + projects[j] + TRAINING);
 					Instances   trainingSet = source1.getDataSet();
-					DataSource  source2 = new DataSource( path_to_dir + "output/" + projects[j] + TESTING);
+					DataSource  source2 = new DataSource( PATH_TO_OUTPUTDIR + projects[j] + TESTING);
 					Instances   testSet = source2.getDataSet();
 
 					// Get the number of attributes
@@ -221,8 +209,8 @@ public class ClassifierModel {
 				}
 
 				// Delete the temp file
-				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TESTING ));
-				//Files.deleteIfExists(Paths.get( path_to_dir + "output/" + projects[j] + TRAINING ));
+				//Files.deleteIfExists(Paths.get( PATH_TO_OUTPUTDIR + projects[j] + TESTING ));
+				//Files.deleteIfExists(Paths.get( PATH_TO_OUTPUTDIR + projects[j] + TRAINING ));
 				csvWriter.flush();
 			}
 
@@ -261,7 +249,7 @@ public class ClassifierModel {
 		ArrayList<Integer> counterList = new ArrayList<>();
 
 		// Create the output ARFF file (.arff)
-		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TRAINING ) ) {
+		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TRAINING ) ) {
 
 			// Append the static line of the ARFF file
 			csvWriter.append("@relation " + projectName + "\n\n");
@@ -281,7 +269,7 @@ public class ClassifierModel {
 			csvWriter.append("@data\n");
 
 			// Read the project dataset
-			try ( BufferedReader br = new BufferedReader( new FileReader( path_to_dir + "output/" + projectName + "_dataset.csv" ) ) ){ 
+			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + "_dataset.csv" ) ) ){ 
 
 				// Skip the first line (contains just column name)
 				String line = br.readLine();
@@ -321,7 +309,7 @@ public class ClassifierModel {
 		int counterBuggies = 0;
 		ArrayList<Integer> counterList = new ArrayList<>();
 		// Create the output ARFF file (.arff)
-		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TESTING ) ) {
+		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TESTING ) ) {
 
 			// Append the static line of the ARFF file
 			csvWriter.append("@relation " + projectName + "\n\n");
@@ -341,7 +329,7 @@ public class ClassifierModel {
 			csvWriter.append("@data\n");
 
 			// Read the project dataset
-			try ( BufferedReader br = new BufferedReader( new FileReader( path_to_dir + "output/" + projectName + "_dataset.csv" ) ) ){  
+			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + "_dataset.csv" ) ) ){  
 
 				// Skip the first line (contains just column name)
 				String line = br.readLine();
@@ -391,7 +379,7 @@ public class ClassifierModel {
 		int 	stepsDone = 1;
 
 		// Create the output ARFF file (.arff)
-		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TRAINING ) ) {
+		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TRAINING ) ) {
 
 			// Append the static line of the ARFF file
 			csvWriter.append("@relation " + projectName + "\n\n");
@@ -443,7 +431,7 @@ public class ClassifierModel {
 		bugs = 0;
 
 		// Create the output ARFF file (.arff) which will be used as TEST SET for the evaluation in the WalkForward iteration.
-		try ( FileWriter csvWriter = new FileWriter( path_to_dir + "output/" + projectName + TESTING ) ) {
+		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TESTING ) ) {
 
 			// Append the static line of the ARFF file
 			csvWriter.append("@relation " + projectName + "\n\n");
