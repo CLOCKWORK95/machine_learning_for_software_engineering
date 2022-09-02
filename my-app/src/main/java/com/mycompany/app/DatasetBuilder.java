@@ -143,7 +143,7 @@ public class DatasetBuilder {
                     newMetrics.setAGE( file.getAGE());
                     newMetrics.setCHURN(file.getCHURN());
                     newMetrics.appendAuthor(file.getAUTHOR());
-					newMetrics.setLOC_TOUCHED(file.getLOC_TOUCHED());
+					newMetrics.setLOC_TOUCHED(file.getLocTouched());
                     newMetrics.setMAX_LOC_ADDED(file.getLinesAdded());
                     newMetrics.setLOC(file.getLOC());
                     newMetrics.setAVG_LOC_ADDED(file.getLinesAdded());

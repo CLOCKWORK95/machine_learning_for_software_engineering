@@ -1,9 +1,4 @@
 package com.mycompany.app;
-import java.util.*;
-import java.util.ArrayList;
-import org.eclipse.jgit.revwalk.RevCommit;
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 public class FileObject{
 
@@ -14,12 +9,12 @@ public class FileObject{
     private String                  buggyness;
     private int                     linesAdded;
     private int                     linesDeleted;
-    private int                     LOC;
-    private int                     LOC_TOUCHED;
-    private int                     AGE;
-    private String                  AUTHOR;
-    private int                     CHURN;
-    private int                     CHANGE_SET_SIZE;
+    private int                     loc;
+    private int                     locTouched;
+    private int                     age;
+    private String                  author;
+    private int                     churn;
+    private int                     changeSetSize;
     private int                     numImports;
     private int                     numComments;
 
@@ -32,18 +27,18 @@ public class FileObject{
     }
 
 
-    public FileObject(  String filepath, int version, int AGE, int LOC, int linesAdded, int linesDeleted, int linesReplaced, 
-                        int changeSetSize, String AUTHOR, int numImports, int numComments ){
+    public FileObject(  String filepath, int version, int age, int loc, int linesAdded, int linesDeleted, int linesReplaced, 
+                        int changeSetSize, String author, int numImports, int numComments ){
         this.filepath = filepath;
         this.version = version;
-        this.AGE = AGE;
-        this.LOC = LOC;
-        this.LOC_TOUCHED = linesAdded + linesDeleted + linesReplaced;
+        this.age = age;
+        this.loc = loc;
+        this.locTouched = linesAdded + linesDeleted + linesReplaced;
         this.linesAdded = linesAdded;
         this.linesDeleted = linesDeleted;
-        this.CHURN = linesAdded - linesDeleted;
-        this.AUTHOR = AUTHOR;
-        this.CHANGE_SET_SIZE = changeSetSize;
+        this.churn = linesAdded - linesDeleted;
+        this.author = author;
+        this.changeSetSize = changeSetSize;
         this.numImports = numImports;
         this.numComments = numComments;
     }
@@ -72,22 +67,22 @@ public class FileObject{
         return this.buggyness;
     }
     public int getLOC(){
-        return this.LOC;
+        return this.loc;
     }
-    public int getLOC_TOUCHED(){
-        return this.LOC_TOUCHED;
+    public int getLocTouched(){
+        return this.locTouched;
     }
     public int getAGE(){
-        return this.AGE;
+        return this.age;
     }
     public int getCHURN() {
-        return this.CHURN;
+        return this.churn;
     }
     public int getChangeSetSize() {
-        return this.CHANGE_SET_SIZE;
+        return this.changeSetSize;
     }
     public String getAUTHOR() {
-        return this.AUTHOR;
+        return this.author;
     }
     public int getLinesAdded(){
         return this.linesAdded;
