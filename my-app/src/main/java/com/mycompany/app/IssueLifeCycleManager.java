@@ -1,9 +1,6 @@
 package com.mycompany.app;
 import java.util.*;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
-import org.eclipse.jgit.errors.MissingObjectException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import java.util.stream.*;
@@ -202,7 +199,7 @@ public class IssueLifeCycleManager{
         for ( IssueObject issue : this.issues ){           
             // If the current issue has not specified AVs it'll be appended to the array
             // that will be used to perform the Proportion Method.
-            if ( issue.getAffectedVersions().size() == 0 ){
+            if ( issue.getAffectedVersions().isEmpty() ){
                 this.issuesWithoutAffectedVersions.add( issue );
             }
             else{
@@ -253,7 +250,7 @@ public class IssueLifeCycleManager{
 
     /*  This Method is used to clean the issues array from all issue tickets that have no related commits. */
     public void removeIssuesWithoutCommits(){
-        issues.removeIf( issue -> issue.getCommits().isEmpty() );;
+        issues.removeIf( issue -> issue.getCommits().isEmpty() );
     }
 
 
@@ -275,6 +272,7 @@ public class IssueLifeCycleManager{
         avg = ( sum/( array.size() ) );
         return avg;
     }
+
 
 
     /*  ------ PROPORTION INCREMENT ------
@@ -323,6 +321,7 @@ public class IssueLifeCycleManager{
     }
 
 
+
     /* This Method is used to set the buggyness of all considered classes to "Yes" or "No". */
     public void classify(){
         for ( IssueObject issue : issuesWithAffectedVersions ){
@@ -332,6 +331,7 @@ public class IssueLifeCycleManager{
             issue.classify();
         }
     }
+
 
 
     public void populateDatasetMapAndWriteToCSV() throws IOException{
