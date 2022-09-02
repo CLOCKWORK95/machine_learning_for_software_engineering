@@ -33,20 +33,18 @@ public class IssueLifeCycleManager{
     private GitRepositoryManager            gitRepoManager;
     private JiraTicketManager               jiraTicketManager;
     private Multimap<LocalDate, String>     versionMap;
-    private double                          p;
-    private double                          avgDistanceOVFV;
     private DatasetBuilder                  datasetBuilder;
 
 
     // ------------------------------ Builders --------------------------------
 
 
-    public IssueLifeCycleManager( String projectName, String projectPath ) throws IOException, InvalidRemoteException{
+    public IssueLifeCycleManager( String projectName, String projectPath ) throws IOException {
         this.projectName = projectName;
         this.projectPath = projectPath;
-        this.issues = new ArrayList<IssueObject>();
-        this.issuesWithAffectedVersions = new ArrayList<IssueObject>();
-        this.issuesWithoutAffectedVersions = new ArrayList<IssueObject>();
+        this.issues = new ArrayList<>();
+        this.issuesWithAffectedVersions = new ArrayList<>();
+        this.issuesWithoutAffectedVersions = new ArrayList<>();
         this.gitRepoManager = new GitRepositoryManager( projectName, projectPath );
         this.jiraTicketManager = new JiraTicketManager( projectName.toUpperCase() );
         this.versionMap = MultimapBuilder.treeKeys().linkedListValues().build();
@@ -55,18 +53,20 @@ public class IssueLifeCycleManager{
 
     // ------------------------------ Getters ---------------------------------
 
-    public ArrayList<IssueObject> getIssues(){
+    public String getProjectPath(){
+        return this.projectPath;
+    }
+
+    public List<IssueObject> getIssues(){
         return this.issues;
     }
-    public ArrayList<IssueObject> getIssuesWithAffectedVersions(){
+    public List<IssueObject> getIssuesWithAffectedVersions(){
         return this.issuesWithAffectedVersions;
     }
-    public ArrayList<IssueObject> getIssuesWithoutAffectedVersions(){
+    public List<IssueObject> getIssuesWithoutAffectedVersions(){
         return this.issuesWithoutAffectedVersions;
     }
-    public double getP(){
-        return this.p;
-    }
+    
     public Multimap<LocalDate, String> getVersionMap(){
         return this.versionMap;
     }
@@ -74,14 +74,7 @@ public class IssueLifeCycleManager{
         return this.datasetBuilder;
     }
 
-    // ------------------------------ Setters ---------------------------------
-
-    public void setP( double p ){
-        this.p = p;
-    }
-
     // ------------------------------ Methods ---------------------------------
-
 
     public void appendIssue( IssueObject issue ){
         this.issues.add( issue );
@@ -118,7 +111,7 @@ public class IssueLifeCycleManager{
 
     /*  This Method is called by Commit Objects associated to this Issue in order to retrieve their own version 
         using the value of the commit local date.  */
-    public int getVersionFromLocalDate( LocalDate localDate ){;
+    public int getVersionFromLocalDate( LocalDate localDate ){
         int version = -1;
         for( LocalDate date : this.versionMap.keySet()){
             version = Integer.valueOf( Iterables.getLast( versionMap.get(date) ));
@@ -133,22 +126,18 @@ public class IssueLifeCycleManager{
     /*  This Method interfaces with the Git Repository Manager in order to retrieve,
         for each issue in issues array, all related commits (having Issue ID inside the
         commit message).    */ 
-    public void logWalk() throws MissingObjectException, IncorrectObjectTypeException, IOException, GitAPIException {
+    public void logWalk() throws IOException, GitAPIException {
         
         Collection<Ref> allRefs = this.gitRepoManager.getRepository().getAllRefs().values();
 
         // a RevWalk allows to walk over commits based on some filtering that is defined
-        int stop = 0;
-
+ 
         ProgressBar pb = new ProgressBar("SCANNING TICKETS", this.issues.size()); 
         pb.start();
-
         
         for ( IssueObject issue : this.issues ){
             
             pb.step();
-
-            int declaredFV = issue.getFv();
 
             try ( RevWalk revWalk = new RevWalk( this.gitRepoManager.getRepository()) ) {
 
@@ -161,7 +150,7 @@ public class IssueLifeCycleManager{
                 for( RevCommit commit : revWalk ) {
                     try{
                         // if the commit has not a parent one just skip it (it would be impossible to retrieve some metrics!!)
-                        RevCommit checkparent = commit.getParent(0);
+                        commit.getParent(0);
                     } catch ( ArrayIndexOutOfBoundsException e ){
                         continue;
                     }
@@ -264,9 +253,7 @@ public class IssueLifeCycleManager{
 
     /*  This Method is used to clean the issues array from all issue tickets that have no related commits. */
     public void removeIssuesWithoutCommits(){
-        System.out.println(this.issues.size());
-        issues.removeIf( issue -> issue.getCommits().isEmpty() );
-        System.out.println(this.issues.size());
+        issues.removeIf( issue -> issue.getCommits().isEmpty() );;
     }
 
 
@@ -279,8 +266,8 @@ public class IssueLifeCycleManager{
 
 
     /*  Computes the average of of all entries in the input double arraylist */
-    public double average( ArrayList<Double> array ){
-        double avg = 0.0;
+    public double average( List<Double> array ){
+        double avg;
         double sum = 0.0;
         for ( double p : array ){
             sum += p;
@@ -295,19 +282,21 @@ public class IssueLifeCycleManager{
         After that, the mean value is computed and returned.
         The input array should contain all issues having FV smaller than the issue for which 
         the value of P is going to be computed (this is the implementation of PROPORTION - INCREMENT)   */
-    public int computeProportionIncremental( ArrayList<IssueObject> filteredIssues ){
+    public int computeProportionIncremental( List<IssueObject> filteredIssues ){
         ArrayList<Double> proportions = new ArrayList<>();
         for ( IssueObject issue : filteredIssues ){
-            if ( !( issue.getOv() == issue.getFv() ) ) {
-                double fv = (double) issue.getFv();
-                double ov = (double) issue.getOv();
-                double iv = (double) issue.getIv();
+            if ( issue.getOv() != issue.getFv() ) {
+                double fv = issue.getFv();
+                double ov = issue.getOv();
+                double iv = issue.getIv();
                 double p = ( fv - iv )/( fv - ov );
                 proportions.add( p );  
             }
         }
         return (int) average( proportions );
     }
+
+
 
     /*  This Method estimates IV (and set AVs) for all issues without declared AVs,
         using Proportion Increment algorithm.   */
@@ -318,13 +307,13 @@ public class IssueLifeCycleManager{
             List<IssueObject> filteredIssues = issuesWithAffectedVersions.stream()
                 .filter(issue -> issue.getFv() <= fv)
                 .collect(Collectors.toList());
-            int P = computeProportionIncremental(new ArrayList<IssueObject>(filteredIssues));
+            int p = computeProportionIncremental(new ArrayList<>(filteredIssues));
             if ( fv == ov ) { 
                 // The following formula is an approximation of the correct one (the one in the else block). 
-                targetIssue.setIv( ( fv - ( 1 * P ) ) );
+                targetIssue.setIv( ( fv - ( 1 * p ) ) );
                 continue;
             } else{
-                targetIssue.setIv( ( fv - ( ( fv - ov ) * P ) ) );
+                targetIssue.setIv( ( fv - ( ( fv - ov ) * p ) ) );
             }
             int minAVValue = targetIssue.getIv();
             int maxAVValue = ( targetIssue.getFv() - 1 );
@@ -350,47 +339,6 @@ public class IssueLifeCycleManager{
         this.datasetBuilder.populateFileDataset(issuesWithAffectedVersions);
         this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
         this.datasetBuilder.writeToCSV(this.projectName);
-    }
-
-
-    public void printIssuesInfo( ArrayList<IssueObject> issues ) throws IOException, GitAPIException{
-        int count = 0;
-        for ( IssueObject issue : issues ){
-            printInfo( issue );
-            count ++;
-            if (count == 300) break;
-        }
-    }
-
-
-    public void printInfo( IssueObject issue ) throws IOException, GitAPIException {
-
-        System.out.println("\n\nTicket Identifier : " + issue.getTicketID() );
-        System.out.println("Resolution Date : " + issue.getResolutionDate() + " -> Fixed Version (index) : " + issue.getFv() );
-        System.out.println("Creation Date : " + issue.getCreationDate() + " -> Opening Version (index) : " + issue.getOv());
-        System.out.println("Affected Versions : " + issue.getAffectedVersions().toString() + " AVs indexes : " + issue.getAvs().toString() );
-        System.out.println("Injected Version (index) : " +  issue.getIv() );
-        System.out.println("Related Commits :");
-        int count = 1;
-        for ( CommitObject commit : issue.getCommits() ) {
-            //System.out.println( "Commit " + count + ") \nRevision hash : " + commit.getRevisionHash() );
-            //System.out.println( "Message : " + commit.getFullMessage() );
-            System.out.println( "Date : " + commit.getCommitLocalDate() + " --> Software Version : " + commit.getVersion() );
-            System.out.println( "Author : "   + commit.getAuthorName() + " Author e-mail : " + commit.getAuthorEmail() );
-            System.out.println( "Touched Files (.java extension) and classification :");
-            int fileCount = 1;
-            for ( FileObject file : commit.getFiles() ){
-                System.out.println( "    " + fileCount + ") Filepath : " + file.getFilepath() + " | Version : "  + file.getVersion() + 
-                " | LOC : " + file.getLOC() + " | AGE : " + file.getAGE()  + " | Buggy : "  + file.getBuggyness());
-                fileCount ++;
-            }
-            count = count + 1;
-        }
-    }
-
-
-    public void printVersionMap(){
-        System.out.println(this.versionMap.toString());
     }
 
 

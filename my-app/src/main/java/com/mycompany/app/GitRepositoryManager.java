@@ -29,7 +29,6 @@ import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.diff.Edit;
 import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.revwalk.RevSort;
-import java.util.logging.Logger;
 
 
 
@@ -37,7 +36,6 @@ public class GitRepositoryManager {
 
     // ------------------------------ Attributes -----------------------------
 
-    private static final Logger 	logger = Logger.getLogger(GitRepositoryManager.class.getName());
     private String                  projectName = "";
     private String                  repositoryPath = "";
     private Repository              repository;
@@ -170,7 +168,7 @@ public class GitRepositoryManager {
 
 
 
-    public List<FileObject> computeMetricsAndAppendFile(CommitObject commitObject, List<FileObject>files, DiffEntry diff, DiffFormatter df, int changeSetSize) throws IOException, InvalidRemoteException {
+    public List<FileObject> computeMetricsAndAppendFile(CommitObject commitObject, List<FileObject>files, DiffEntry diff, DiffFormatter df, int changeSetSize) throws IOException {
 
         int linesAdded = 0;
         int linesDeleted = 0;
