@@ -23,9 +23,9 @@ public class App {
     public static void main( String[] args ) throws Exception, InvalidRemoteException, TransportException, GitAPIException, IOException, JSONException 
     {
 
-        String[] projectNames = {"bookkeeper","storm"};
+    String[] projectNames = {"bookkeeper"/*,"storm"*/};
 
-        String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" ,"/home/gianmarco/Scrivania/ML_4_SE/storm/.git"};
+    String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" /*,"/home/gianmarco/Scrivania/ML_4_SE/storm/.git"*/};
 
         int condition = 1;
 

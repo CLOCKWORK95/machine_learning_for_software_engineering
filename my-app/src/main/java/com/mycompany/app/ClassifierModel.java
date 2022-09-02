@@ -30,8 +30,8 @@ import weka.filters.supervised.instance.SpreadSubsample;
 
 public class ClassifierModel {
 
-    private String[]        		projects = {"storm", "bookkeeper"};
-    private Integer[]       		limits = {14,8};
+    private String[]        		projects = {/*"storm",*/ "bookkeeper"};
+    private Integer[]       		limits = {/*14,*/8};
 	private final String    		TRAINING = "_training.arff";
 	private final String    		TESTING = "_testing.arff";
     private String 					path_to_dir = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/";
