@@ -25,7 +25,7 @@ public class DatasetBuilder {
     //------------------------------------ Attributes --------------------------------------------
 
     // Dataset as a MultiKeyMap with key :<version,filepath> and value <metrics>
-	private MultiKeyMap<MultiKey<Object>,Metrics> 			fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap() );
+	private MultiKeyMap<MultiKey<Object>,Metrics> 			fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap<>() );
 
 	private static 	Logger 									logger = Logger.getLogger(DatasetBuilder.class.getName());
 
@@ -104,7 +104,7 @@ public class DatasetBuilder {
 					
 					// ... put the pair (version, filePath) in the dataset map
 					for (int j = 1; j < (lastVersion) + 1; j++) {
-						MultiKey<Object> key = new MultiKey<Object>( j, i.toString().replace(PROJECT_DIR + "/" + projectName + "/",""));
+						MultiKey<Object> key = new MultiKey<>( j, i.toString().replace(PROJECT_DIR + "/" + projectName + "/",""));
 						putEmptyRecord(key, newMetrics);
 					}
 				}
@@ -154,13 +154,13 @@ public class DatasetBuilder {
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
 						logger.info("NEW entry!");
-						MultiKey<Object> key = new MultiKey<Object>(version,filepath);
+						MultiKey<Object> key = new MultiKey<>(version,filepath);
                         putRecord( key, newMetrics );
                     } else{
                         Metrics oldMetrics = fileDataset.get( version, filepath );
 						logger.info("OLD entry!");
                         newMetrics.update( oldMetrics );
-                        MultiKey<Object> key = new MultiKey<Object>(version,filepath);
+                        MultiKey<Object> key = new MultiKey<>(version,filepath);
                         putRecord( key, newMetrics );
                     }
                 }
@@ -173,25 +173,6 @@ public class DatasetBuilder {
 
 		// Set the name of the file
 		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ) {
-
-			/*	
-			 * Metrics Data Structure
-             *   (version)
-             *   (filepath)
-			 *  0 - NumberRevisions
-			 *  1 - NumberAuthors
-			 *  2 - LOC
-			 *  3 - AGE
-			 *  4 - CHURN
-			 *  5 - LOC_TOUCHED
-			 *  6 - Max_Loc_Added
-			 *  7 - Avg_Chg_set
-			 *  8 - Max_Chg_Set
-			 *  9 - Avg_LOC_Added
-			 *  10 - numImports
-			 *  11 - numComments
-			 * 	12 - Buggyness
-			 * */
 
 			// Append the first line
 			csvWriter.append("Version Number");
@@ -235,7 +216,7 @@ public class DatasetBuilder {
 				MultiKey<Object> key = (MultiKey<Object>) dataSetIterator.getKey();
 
 				// Get the metrics list associated to the multikey
-				Metrics metrics = (Metrics) fileDataset.get(key.getKey(0), key.getKey(1));
+				Metrics metrics = fileDataset.get(key.getKey(0), key.getKey(1));
 
 				int version = (int) key.getKey(0);
 
@@ -250,7 +231,6 @@ public class DatasetBuilder {
 
 				Metrics metrics = (Metrics) entry.getValue();
 				// Check that the version index is contained in the first half of the releases
-				//if (Integer.valueOf(entry.getKey().split(",")[0]) <= (lastVersion) + 1) {
 				if ( true ) {
                     int nr =                metrics.getNR();
                     String NR =             Integer.toString((metrics.getNR()));
