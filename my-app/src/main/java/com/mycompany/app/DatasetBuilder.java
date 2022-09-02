@@ -3,9 +3,7 @@ package com.mycompany.app;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.List;
 import java.util.TreeMap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.collections4.MapIterator;
@@ -106,7 +104,7 @@ public class DatasetBuilder {
 					
 					// ... put the pair (version, filePath) in the dataset map
 					for (int j = 1; j < (lastVersion) + 1; j++) {
-						MultiKey<Object> key = new MultiKey( j, i.toString().replace(PROJECT_DIR + "/" + projectName + "/",""));
+						MultiKey<Object> key = new MultiKey<Object>( j, i.toString().replace(PROJECT_DIR + "/" + projectName + "/",""));
 						putEmptyRecord(key, newMetrics);
 					}
 				}
@@ -120,6 +118,11 @@ public class DatasetBuilder {
 		emptyMetrics.setFilepath( (String) keys.getKey(1));
 		logger.info("NEW EMPTY RECORD!!");
 		fileDataset.put( keys, emptyMetrics );
+	}
+
+
+	public void putRecord(MultiKey keys, Metrics metrics){
+		fileDataset.put( keys, metrics );
 	}
         
        
@@ -151,14 +154,14 @@ public class DatasetBuilder {
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
 						logger.info("NEW entry!");
-						MultiKey key = new MultiKey(version,filepath);
-                        fileDataset.put( key, newMetrics );
+						MultiKey<Object> key = new MultiKey<Object>(version,filepath);
+                        putRecord( key, newMetrics );
                     } else{
-                        Metrics oldMetrics = ( Metrics ) fileDataset.get( version, filepath );
+                        Metrics oldMetrics = fileDataset.get( version, filepath );
 						logger.info("OLD entry!");
                         newMetrics.update( oldMetrics );
-                        MultiKey key = new MultiKey(version,filepath);
-                        fileDataset.put( key, newMetrics );
+                        MultiKey<Object> key = new MultiKey<Object>(version,filepath);
+                        putRecord( key, newMetrics );
                     }
                 }
             }
