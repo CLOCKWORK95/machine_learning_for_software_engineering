@@ -273,7 +273,6 @@ public class ClassifierModel {
 	    param : trainingLimit, the index of the last version to be included in the training set. */ 
 	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) {
 
-		BufferedReader br;
 		int counterElement = 0;
 		int counterBuggies = 0;
 
@@ -286,24 +285,26 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ); 
+			try(BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) )){
 
-			// Skip the first line (contains just column name)
-			String line = br.readLine();
+				// Skip the first line (contains just column name)
+				String line = br.readLine();
 
-			// Read till the last row 
-			while ( ( line = br.readLine() ) != null ){  
+				// Read till the last row 
+				while ( ( line = br.readLine() ) != null ){  
 
-				// Check if the version number is contained in the limit index
-				if ( Integer.parseInt( line.split(",")[0] ) <= trainingLimit ) {
+					// Check if the version number is contained in the limit index
+					if ( Integer.parseInt( line.split(",")[0] ) <= trainingLimit ) {
 
-					counterElement = counterElement + 1;
+						counterElement = counterElement + 1;
 
-					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
-				}
-			}	br.close();
-			// Flush the file to the disk
-			csvWriter.flush();
+						counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
+					}
+				}	
+				br.close();
+				// Flush the file to the disk
+				csvWriter.flush();
+			}
 
 			counterList.add(counterElement);
 			counterList.add(counterBuggies);
@@ -320,8 +321,7 @@ public class ClassifierModel {
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
 	public List<Integer> walkForwardTesting( String projectName, int testing ) throws NoTestSetAvailableException{
-		
-		BufferedReader br;
+	
 		int counterElement = 0;
 		int counterBuggies = 0;
 		ArrayList<Integer> counterList = new ArrayList<>();
@@ -332,33 +332,34 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ));  
+			try(BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ))){ 
 
-			// Skip the first line (contains just column name)
-			String line = br.readLine();
+				// Skip the first line (contains just column name)
+				String line = br.readLine();
 
-			// Read till the last row 
-			while ( ( line = br.readLine() ) != null ){  
+				// Read till the last row 
+				while ( ( line = br.readLine() ) != null ){  
 
-				// Check if the version number is equal to the one equal to the test index
-				if ( Integer.parseInt( line.split(",")[0] ) == testing ) {
+					// Check if the version number is equal to the one equal to the test index
+					if ( Integer.parseInt( line.split(",")[0] ) == testing ) {
 
-					counterElement = counterElement + 1;
+						counterElement = counterElement + 1;
 
-					// Append the row readed from the CSV file, but without the first 2 column
-					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
-				}
-			}	br.close();
+						// Append the row readed from the CSV file, but without the first 2 column
+						counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
+					}
+				}	
+				br.close();
+				// Flush the file to the disk
+				csvWriter.flush();
+			}
 
-			// Flush the file to the disk
-			csvWriter.flush();
 			counterList.add(counterElement);
 			counterList.add(counterBuggies);
 
 		} catch( Exception e){
 			logger.info("Some problems occurred while writing the arff file.");
 		} 
-
 		if ( counterElement <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are no entries in version", testing );
 			throw(e);
