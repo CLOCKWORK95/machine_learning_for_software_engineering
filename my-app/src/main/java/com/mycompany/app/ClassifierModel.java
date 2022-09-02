@@ -24,18 +24,19 @@ import weka.filters.supervised.instance.SpreadSubsample;
 
 public class ClassifierModel {
 
-    private String[]        		projects = {/*"storm",*/ "bookkeeper"};
-    private Integer[]       		limits = {/*14,*/8};
+    private String[]        		projects = {"storm", "bookkeeper"};
+    private Integer[]       		limits = {14,8};
 	private static final String    	TRAINING = "_training.arff";
 	private static final String    	TESTING = "_testing.arff";
 	private static final String		PATH_TO_OUTPUTDIR = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/";
 	private static final String		EVALUATION_FILE_FORMAT = "_evaluation.csv";
+	private static final String		DATASET_FILE_FORMAT = "_dataset.csv";
 	private static final String 	OVER_SAMPLING = "Over sampling";
 	private static final String 	UNDER_SAMPLING = "Under sampling";
 	private static final String 	SMOTE = "Smote";
 	private static final String 	NO_SAMPLING = "No sampling";
 	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
-	private final String 			FEATURE_SELECTION = "False";
+	private static final String 	FEATURE_SELECTION = "False";
 
 
 	public void evaluateSampling() throws Exception{
@@ -95,14 +96,14 @@ public class ClassifierModel {
 			try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + this.projects[j]+ EVALUATION_FILE_FORMAT ) ) {
 
 				String 						projectName = this.projects[j];
-				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( limits[j], PATH_TO_OUTPUTDIR + projectName + "_dataset.csv" );
-				int 						STEPS = reader.getSteps();
+				ModifiedWalkForwardReader 	reader = new ModifiedWalkForwardReader( limits[j], PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT );
+				int 						steps = reader.getSteps();
 				
 				// Append the first line of the evaluation results file.
 				csvWriter.append("\nDataset,# Training,TrainingSet Size,TestSet Size,% Training,% Defect Training,%Defect Testing,Classifier,Balancing,FeatureSelection,TP,FP,TN,FN,Precision,Recall,ROC Area,Kappa,Accuracy\n");
 
 				// Iterate over the single version for the WalkForward technique...
-				for ( int i = 1; i < STEPS; i++ ) {
+				for ( int i = 1; i < steps; i++ ) {
 
 					reader.reset();
 					// Create the ARFF file for the training and test sets: training set stops at the i-th fold, test set is the (i+1)th fold.
@@ -207,16 +208,11 @@ public class ClassifierModel {
 					csvWriter.append(projects[j] + "," + i + ",IBk," + eval.precision(0) + "," + eval.recall(0) +  "," + eval.areaUnderROC(0) + "," + eval.kappa() + "," + (1-eval.errorRate()) +"\n\n");
 
 				}
-
-				// Delete the temp file
-				//Files.deleteIfExists(Paths.get( PATH_TO_OUTPUTDIR + projects[j] + TESTING ));
-				//Files.deleteIfExists(Paths.get( PATH_TO_OUTPUTDIR + projects[j] + TRAINING ));
 				csvWriter.flush();
 			}
-
-			// Flush the output file to disk
 		}
 	}
+
 
 
     /*  This method reads a row from the original csv file and replaces it with all of its content 
@@ -238,6 +234,28 @@ public class ClassifierModel {
 	}
 
 
+
+	public void appendHeaderToArf( FileWriter csvWriter, String projectName) throws IOException{
+		// Append the header line to the ARFF file
+		csvWriter.append("@relation " + projectName + "\n\n");
+		csvWriter.append("@attribute NumberRevisions real\n");
+		csvWriter.append("@attribute NumberAuthors real\n");
+		csvWriter.append("@attribute LOC real\n");
+		csvWriter.append("@attribute AGE real\n");
+		csvWriter.append("@attribute CHURN real\n");
+		csvWriter.append("@attribute LOC_TOUCHED real\n");
+		csvWriter.append("@attribute AvgLocAdded real\n");
+		csvWriter.append("@attribute MaxLocAdded real\n");
+		csvWriter.append("@attribute AvgChgSet real\n");
+		csvWriter.append("@attribute MaxChgSet real\n");
+		csvWriter.append("@attribute numImports real\n");
+		csvWriter.append("@attribute numComments real\n");
+		csvWriter.append("@attribute Buggy {Yes, No}\n\n");
+		csvWriter.append("@data\n");
+	}
+
+
+
     /*  This method build the ARFF file for the specified project used as Training Set.
 	    param : projectName, the name of the project.
 	    param : trainingLimit, the index of the last version to be included in the training set. */ 
@@ -252,24 +270,10 @@ public class ClassifierModel {
 		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TRAINING ) ) {
 
 			// Append the static line of the ARFF file
-			csvWriter.append("@relation " + projectName + "\n\n");
-			csvWriter.append("@attribute NumberRevisions real\n");
-			csvWriter.append("@attribute NumberAuthors real\n");
-			csvWriter.append("@attribute LOC real\n");
-			csvWriter.append("@attribute AGE real\n");
-			csvWriter.append("@attribute CHURN real\n");
-			csvWriter.append("@attribute LOC_TOUCHED real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
-			csvWriter.append("@attribute MaxLocAdded real\n");
-			csvWriter.append("@attribute AvgChgSet real\n");
-			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute numImports real\n");
-			csvWriter.append("@attribute numComments real\n");
-			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
-			csvWriter.append("@data\n");
+			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + "_dataset.csv" ) ) ){ 
+			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ) ){ 
 
 				// Skip the first line (contains just column name)
 				String line = br.readLine();
@@ -312,24 +316,10 @@ public class ClassifierModel {
 		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TESTING ) ) {
 
 			// Append the static line of the ARFF file
-			csvWriter.append("@relation " + projectName + "\n\n");
-			csvWriter.append("@attribute NumberRevisions real\n");
-			csvWriter.append("@attribute NumberAuthors real\n");
-			csvWriter.append("@attribute LOC real\n");
-			csvWriter.append("@attribute AGE real\n");
-			csvWriter.append("@attribute CHURN real\n");
-			csvWriter.append("@attribute LOC_TOUCHED real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
-			csvWriter.append("@attribute MaxLocAdded real\n");
-			csvWriter.append("@attribute AvgChgSet real\n");
-			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute numImports real\n");
-			csvWriter.append("@attribute numComments real\n");
-			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
-			csvWriter.append("@data\n");
+			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + "_dataset.csv" ) ) ){  
+			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ) ){  
 
 				// Skip the first line (contains just column name)
 				String line = br.readLine();
@@ -381,22 +371,8 @@ public class ClassifierModel {
 		// Create the output ARFF file (.arff)
 		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TRAINING ) ) {
 
-			// Append the static line of the ARFF file
-			csvWriter.append("@relation " + projectName + "\n\n");
-			csvWriter.append("@attribute NumberRevisions real\n");
-			csvWriter.append("@attribute NumberAuthors real\n");
-			csvWriter.append("@attribute LOC real\n");
-			csvWriter.append("@attribute AGE real\n");
-			csvWriter.append("@attribute CHURN real\n");
-			csvWriter.append("@attribute LOC_TOUCHED real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
-			csvWriter.append("@attribute MaxLocAdded real\n");
-			csvWriter.append("@attribute AvgChgSet real\n");
-			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute numImports real\n");
-			csvWriter.append("@attribute numComments real\n");
-			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
-			csvWriter.append("@data\n");
+			// Append the static line of the ARFF file which will be used as TRAINING SET for the evaluation in the WalkForward iteration.
+			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
 			try {
@@ -434,21 +410,7 @@ public class ClassifierModel {
 		try ( FileWriter csvWriter = new FileWriter( PATH_TO_OUTPUTDIR + projectName + TESTING ) ) {
 
 			// Append the static line of the ARFF file
-			csvWriter.append("@relation " + projectName + "\n\n");
-			csvWriter.append("@attribute NumberRevisions real\n");
-			csvWriter.append("@attribute NumberAuthors real\n");
-			csvWriter.append("@attribute LOC real\n");
-			csvWriter.append("@attribute AGE real\n");
-			csvWriter.append("@attribute CHURN real\n");
-			csvWriter.append("@attribute LOC_TOUCHED real\n");
-			csvWriter.append("@attribute AvgLocAdded real\n");
-			csvWriter.append("@attribute MaxLocAdded real\n");
-			csvWriter.append("@attribute AvgChgSet real\n");
-			csvWriter.append("@attribute MaxChgSet real\n");
-			csvWriter.append("@attribute numImports real\n");
-			csvWriter.append("@attribute numComments real\n");
-			csvWriter.append("@attribute Buggy {Yes, No}\n\n");
-			csvWriter.append("@data\n");
+			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
 			try {  
@@ -475,7 +437,7 @@ public class ClassifierModel {
 		}
 		if ( entries <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are not enough entries to build test set! " + 
-													"Please decrease the integer STEPS parameter of ModifiedWalkForwardReader." );
+													"Please decrease the integer steps parameter of ModifiedWalkForwardReader." );
 			throw(e);
 		}
 
