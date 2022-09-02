@@ -34,6 +34,7 @@ public class ClassifierModel {
 	private static final String 	OVER_SAMPLING = "Over sampling";
 	private static final String 	UNDER_SAMPLING = "Under sampling";
 	private static final String 	SMOTE = "Smote";
+	private static final String		COST_SENSITIVE = "Cost Sensitive";
 	private static final String 	NO_SAMPLING = "No sampling";
 	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
 	private static final String 	FEATURE_SELECTION = "False";
@@ -75,7 +76,7 @@ public class ClassifierModel {
 					Instances   testSet = source2.getDataSet();
 
 					// Apply sampling to the two datasets
-					List<String> samplingResult = applySampling( trainingSet, testSet, percentageMajorityClass, "False");
+					List<String> samplingResult = applySampling( trainingSet, testSet, percentageMajorityClass, FEATURE_SELECTION );
 					for (String result : samplingResult) {
 						csvWriter.append(projects[j] + "," + i  + "," + resultTraining.get(0) + "," + resultTesting.get(0) + "," + percentTraining  + "," + percentDefectTraining  + "," + percentDefectTesting +"," + result);
 					}
@@ -398,7 +399,8 @@ public class ClassifierModel {
 				reader.appendCounterResult( entries );
 				reader.appendCounterResult( bugs );
 
-			} catch( IOException e ){
+			} catch( Exception e ){
+				e.printStackTrace();
 				throw e;
 			}
 		}
@@ -432,6 +434,7 @@ public class ClassifierModel {
 				reader.appendCounterResult( bugs );
 
 			} catch (Exception e){
+				e.printStackTrace();
 				throw( e );
 			}
 		}
@@ -496,7 +499,7 @@ public class ClassifierModel {
 			// Evaluate the Cost Sensitive Classifier
 			eval = new Evaluation(testing, classifierCS.getCostMatrix());
 			eval = applyFilterForSampling(null, eval, training, testing, classifierCS);
-			addResult(eval, result, "Cost Sensitive", NO_SAMPLING, featureSelection);
+			addResult(eval, result, COST_SENSITIVE, NO_SAMPLING, featureSelection);
 			//-----------------------------------------------------------------------------
 
 
@@ -523,7 +526,7 @@ public class ClassifierModel {
 			// Evaluate the Cost Sensitive Classifier
 			eval = new Evaluation(testing, classifierCS.getCostMatrix());
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierCS);
-			addResult(eval, result, "Cost Sensitive", UNDER_SAMPLING, featureSelection);
+			addResult(eval, result, COST_SENSITIVE, UNDER_SAMPLING, featureSelection);
 			//-----------------------------------------------------------------------------
 
 
@@ -553,7 +556,7 @@ public class ClassifierModel {
 			// Evaluate the Cost Sensitive Classifier
 			eval = new Evaluation(testing, classifierCS.getCostMatrix());
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierCS);
-			addResult(eval, result, "Cost Sensitive", OVER_SAMPLING, featureSelection);
+			addResult(eval, result, COST_SENSITIVE, OVER_SAMPLING, featureSelection);
 			//-----------------------------------------------------------------------------
 
 
@@ -579,7 +582,7 @@ public class ClassifierModel {
 			// Evaluate the Cost Sensitive Classifier
 			eval = new Evaluation(testing, classifierCS.getCostMatrix());
 			eval = applyFilterForSampling(fc, eval, training, testing, classifierCS);
-			addResult(eval, result, "Cost Sensitive", SMOTE, featureSelection);
+			addResult(eval, result, COST_SENSITIVE, SMOTE, featureSelection);
 			//-----------------------------------------------------------------------------
 
 		} catch ( Exception e ) {
