@@ -203,16 +203,8 @@ public class IssueLifeCycleManager{
                 this.issuesWithoutAffectedVersions.add( issue );
             }
             else{
-                ArrayList<Integer> avs = new ArrayList<>();
-                ArrayList<String> affectedVersions = (ArrayList<String>) issue.getAffectedVersions();
-                for ( String version : affectedVersions ){
-                    for( LocalDate date : this.versionMap.keySet() ){
-                        if ( Iterables.get(versionMap.get(date),0).equals( version )){    
-                            avs.add( Integer.valueOf( Iterables.getLast( versionMap.get(date) )) );              
-                            break;
-                        }
-                    }
-                } 
+                ArrayList<Integer> avs = (ArrayList<Integer>) getIntegerAffectedVersionsFromMap( issue );
+                
                 // Check if the reported affected versions for the current issue are not coherent 
                 // with the reported fixed version and opening version, and populate with all remaining 
                 // versions between them.
@@ -234,6 +226,21 @@ public class IssueLifeCycleManager{
                 }            
             }
         }
+    }
+
+
+    public List<Integer> getIntegerAffectedVersionsFromMap(IssueObject issue){
+        ArrayList<Integer> avs = new ArrayList<>();
+        ArrayList<String> affectedVersions = (ArrayList<String>) issue.getAffectedVersions();
+        for ( String version : affectedVersions ){
+            for( LocalDate date : this.versionMap.keySet() ){
+                if ( Iterables.get(versionMap.get(date),0).equals( version )){    
+                    avs.add( Integer.valueOf( Iterables.getLast( versionMap.get(date) )) );              
+                    break;
+                }
+            }
+        } 
+        return avs;
     }
 
 
