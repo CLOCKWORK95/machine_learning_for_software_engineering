@@ -285,32 +285,34 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ) ){ 
+			BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ); 
 
-				// Skip the first line (contains just column name)
-				String line = br.readLine();
+			// Skip the first line (contains just column name)
+			String line = br.readLine();
 
-				// Read till the last row 
-				while ( ( line = br.readLine() ) != null ){  
+			// Read till the last row 
+			while ( ( line = br.readLine() ) != null ){  
 
-					// Check if the version number is contained in the limit index
-					if ( Integer.parseInt( line.split(",")[0] ) <= trainingLimit ) {
+				// Check if the version number is contained in the limit index
+				if ( Integer.parseInt( line.split(",")[0] ) <= trainingLimit ) {
 
-						counterElement = counterElement + 1;
+					counterElement = counterElement + 1;
 
-						counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
-					}
+					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
 				}
-
-				// Flush the file to the disk
-				csvWriter.flush();
-
-				counterList.add(counterElement);
-				counterList.add(counterBuggies);
-
-				return counterList;
-
 			}
+			br.close();
+			// Flush the file to the disk
+			csvWriter.flush();
+
+			counterList.add(counterElement);
+			counterList.add(counterBuggies);
+
+			return counterList;
+
+		} catch(Exception e){
+			logger.info("Some problems occurred while writing the arff file.");
+			return null;
 		}
 	}
 
@@ -319,7 +321,7 @@ public class ClassifierModel {
     /*  This method build the ARFF file for the specific project relative to the Test Set.
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
-	public List<Integer> walkForwardTesting( String projectName, int testing ) throws Exception{
+	public List<Integer> walkForwardTesting( String projectName, int testing ) throws NoTestSetAvailableException{
 
 		int counterElement = 0;
 		int counterBuggies = 0;
@@ -331,31 +333,36 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			try ( BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ) ) ){  
+			BufferedReader br = new BufferedReader( new FileReader( PATH_TO_OUTPUTDIR + projectName + DATASET_FILE_FORMAT ));  
 
-				// Skip the first line (contains just column name)
-				String line = br.readLine();
+			// Skip the first line (contains just column name)
+			String line = br.readLine();
 
-				// Read till the last row 
-				while ( ( line = br.readLine() ) != null ){  
+			// Read till the last row 
+			while ( ( line = br.readLine() ) != null ){  
 
-					// Check if the version number is equal to the one equal to the test index
-					if ( Integer.parseInt( line.split(",")[0] ) == testing ) {
+				// Check if the version number is equal to the one equal to the test index
+				if ( Integer.parseInt( line.split(",")[0] ) == testing ) {
 
-						counterElement = counterElement + 1;
+					counterElement = counterElement + 1;
 
-						// Append the row readed from the CSV file, but without the first 2 column
-						counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
-					}
+					// Append the row readed from the CSV file, but without the first 2 column
+					counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
 				}
-
-				// Flush the file to the disk
-				csvWriter.flush();
-				counterList.add(counterElement);
-				counterList.add(counterBuggies);
-
 			}
+
+			br.close();
+
+			// Flush the file to the disk
+			csvWriter.flush();
+			counterList.add(counterElement);
+			counterList.add(counterBuggies);
+
+			
+		} catch( Exception e){
+			logger.info("Some problems occurred while writing the arff file.");
 		}
+
 		if ( counterElement <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are no entries in version", testing );
 			throw(e);
@@ -386,35 +393,28 @@ public class ClassifierModel {
 			// Append the static line of the ARFF file which will be used as TRAINING SET for the evaluation in the WalkForward iteration.
 			appendHeaderToArf(csvWriter, projectName);
 
-			// Read the project dataset
-			try {
-				// Skip the first line (contains just column name)
-				String line = reader.getBr().readLine();
+			// Read the project dataset in csv format
+			// Skip the first line (contains just column name)
+			String line = reader.getBr().readLine();
+			// Read till the last row 
+			while ( ( line = reader.getBr().readLine() ) != null ){  
+				if ( entries != 0 && entries % reader.getStep() == 0 && stepsDone == trainingSteps ) {
+					break;
+				} 
+				if ( entries != 0 && entries % reader.getStep() == 0 && stepsDone < trainingSteps ) {
+					stepsDone = stepsDone + 1;
+				} 
+				entries = entries + 1;
+				bugs = bugs + appendToCSV( csvWriter, line );
 
-				// Read till the last row 
-				while ( ( line = reader.getBr().readLine() ) != null ){  
-
-					if ( entries != 0 && entries % reader.getStep() == 0 && stepsDone == trainingSteps ) {
-						break;
-					} 
-					if ( entries != 0 && entries % reader.getStep() == 0 && stepsDone < trainingSteps ) {
-						stepsDone = stepsDone + 1;
-					} 
-					entries = entries + 1;
-					bugs = bugs + appendToCSV( csvWriter, line );
-
-				}
-
-				// Flush the file to the disk
-				csvWriter.flush();
-				reader.appendCounterResult( entries );
-				reader.appendCounterResult( bugs );
-
-			} catch( Exception e ){
-				logger.info("Some problems occurred while writing the arff file.");
 			}
+			// Flush the file to the disk
+			csvWriter.flush();
+			reader.appendCounterResult( entries );
+			reader.appendCounterResult( bugs );
+			
 		} catch( Exception e){
-			logger.info("Unable to read from csv file.");
+			logger.info("Some problems occurred while writing the arff file.");
 		}
 
 		entries = 0;
@@ -427,29 +427,24 @@ public class ClassifierModel {
 			appendHeaderToArf(csvWriter, projectName);
 
 			// Read the project dataset
-			try {  
-				String line;
-				// Read untill the next step is complete.
-				while ( ( line = reader.getBr().readLine() ) != null ){  
+			String line;
+			// Read untill the next step is complete.
+			while ( ( line = reader.getBr().readLine() ) != null ){  
 
-					if ( entries < reader.getStep() ) {
+				if ( entries < reader.getStep() ) {
 
-						entries = entries + 1;
-						// Append the row readed from the CSV file, but without the first 2 column
-						bugs = bugs + appendToCSV( csvWriter, line );
-					}
+					entries = entries + 1;
+					// Append the row readed from the CSV file, but without the first 2 column
+					bugs = bugs + appendToCSV( csvWriter, line );
 				}
-
-				// Flush the file to the disk
-				csvWriter.flush();
-				reader.appendCounterResult( entries );
-				reader.appendCounterResult( bugs );
-
-			} catch (Exception e){
-				logger.info("Some problems occurred while writing the arff file.");
 			}
+			// Flush the file to the disk
+			csvWriter.flush();
+			reader.appendCounterResult( entries );
+			reader.appendCounterResult( bugs );
+
 		} catch( Exception e){
-			logger.info("Unable to read from csv file.");
+			logger.info("Some problems occurred while writing the arff file.");
 		}
 
 		if ( entries <= 5 ) {
