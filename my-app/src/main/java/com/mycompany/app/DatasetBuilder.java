@@ -233,15 +233,15 @@ public class DatasetBuilder {
 				// Check that the version index is contained in the first half of the releases
 				if ( true ) {
                     int    nr =             metrics.getNR();
-                    String numRev =         Integer.toString((metrics.getNR()));
+                    String numRev =         Integer.toString(metrics.getNR());
                     String nAuth =          Integer.toString(metrics.getAUTHORS().size());
-                    String loc =            Integer.toString((int) ( metrics.getLOC()/nr ) );
+                    String loc =            Integer.toString(metrics.getLOC()/nr);
                     String age =            Integer.toString(metrics.getAGE());
                     String churn =          Integer.toString(metrics.getCHURN());
 					String locTouched = 	Integer.toString(metrics.getLOC_TOUCHED());
-					String avgLocAdded =    Integer.toString((int) ( metrics.getAVG_LOC_ADDED()/nr ) );
+					String avgLocAdded =    Integer.toString(metrics.getAVG_LOC_ADDED()/nr);
                     String maxLocAdded =    Integer.toString(metrics.getMAX_LOC_ADDED());
-                    String avgChgSet =      Integer.toString((int) ( metrics.getAVG_CHANGE_SET()/nr ) );
+                    String avgChgSet =      Integer.toString(metrics.getAVG_CHANGE_SET()/nr);
                     String maxChgSet =      Integer.toString(metrics.getMAX_CHANGE_SET());
 					String numImports = 	Integer.toString(metrics.getNumImports()/nr);
 					String numComments = 	Integer.toString(metrics.getNumComments()/nr);
