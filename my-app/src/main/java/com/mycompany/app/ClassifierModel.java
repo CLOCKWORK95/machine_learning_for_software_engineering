@@ -38,6 +38,7 @@ public class ClassifierModel {
 	private static final String 	NO_SAMPLING = "No sampling";
 	private static final Logger 	logger = Logger.getLogger(ClassifierModel.class.getName());
 	private static final String 	FEATURE_SELECTION = "False";
+	private static final String 	ARF_EXC_MSG = "Some problems occurred while writing the arff file.";
 
 
 	public static String getCurrentDirectory() {
@@ -301,7 +302,6 @@ public class ClassifierModel {
 						counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
 					}
 				}	
-				br.close();
 				// Flush the file to the disk
 				csvWriter.flush();
 			}
@@ -310,7 +310,7 @@ public class ClassifierModel {
 			counterList.add(counterBuggies);
 
 		} catch(Exception e){
-			logger.info("Some problems occurred while writing the arff file.");
+			logger.info(ARF_EXC_MSG);
 		} 
 		return counterList;
 	}
@@ -349,7 +349,6 @@ public class ClassifierModel {
 						counterBuggies = counterBuggies + appendToCSV( csvWriter, line );
 					}
 				}	
-				br.close();
 				// Flush the file to the disk
 				csvWriter.flush();
 			}
@@ -358,7 +357,7 @@ public class ClassifierModel {
 			counterList.add(counterBuggies);
 
 		} catch( Exception e){
-			logger.info("Some problems occurred while writing the arff file.");
+			logger.info(ARF_EXC_MSG);
 		} 
 		if ( counterElement <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are no entries in version", testing );
@@ -411,7 +410,7 @@ public class ClassifierModel {
 			reader.appendCounterResult( bugs );
 			
 		} catch( Exception e){
-			logger.info("Some problems occurred while writing the arff file.");
+			logger.info(ARF_EXC_MSG);
 		}
 
 		entries = 0;
@@ -441,7 +440,7 @@ public class ClassifierModel {
 			reader.appendCounterResult( bugs );
 
 		} catch( Exception e){
-			logger.info("Some problems occurred while writing the arff file.");
+			logger.info(ARF_EXC_MSG);
 		}
 
 		if ( entries <= 5 ) {
