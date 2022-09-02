@@ -36,7 +36,7 @@ public class ClassifierModel {
 	private static final String 	SMOTE = "Smote";
 	private static final String		COST_SENSITIVE = "Cost Sensitive";
 	private static final String 	NO_SAMPLING = "No sampling";
-	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
+	private static final Logger 	logger = Logger.getLogger(ClassifierModel.class.getName());
 	private static final String 	FEATURE_SELECTION = "False";
 
 
@@ -374,7 +374,7 @@ public class ClassifierModel {
 		param : projectName		the name of the project.
 		param : reader			a structured reader object implemented to perform the walkforward task.
 		param : trainingSteps	the number of folds to divide the dataset into.	 */ 
-	public ModifiedWalkForwardReader modifiedWalkForwardTrainingAndTest( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws Exception {
+	public ModifiedWalkForwardReader modifiedWalkForwardTrainingAndTest( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws NoTestSetAvailableException {
 
 		int 	entries = 0;
 		int 	bugs = 0;
@@ -411,9 +411,10 @@ public class ClassifierModel {
 				reader.appendCounterResult( bugs );
 
 			} catch( Exception e ){
-				e.printStackTrace();
-				throw e;
+				logger.info("Some problems occurred while writing the arff file.");
 			}
+		} catch( Exception e){
+			logger.info("Unable to read from csv file.");
 		}
 
 		entries = 0;
@@ -445,10 +446,12 @@ public class ClassifierModel {
 				reader.appendCounterResult( bugs );
 
 			} catch (Exception e){
-				e.printStackTrace();
-				throw( e );
+				logger.info("Some problems occurred while writing the arff file.");
 			}
+		} catch( Exception e){
+			logger.info("Unable to read from csv file.");
 		}
+
 		if ( entries <= 5 ) {
 			NoTestSetAvailableException e = new NoTestSetAvailableException("There are not enough entries to build test set! " + 
 													"Please decrease the integer steps parameter of ModifiedWalkForwardReader." );
@@ -618,7 +621,7 @@ public class ClassifierModel {
 
 
 
-	public Evaluation applyFilterForSampling( FilteredClassifier fc, Evaluation eval, Instances training, Instances testing, AbstractClassifier classifierName ) throws SamplingException {
+	public Evaluation applyFilterForSampling( FilteredClassifier fc, Evaluation eval, Instances training, Instances testing, AbstractClassifier classifierName ){
 
 		// In filter needed, apply it and evaluate the model 
 		try {
@@ -633,7 +636,7 @@ public class ClassifierModel {
 
 			}
 		} catch (Exception e) {
-			LOGGER.info("Attenzione. Classe minoritaria insufficiente per SMOTE.");
+			logger.info("Attenzione. Classe minoritaria insufficiente per SMOTE.");
 		}
 		return eval;
 	}
@@ -654,7 +657,7 @@ public class ClassifierModel {
 
 
 
-    public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ) throws Exception {
+    public String getMetrics( Evaluation eval, String classifier, String balancing, String featureSelection ){
 		return classifier + "," + balancing + "," + featureSelection + "," + eval.truePositiveRate(0)  + "," + eval.falsePositiveRate(0)  + "," + eval.trueNegativeRate(0)  + "," + eval.falseNegativeRate(0)  + "," + eval.precision(0)  + "," + eval.recall(0)  + "," + eval.areaUnderROC(0)  + "," + eval.kappa() + "," + (1-eval.errorRate()) + "\n";
 	}
 
