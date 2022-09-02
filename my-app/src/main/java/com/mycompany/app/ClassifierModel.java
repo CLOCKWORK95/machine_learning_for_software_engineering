@@ -28,7 +28,7 @@ public class ClassifierModel {
     private Integer[]       		limits = {14,8};
 	private static final String    	TRAINING = "_training.arff";
 	private static final String    	TESTING = "_testing.arff";
-	private static final String		PATH_TO_OUTPUTDIR = "/home/gianmarco/Scrivania/ML_4_SE/my-app/src/main/java/com/mycompany/app/output/";
+	private static final String		PATH_TO_OUTPUTDIR = getOutputDirPath();
 	private static final String		EVALUATION_FILE_FORMAT = "_evaluation.csv";
 	private static final String		DATASET_FILE_FORMAT = "_dataset.csv";
 	private static final String 	OVER_SAMPLING = "Over sampling";
@@ -38,6 +38,17 @@ public class ClassifierModel {
 	private static final String 	NO_SAMPLING = "No sampling";
 	private static final Logger 	LOGGER = Logger.getLogger(ClassifierModel.class.getName());
 	private static final String 	FEATURE_SELECTION = "False";
+
+
+	public static String getCurrentDirectory() {
+		return System.getProperty("user.dir");
+	}
+
+
+	public static String getOutputDirPath(){
+		return getCurrentDirectory() + "/src/main/java/com/mycompany/app/output/";
+	}
+
 
 
 	public void evaluateSampling() throws Exception{
@@ -260,7 +271,7 @@ public class ClassifierModel {
     /*  This method build the ARFF file for the specified project used as Training Set.
 	    param : projectName, the name of the project.
 	    param : trainingLimit, the index of the last version to be included in the training set. */ 
-	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) throws IOException {
+	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) throws Exception {
 
 		int counterElement = 0;
 		int counterBuggies = 0;
@@ -308,7 +319,7 @@ public class ClassifierModel {
     /*  This method build the ARFF file for the specific project relative to the Test Set.
 	    param : projectName, the name of the project.
 	    param : testing, the index of the version to be included in the test set.  */ 
-	public List<Integer> walkForwardTesting( String projectName, int testing ) throws IOException, NoTestSetAvailableException, Exception{
+	public List<Integer> walkForwardTesting( String projectName, int testing ) throws Exception{
 
 		int counterElement = 0;
 		int counterBuggies = 0;
@@ -363,7 +374,7 @@ public class ClassifierModel {
 		param : projectName		the name of the project.
 		param : reader			a structured reader object implemented to perform the walkforward task.
 		param : trainingSteps	the number of folds to divide the dataset into.	 */ 
-	public ModifiedWalkForwardReader modifiedWalkForwardTrainingAndTest( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws IOException, NoTestSetAvailableException, Exception {
+	public ModifiedWalkForwardReader modifiedWalkForwardTrainingAndTest( String projectName, ModifiedWalkForwardReader reader, int trainingSteps ) throws Exception {
 
 		int 	entries = 0;
 		int 	bugs = 0;
