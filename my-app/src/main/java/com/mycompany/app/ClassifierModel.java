@@ -21,6 +21,10 @@ import weka.core.Instances;
 import weka.filters.supervised.instance.Resample;
 import weka.filters.supervised.instance.SMOTE;
 import weka.filters.supervised.instance.SpreadSubsample;
+import weka.attributeSelection.CfsSubsetEval;
+import weka.attributeSelection.GreedyStepwise;
+import weka.filters.Filter;
+import weka.filters.supervised.attribute.AttributeSelection;
 
 public class ClassifierModel {
 
@@ -103,6 +107,34 @@ public class ClassifierModel {
 
 
 
+	public static List<Instances> featureSelection( Instances training, Instances testing ) throws Exception{
+		
+		// Create "Evaluator" and "Search" Algorithm Objects to perform Attribute selection over the given dataset.
+		// Both objects will be used as settings for an Attribute Selection Object.
+		CfsSubsetEval 		evaluator = new CfsSubsetEval();
+		GreedyStepwise 		search = new GreedyStepwise();
+							search.setSearchBackwards(true);
+		// Create the Attribute Selection Object and setup it.
+		AttributeSelection 	filter = new AttributeSelection();
+							filter.setEvaluator( evaluator );
+							filter.setSearch( search );
+							filter.setInputFormat(training);
+		// Apply the attribute selection filter to training and test sets to gain the filtered versions of them.
+		Instances filteredTraining = Filter.useFilter( training, filter );
+		Instances filteredTesting = Filter.useFilter( testing, filter );
+		
+		int numAttrNoFilter = training.numAttributes();
+		int numAttrFiltered = filteredTraining.numAttributes();	
+
+		List<Instances> datasets =  new ArrayList<>();
+		datasets.add( filteredTraining );
+		datasets.add( filteredTesting );
+		return datasets;
+
+	}
+
+
+
 	public void evaluateSamplingModified() throws Exception{
 
 		// For each project...
@@ -139,7 +171,7 @@ public class ClassifierModel {
 					Instances   testSet = source2.getDataSet();
 					
 					if ( FEATURE_SELECTION.equals( "True" ) ) {
-						List<Instances> datasets = WekaFeatureSelection.featureSelection( trainingSet, testSet );
+						List<Instances> datasets = featureSelection( trainingSet, testSet );
 						trainingSet = datasets.get( 0 );
 						testSet = datasets.get( 1 );
 					}
