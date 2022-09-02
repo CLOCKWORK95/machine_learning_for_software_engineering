@@ -1,5 +1,6 @@
 package com.mycompany.app;
 import java.util.ArrayList;
+import java.util.List;
 
 public class IssueObject{
 
@@ -28,12 +29,12 @@ public class IssueObject{
         this.affectedVersions = new ArrayList<>();
     }
 
-    public IssueObject( String ticketID, String resolutionDate, String creationDate, ArrayList<String> affectedVersions ){
+    public IssueObject( String ticketID, String resolutionDate, String creationDate, List<String> affectedVersions ){
         this.commits = new ArrayList<>();
         this.ticketID = ticketID;
         this.resolutionDate = resolutionDate;
         this.creationDate = creationDate;
-        this.affectedVersions = affectedVersions;
+        this.affectedVersions = (ArrayList<String>) affectedVersions;
         this.avs = new ArrayList<>();
     }
 
@@ -45,10 +46,10 @@ public class IssueObject{
     public String getResolutionDate(){
         return this.resolutionDate;
     }
-    public ArrayList<String> getAffectedVersions(){
+    public List<String> getAffectedVersions(){
         return this.affectedVersions;
     }
-    public ArrayList<CommitObject> getCommits(){
+    public List<CommitObject> getCommits(){
         return this.commits;
     }
     public String getCreationDate(){
@@ -63,7 +64,7 @@ public class IssueObject{
     public int getIv(){
         return this.iv;
     }
-    public ArrayList<Integer> getAvs(){
+    public List<Integer> getAvs(){
         return this.avs;
     }
 
@@ -75,11 +76,11 @@ public class IssueObject{
     public void setResolutionDate( String resolutionDate ){
         this.resolutionDate = resolutionDate;
     }
-    public void setAffectedVersions( ArrayList<String> affectedVersions ){
-        this.affectedVersions = affectedVersions;
+    public void setAffectedVersions( List<String> affectedVersions ){
+        this.affectedVersions = (ArrayList<String>) affectedVersions;
     }
-    public void setCommits( ArrayList<CommitObject> commits ){
-        this.commits = commits;
+    public void setCommits( List<CommitObject> commits ){
+        this.commits = (ArrayList<CommitObject>) commits;
     }
     public String setCreationDate(){
         return this.creationDate;
@@ -93,8 +94,8 @@ public class IssueObject{
     public void setIv( int iv ){
         this.iv = iv;
     }
-    public void setAvs( ArrayList<Integer> avs ){
-        this.avs = avs;
+    public void setAvs( List<Integer> avs ){
+        this.avs = (ArrayList<Integer>) avs;
     }
 
     // ------------------------------ Methods --------------------------------

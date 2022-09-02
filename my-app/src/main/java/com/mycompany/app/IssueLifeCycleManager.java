@@ -204,7 +204,7 @@ public class IssueLifeCycleManager{
             }
             else{
                 ArrayList<Integer> avs = new ArrayList<>();
-                ArrayList<String> affectedVersions = issue.getAffectedVersions();
+                ArrayList<String> affectedVersions = (ArrayList<String>) issue.getAffectedVersions();
                 for ( String version : affectedVersions ){
                     for( LocalDate date : this.versionMap.keySet() ){
                         if ( Iterables.get(versionMap.get(date),0).equals( version )){    

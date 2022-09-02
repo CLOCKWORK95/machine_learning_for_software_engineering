@@ -3,26 +3,20 @@ package com.mycompany.app;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-
-import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
-
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 
 public class JiraTicketManager {
 	
 	// ------------------------------ Attributes -----------------------------
 
-	public final String USER_DIR = "user.dir";
-	public final String RELEASE_DATE = "releaseDate";
-	public final String FILE_EXTENSION = ".java";
+	public final static String USER_DIR = "user.dir";
+	public final static String RELEASE_DATE = "releaseDate";
+	public final static String FILE_EXTENSION = ".java";
 	private String projectName = "";
 
 	// ------------------------------ Builders --------------------------------
@@ -58,14 +52,11 @@ public class JiraTicketManager {
    
 	public JSONArray readJsonArrayFromUrl(String url) throws IOException, JSONException {
 		InputStream is = new URL(url).openStream();
-		try {
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+		try(BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")))) {
 			String jsonText = readAll(rd);
 			JSONArray json = new JSONArray(jsonText);
 			return json;
-		} finally {
-			is.close();
-		}
+		} 
 	}
 
 
