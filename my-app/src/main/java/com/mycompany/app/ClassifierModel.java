@@ -122,9 +122,6 @@ public class ClassifierModel {
 		// Apply the attribute selection filter to training and test sets to gain the filtered versions of them.
 		Instances filteredTraining = Filter.useFilter( training, filter );
 		Instances filteredTesting = Filter.useFilter( testing, filter );
-		
-		int numAttrNoFilter = training.numAttributes();
-		int numAttrFiltered = filteredTraining.numAttributes();	
 
 		List<Instances> datasets =  new ArrayList<>();
 		datasets.add( filteredTraining );

@@ -1,6 +1,5 @@
 package com.mycompany.app;
 import java.io.BufferedReader;
-import java.lang.Math;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.FileReader;
@@ -11,14 +10,14 @@ public class ModifiedWalkForwardReader {
 
     private BufferedReader  br;
     private List<Integer>   counterResults;     // Results of a single walk [ numelementsTraining, numbugsTraining, numelementsTest, numbugsTest ].
-    private int             STEP;               // Step size.
-    private int             STEPS;              // Number of steps to divide the dataset into.
-    private int             SIZE;               // Number of lines of the file specified in path.
+    private int             step;               // Step size.
+    private int             steps;              // Number of steps to divide the dataset into.
+    private int             size;               // Number of lines of the file specified in path.
     private String          path;               // filepath.
 
 
-    public ModifiedWalkForwardReader( int STEPS, String path ) throws FileNotFoundException, IOException {
-        this.STEPS = STEPS;
+    public ModifiedWalkForwardReader( int steps, String path ) throws IOException {
+        this.steps = steps;
         this.path = path;
         this.br = new BufferedReader( new FileReader( path ) );
         this.counterResults = new ArrayList<>();
@@ -39,23 +38,22 @@ public class ModifiedWalkForwardReader {
         return this.counterResults;
     }
     public int getStep(){
-        return this.STEP;
+        return this.step;
     }
     public int getSteps(){
-        return this.STEPS;
+        return this.steps;
     }
 
     
-    public void getDatasetSize() throws IOException , FileNotFoundException {
+    public void getDatasetSize() throws IOException {
         int lines = 0;
-        String l;
-        while( (l = this.br.readLine()) != null ){
+        for( String l = this.br.readLine(); l != null; l = this.br.readLine() ){
             lines ++;
         }
         if( lines > 2 ){
-            this.SIZE = lines -1;
+            this.size = lines -1;
         }
-        this.STEP = (int) Math.floor( (double) this.SIZE / this.STEPS );
+        this.step = (int) Math.floor( (double) this.size / this.steps );
         this.br = new BufferedReader( new FileReader( path ) );
     }
 
@@ -63,7 +61,7 @@ public class ModifiedWalkForwardReader {
         this.counterResults.add( value );
     }
 
-    public void reset() throws IOException, FileNotFoundException {
+    public void reset() throws IOException {
         this.br = new BufferedReader( new FileReader( path ) );
         this.counterResults.clear();
     }
