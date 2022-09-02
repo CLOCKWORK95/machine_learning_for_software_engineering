@@ -271,7 +271,7 @@ public class ClassifierModel {
     /*  This method build the ARFF file for the specified project used as Training Set.
 	    param : projectName, the name of the project.
 	    param : trainingLimit, the index of the last version to be included in the training set. */ 
-	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) throws Exception {
+	public List<Integer> walkForwardTraining( String projectName, int trainingLimit ) {
 
 		int counterElement = 0;
 		int counterBuggies = 0;
