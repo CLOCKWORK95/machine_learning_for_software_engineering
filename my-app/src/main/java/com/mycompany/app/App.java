@@ -9,9 +9,9 @@ public class App {
 
     public static void main( String[] args ) throws Exception {
 
-    String[] projectNames = {"bookkeeper"/*,"storm"*/};
+    String[] projectNames = {"bookkeeper"/* ,"storm" */};
 
-    String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" /*,"/home/gianmarco/Scrivania/ML_4_SE/storm/.git"*/};
+    String[] projectPaths = {"/home/gianmarco/Scrivania/ML_4_SE/bookkeeper/.git" /* ,"/home/gianmarco/Scrivania/ML_4_SE/storm/.git" */};
 
         Scanner sc= new Scanner(System.in);    
         logger.info("\n\nDATASET CREATION                    -   0\nPREDICTORS TRAINING AND EVALUATION  -   1\nEnter the operation code : ");  

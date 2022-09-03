@@ -257,19 +257,17 @@ public class GitRepositoryManager {
 
 
 
-    public int getLoc( String fileText ) {
+    public int getLoc( String fileText ) throws IOException{
         int lines = 0;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
             for ( String line = reader.readLine(); line != null; line = reader.readLine())  lines++;
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        }
+        } 
         return lines;
     }
 
 
 
-    public int getNumImports( String fileText ){
+    public int getNumImports( String fileText ) throws IOException{
         int numImports = 0;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
             for ( String line = reader.readLine(); line != null; line = reader.readLine()) {
@@ -277,15 +275,13 @@ public class GitRepositoryManager {
                     numImports ++;
                 }
             }         
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        }
+        } 
         return numImports;
     }
 
 
 
-    public int getNumComments( String fileText ){
+    public int getNumComments( String fileText ) throws IOException{
         int numComments = 0;
         try ( BufferedReader reader = new BufferedReader(new StringReader(fileText)) ) {
             for ( String line = reader.readLine(); line != null; line = reader.readLine()) {   
@@ -296,9 +292,7 @@ public class GitRepositoryManager {
                             numComments ++;              
                 }     
             }         
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        }
+        } 
         return numComments;
     }
 

@@ -155,7 +155,7 @@ public class IssueLifeCycleManager{
                     int version = getVersionFromLocalDate( commitLocalDate );
                     
                     // The following is important : Jira could be not consistent in FV!!! Git has the truth!!!
-                    if ( (issue.getFv() < version && (version-issue.getFv()<=5)) )  issue.setFv( version ); 
+                    if ( (issue.getFv() < version && (version-issue.getFv()<=4)) )  issue.setFv( version ); 
                    
                     CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
                     issue.append( commitObject );
