@@ -25,7 +25,7 @@ public class DatasetBuilder {
     //------------------------------------ Attributes --------------------------------------------
 
     // Dataset as a MultiKeyMap with key :<version,filepath> and value <metrics>
-	private MultiKeyMap<MultiKey<Object>,Metrics> 			fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap<>() );
+	private MultiKeyMap<? extends MultiKey<?>,Metrics> 							fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap<>() );
 
 	private static 	Logger 									logger = Logger.getLogger(DatasetBuilder.class.getName());
 
@@ -154,7 +154,7 @@ public class DatasetBuilder {
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
 						logger.info("NEW entry!");
-						MultiKey<Object> key = new MultiKey<>(version,filepath);
+						MultiKey<Object> key =  new MultiKey<>(version,filepath);
                         putRecord( key, newMetrics );
                     } else{
                         Metrics oldMetrics = fileDataset.get( version, filepath );
@@ -208,12 +208,12 @@ public class DatasetBuilder {
 
             // The following Tree Map is used to insert dataset entries in the csv following the correct order (by version).
 			Map<String, Metrics> orderedMap = new TreeMap<>();
-			MapIterator dataSetIterator = fileDataset.mapIterator();
+			MapIterator<?,Metrics> dataSetIterator = fileDataset.mapIterator();
 
 			// Iterate over the dataset
 			while ( dataSetIterator.hasNext() ) {
 				dataSetIterator.next();
-				MultiKey<Object> key = (MultiKey<Object>) dataSetIterator.getKey();
+				MultiKey<?> key =  (MultiKey<?>) dataSetIterator.getKey();
 
 				// Get the metrics list associated to the multikey
 				Metrics metrics = fileDataset.get(key.getKey(0), key.getKey(1));
