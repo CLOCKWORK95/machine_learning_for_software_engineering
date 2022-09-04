@@ -209,7 +209,7 @@ public class GitRepositoryManager {
             fileObj.setNumImports(numImports);
             fileObj.setNumComments(numComments);
             
-            filepathsList.add(filepath);
+            if (!filepathsList.contains(filepath))  filepathsList.add(filepath);
             files.add(fileObj);
         }
 
