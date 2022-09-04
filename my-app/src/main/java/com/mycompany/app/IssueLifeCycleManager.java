@@ -30,6 +30,7 @@ public class IssueLifeCycleManager{
     private JiraTicketManager               jiraTicketManager;
     private Multimap<LocalDate, String>     versionMap;
     private DatasetBuilder                  datasetBuilder;
+    private ArrayList<String>               fileNames;
 
 
     // ------------------------------ Builders --------------------------------
@@ -77,9 +78,11 @@ public class IssueLifeCycleManager{
     }
 
 
+
     public void appendVersionMapEntry( LocalDate key, String value ){
         this.versionMap.put( key, value );
     }
+
 
 
     public Set<LocalDate> getVersionMapKeySet(){
@@ -129,6 +132,8 @@ public class IssueLifeCycleManager{
         // a RevWalk allows to walk over commits based on some filtering that is defined      
         for ( IssueObject issue : this.issues ){
 
+            int maxDistInconsistentFv = 4;
+
             try ( RevWalk revWalk = new RevWalk( this.gitRepoManager.getRepository()) ) {
 
                 revWalk.setRevFilter( MessageRevFilter.create( issue.getTicketID() ) );
@@ -148,7 +153,11 @@ public class IssueLifeCycleManager{
                     int version = getVersionFromLocalDate( commitLocalDate );
                     
                     // The following is important : Jira could be not consistent in FV!!! Git has the truth!!!
-                    if ( (issue.getFv() < version && (version-issue.getFv()<=4)) )  issue.setFv( version ); 
+                    int currentFv = issue.getFv();
+                    if ( ((currentFv < version) && (version-currentFv <= maxDistInconsistentFv)) ){
+                        maxDistInconsistentFv -= (version-currentFv);
+                        issue.setFv( version ); 
+                    }
                    
                     CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
                     issue.append( commitObject );
@@ -216,7 +225,6 @@ public class IssueLifeCycleManager{
             }
         }
     }
-
 
     
     public List<Integer> getIntegerAffectedVersionsFromMap(IssueObject issue){
@@ -332,7 +340,8 @@ public class IssueLifeCycleManager{
 
 
     public void populateDatasetMapAndWriteToCSV() throws IOException{
-        this.datasetBuilder.initiateFileDataset();
+        ArrayList<String> filepathsList = (ArrayList<String>) gitRepoManager.getFilePathsList();
+        this.datasetBuilder.initializeDatasetWithEmptyFiles(filepathsList);
         this.datasetBuilder.populateFileDataset(issuesWithAffectedVersions);
         this.datasetBuilder.populateFileDataset(issuesWithoutAffectedVersions);
         this.datasetBuilder.writeToCSV(this.projectName);

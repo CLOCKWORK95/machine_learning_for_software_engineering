@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.logging.Logger;
@@ -170,6 +171,7 @@ public class DatasetBuilder {
     }
 
 
+	
 	public void writeToCSV( String projectName ) throws IOException {
 
 		// Set the name of the file
@@ -262,5 +264,33 @@ public class DatasetBuilder {
 		}
 	}
 
-    
+
+
+	public void initializeDatasetWithEmptyFiles(List<String> files){
+		Metrics newMetrics = new Metrics();
+				newMetrics.setNR(1);
+				newMetrics.setAGE(0);
+				newMetrics.setCHURN(0);
+				newMetrics.appendAuthor("");
+				newMetrics.setLocTouched(0);
+				newMetrics.setMaxLocAdded(0);
+				newMetrics.setLOC(0);
+				newMetrics.setAvgLocAdded(0);
+				newMetrics.setAvgChangeSetSize(0);
+				newMetrics.setMaxChangeSetSize(0);
+				newMetrics.setNumImports(0);
+				newMetrics.setNumComments(0);
+				newMetrics.setBUGGYNESS("No");
+
+        for (int versionFile = 0; versionFile < lastVersion; versionFile++){
+            for (String f : files ){
+                if (!fileDataset.containsKey(versionFile, f)) {
+					MultiKey<Object> key = new MultiKey<>(versionFile, f);
+					putEmptyRecord(key, newMetrics);
+                }
+            }
+        }
+    }
+
+
 }

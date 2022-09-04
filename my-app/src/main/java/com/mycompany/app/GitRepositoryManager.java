@@ -40,6 +40,7 @@ public class GitRepositoryManager {
     private Repository              repository;
     public static final String      FILE_EXTENSION = ".java";
     private Git                     git;
+    private ArrayList<String>       filepathsList = new ArrayList<>();
 
     // ------------------------------ Builders --------------------------------
 
@@ -76,6 +77,10 @@ public class GitRepositoryManager {
 
     public Repository getRepository( ){
         return this.repository;
+    }
+
+    public List<String> getFilePathsList(){
+        return this.filepathsList;
     }
     
     // ------------------------------ Methods --------------------------------
@@ -198,12 +203,13 @@ public class GitRepositoryManager {
             int     numImports = getNumImports(fileText);
             int     numComments = getNumComments(fileText);
             
-            FileObject fileObj = new FileObject(  filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced);
+            FileObject fileObj = new FileObject(filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced);
             fileObj.setChangeSetSize(changeSetSize);
             fileObj.setAuthor(commitObject.getAuthorName());
             fileObj.setNumImports(numImports);
             fileObj.setNumComments(numComments);
             
+            filepathsList.add(filepath);
             files.add(fileObj);
         }
 
