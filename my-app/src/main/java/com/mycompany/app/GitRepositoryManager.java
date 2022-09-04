@@ -209,7 +209,7 @@ public class GitRepositoryManager {
             fileObj.setNumImports(numImports);
             fileObj.setNumComments(numComments);
             
-            if (!filepathsList.contains(filepath))  filepathsList.add(filepath);
+            appendFileName(filepath);
             files.add(fileObj);
         }
 
@@ -217,6 +217,9 @@ public class GitRepositoryManager {
     }
 
 
+    public void appendFileName( String filepath ){
+        if (!filepathsList.contains(filepath))  filepathsList.add(filepath);
+    }
 
     public String getTextfromCommittedFile( RevCommit commit, String filename ) throws IOException {
         RevTree tree = commit.getTree();
