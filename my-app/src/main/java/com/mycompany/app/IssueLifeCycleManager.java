@@ -14,7 +14,6 @@ import org.eclipse.jgit.revwalk.filter.MessageRevFilter;
 import com.google.common.collect.Iterables; 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
-import me.tongfei.progressbar.ProgressBar;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
