@@ -229,6 +229,7 @@ public class IssueLifeCycleManager{
     }
 
 
+    
     public List<Integer> getIntegerAffectedVersionsFromMap(IssueObject issue){
         ArrayList<Integer> avs = new ArrayList<>();
         ArrayList<String> affectedVersions = (ArrayList<String>) issue.getAffectedVersions();
