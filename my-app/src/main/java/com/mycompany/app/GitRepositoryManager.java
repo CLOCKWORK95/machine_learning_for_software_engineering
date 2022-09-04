@@ -197,8 +197,14 @@ public class GitRepositoryManager {
             int     loc = getLoc( fileText );
             int     numImports = getNumImports(fileText);
             int     numComments = getNumComments(fileText);
-            files.add( new FileObject(  filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced, 
-                                        changeSetSize, commitObject.getAuthorName(), numImports, numComments ) );
+            
+            FileObject fileObj = new FileObject(  filepath, version, fileAge, loc, linesAdded, linesDeleted, linesReplaced);
+            fileObj.setChangeSetSize(changeSetSize);
+            fileObj.setAuthor(commitObject.getAuthorName());
+            fileObj.setNumImports(numImports);
+            fileObj.setNumComments(numComments);
+            
+            files.add(fileObj);
         }
 
         return files;

@@ -27,8 +27,7 @@ public class FileObject{
     }
 
 
-    public FileObject(  String filepath, int version, int age, int loc, int linesAdded, int linesDeleted, int linesReplaced, 
-                        int changeSetSize, String author, int numImports, int numComments ){
+    public FileObject(  String filepath, int version, int age, int loc, int linesAdded, int linesDeleted, int linesReplaced ){
         this.filepath = filepath;
         this.version = version;
         this.age = age;
@@ -37,13 +36,25 @@ public class FileObject{
         this.linesAdded = linesAdded;
         this.linesDeleted = linesDeleted;
         this.churn = linesAdded - linesDeleted;
-        this.author = author;
-        this.changeSetSize = changeSetSize;
-        this.numImports = numImports;
-        this.numComments = numComments;
     }
 
     // ------------------------------ Setters ----------------------------------
+
+    public void setChangeSetSize( int changeSetSize ){
+        this.changeSetSize = changeSetSize;
+    }
+
+    public void setAuthor( String author ){
+        this.author = author;
+    }
+
+    public void setNumImports( int numImports ){
+        this.numImports = numImports;
+    }
+
+    public void setNumComments( int numComments ){
+        this.numComments = numComments;
+    }
 
     public void setFilepath( String filepath){
         this.filepath = filepath;

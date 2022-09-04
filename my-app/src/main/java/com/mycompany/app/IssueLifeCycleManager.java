@@ -127,14 +127,8 @@ public class IssueLifeCycleManager{
         
         Collection<Ref> allRefs = this.gitRepoManager.getRepository().getRefDatabase().getRefs();
 
-        // a RevWalk allows to walk over commits based on some filtering that is defined
- 
-        ProgressBar pb = new ProgressBar("SCANNING TICKETS", this.issues.size()); 
-        pb.start();
-        
+        // a RevWalk allows to walk over commits based on some filtering that is defined      
         for ( IssueObject issue : this.issues ){
-            
-            pb.step();
 
             try ( RevWalk revWalk = new RevWalk( this.gitRepoManager.getRepository()) ) {
 
@@ -159,14 +153,10 @@ public class IssueLifeCycleManager{
                    
                     CommitObject commitObject = new CommitObject( commit, issue, version, this.gitRepoManager );
                     issue.append( commitObject );
-                    
-                    
+                                   
                 }
             } 
-
         } 
-
-        pb.stop();
     }
 
 
