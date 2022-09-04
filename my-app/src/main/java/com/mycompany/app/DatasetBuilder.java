@@ -25,7 +25,8 @@ public class DatasetBuilder {
     //------------------------------------ Attributes --------------------------------------------
 
     // Dataset as a MultiKeyMap with key :<version,filepath> and value <metrics>
-	private MultiKeyMap<? extends MultiKey<?>,Metrics> 							fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap<>() );
+	//private MultiKeyMap<? extends MultiKey<?>,Metrics> 		fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap<>() );
+	private MultiKeyMap<Object,Metrics> 					fileDataset = MultiKeyMap.multiKeyMap( new LinkedMap<>() );
 
 	private static 	Logger 									logger = Logger.getLogger(DatasetBuilder.class.getName());
 
@@ -113,7 +114,7 @@ public class DatasetBuilder {
 	}
 
 
-	public void putEmptyRecord(MultiKey keys, Metrics emptyMetrics){
+	public void putEmptyRecord(MultiKey<Object> keys, Metrics emptyMetrics){
 		emptyMetrics.setVersion( (int) keys.getKey(0));
 		emptyMetrics.setFilepath( (String) keys.getKey(1));
 		logger.info("NEW EMPTY RECORD!!");
@@ -121,7 +122,7 @@ public class DatasetBuilder {
 	}
 
 
-	public void putRecord(MultiKey keys, Metrics metrics){
+	public void putRecord(MultiKey<Object> keys, Metrics metrics){
 		fileDataset.put( keys, metrics );
 	}
         
@@ -154,14 +155,14 @@ public class DatasetBuilder {
                     newMetrics.setBUGGYNESS(file.getBuggyness());
                     if( !fileDataset.containsKey(version,filepath) ){
 						logger.info("NEW entry!");
-						MultiKey<Object> key =  new MultiKey<>(version,filepath);
-                        putRecord( key, newMetrics );
+						MultiKey<?> key =  new MultiKey<>(version,filepath);
+                        putRecord( (MultiKey<Object>) key, newMetrics );
                     } else{
                         Metrics oldMetrics = fileDataset.get( version, filepath );
 						logger.info("OLD entry!");
                         newMetrics.update( oldMetrics );
-                        MultiKey<Object> key = new MultiKey<>(version,filepath);
-                        putRecord( key, newMetrics );
+                        MultiKey<?> key = new MultiKey<>(version,filepath);
+                        putRecord( (MultiKey<Object>) key, newMetrics );
                     }
                 }
             }
