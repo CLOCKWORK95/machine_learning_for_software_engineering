@@ -125,7 +125,7 @@ public class IssueLifeCycleManager{
         commit message).    */ 
     public void logWalk() throws IOException, GitAPIException {
         
-        Collection<Ref> allRefs = this.gitRepoManager.getRepository().getAllRefs().values();
+        Collection<Ref> allRefs = this.gitRepoManager.getRepository().getRefDatabase().getRefs();
 
         // a RevWalk allows to walk over commits based on some filtering that is defined
  
