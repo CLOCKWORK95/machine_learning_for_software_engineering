@@ -30,10 +30,11 @@
       <artifactId>org.json</artifactId>
       <version>1.0.0.v201011060100</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->
     <dependency>
-      <groupId>org.eclipse.jgit</groupId>
-      <artifactId>org.eclipse.jgit</artifactId>
-      <version>5.4.2.201908231537-r</version>
+        <groupId>org.eclipse.jgit</groupId>
+        <artifactId>org.eclipse.jgit</artifactId>
+        <version>5.2.2.201904231744-r</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
