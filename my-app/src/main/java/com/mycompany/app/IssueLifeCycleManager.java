@@ -30,7 +30,6 @@ public class IssueLifeCycleManager{
     private JiraTicketManager               jiraTicketManager;
     private Multimap<LocalDate, String>     versionMap;
     private DatasetBuilder                  datasetBuilder;
-    private ArrayList<String>               fileNames;
 
 
     // ------------------------------ Builders --------------------------------

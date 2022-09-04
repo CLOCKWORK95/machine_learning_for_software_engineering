@@ -65,9 +65,11 @@ public class DatasetBuilder {
 	}
 
 
+
 	public static String getOutputDirPath(){
 		return getCurrentDirectory() + "/src/main/java/com/mycompany/app/output/";
 	}
+
 
 
 	public Multimap<LocalDate,String>  getVersionMap(){
@@ -79,20 +81,7 @@ public class DatasetBuilder {
 		the Multi Key Map representing the dataset to be created. */
     public void initiateFileDataset() throws IOException{
 
-		Metrics newMetrics = new Metrics();
-		newMetrics.setNR(1);
-		newMetrics.setAGE(0);
-		newMetrics.setCHURN(0);
-		newMetrics.appendAuthor("");
-		newMetrics.setLocTouched(0);
-		newMetrics.setMaxLocAdded(0);
-		newMetrics.setLOC(0);
-		newMetrics.setAvgLocAdded(0);
-		newMetrics.setAvgChangeSetSize(0);
-		newMetrics.setMaxChangeSetSize(0);
-		newMetrics.setNumImports(0);
-		newMetrics.setNumComments(0);
-		newMetrics.setBUGGYNESS("No");
+		Metrics newMetrics = getEmptyMetrics();
 
 		// Get all the file in the repo folder
 		try (Stream<File> fileStream = Files.walk(Paths.get(PROJECT_DIR + "/" + projectName + "/"))
@@ -115,12 +104,28 @@ public class DatasetBuilder {
 	}
 
 
+	
+	public void initializeDatasetWithEmptyFiles(List<String> files){
+		Metrics newMetrics = getEmptyMetrics();
+        for (int versionFile = 0; versionFile < lastVersion; versionFile++){
+            for (String f : files ){
+                if (!fileDataset.containsKey(versionFile, f)) {
+					MultiKey<Object> key = new MultiKey<>(versionFile, f);
+					putEmptyRecord(key, newMetrics);
+                }
+            }
+        }
+    }
+
+
+
 	public void putEmptyRecord(MultiKey<Object> keys, Metrics emptyMetrics){
 		emptyMetrics.setVersion( (int) keys.getKey(0));
 		emptyMetrics.setFilepath( (String) keys.getKey(1));
 		logger.info("NEW EMPTY RECORD!!");
 		fileDataset.put( keys, emptyMetrics );
 	}
+
 
 
 	public void putRecord(MultiKey<Object> keys, Metrics metrics){
@@ -171,7 +176,7 @@ public class DatasetBuilder {
     }
 
 
-	
+
 	public void writeToCSV( String projectName ) throws IOException {
 
 		// Set the name of the file
@@ -266,7 +271,7 @@ public class DatasetBuilder {
 
 
 
-	public void initializeDatasetWithEmptyFiles(List<String> files){
+	public Metrics getEmptyMetrics(){
 		Metrics newMetrics = new Metrics();
 				newMetrics.setNR(1);
 				newMetrics.setAGE(0);
@@ -281,16 +286,8 @@ public class DatasetBuilder {
 				newMetrics.setNumImports(0);
 				newMetrics.setNumComments(0);
 				newMetrics.setBUGGYNESS("No");
-
-        for (int versionFile = 0; versionFile < lastVersion; versionFile++){
-            for (String f : files ){
-                if (!fileDataset.containsKey(versionFile, f)) {
-					MultiKey<Object> key = new MultiKey<>(versionFile, f);
-					putEmptyRecord(key, newMetrics);
-                }
-            }
-        }
-    }
+		return newMetrics;
+	}
 
 
 }
