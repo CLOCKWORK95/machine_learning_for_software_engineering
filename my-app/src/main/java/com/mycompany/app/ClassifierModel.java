@@ -28,8 +28,8 @@ import weka.filters.supervised.attribute.AttributeSelection;
 
 public class ClassifierModel {
 
-    private String[]        		projects = {"storm", "bookkeeper"};
-    private Integer[]       		limits = {14,8};
+    private String[]        		projects = {/*"storm",*/ "bookkeeper"};
+    private Integer[]       		limits = {/*14,*/8};
 	private static final String    	TRAINING = "_training.arff";
 	private static final String    	TESTING = "_testing.arff";
 	private static final String		PATH_TO_OUTPUTDIR = getOutputDirPath();
